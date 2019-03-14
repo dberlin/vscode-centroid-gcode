@@ -1,0 +1,94 @@
+{
+    "name": "centroid-gcode-language",
+    "displayName": "G-Code Language Support (Centroid)",
+    "description": "Language support (highlighting, hovers) for GCode",
+    "bugs": {
+        "url": "https://github.com/dberlin/vscode-centroid-gcode/issues"
+    },
+    "homepage": "https://github.com/dberlin/vscode-centroid-gcode",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dberlin/vscode-centroid-gcode.git"
+    },
+    "publisher": "DanielBerlin",
+    "license": "Apache-2.0",
+    "version": "0.0.2",
+    "engines": {
+        "vscode": "^1.31.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "centroid-gcode",
+                "aliases": [
+                    "Centroid gcode",
+                    "gcode",
+                    "GCODE",
+                    "nc",
+                    "syntax",
+                    "highlighter",
+                    "language",
+                    "centroid-gcode"
+                ],
+                "extensions": [
+                    ".nc",
+                    ".gcode",
+                    ".tap",
+                    ".cls",
+                    ".apt",
+                    ".mpt",
+                    ".fnc",
+                    ".gc",
+                    ".dnc",
+                    ".cnc",
+                    ".ncf",
+                    ".ncc",
+                    ".maz",
+                    ".hnc",
+                    ".knc",
+                    ".g00",
+                    ".mac",
+                    ".hom"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "centroid-gcode",
+                "scopeName": "source.centroidgcode",
+                "path": "./syntaxes/centroid-gcode.tmLanguage.json"
+            }
+        ]
+    },
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/extension.js",
+    "scripts": {
+        "convert-yaml": "ts-node src/scripts/yaml2expandedjs.ts yaml/original_help_text.yaml > src/json/help_text.json",
+        "vscode:prepublish": "npm run compile",
+        "compile": "npm run convert-yaml && tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/js-yaml": "^3.12.0",
+        "@types/jsdom": "^12.2.3",
+        "@types/mocha": "^5.2.6",
+        "@types/node": "^10.14.1",
+        "js-yaml": "^3.12.2",
+        "jsdom": "^14.0.0",
+        "mocha": "^6.0.2",
+        "tslint": "^5.14.0",
+        "typescript": "^3.2.4",
+        "vscode": "^1.1.2"
+    },
+    "dependencies": {
+        "tiny-trie": "^0.2.6"
+    }
+}

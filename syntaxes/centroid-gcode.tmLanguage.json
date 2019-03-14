@@ -1,0 +1,209 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Centroid gcode",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#speedfeeds"
+    },
+    {
+      "include": "#prognumbers"
+    },
+    {
+      "include": "#coords"
+    },
+    {
+      "include": "#modifiers"
+    },
+    {
+      "include": "macrovars"
+    },
+    {
+      "include": "#tools"
+    },
+    {
+      "include": "#controlkeywords"
+    },
+    {
+      "include": "#mathkeywords"
+    },
+    {
+      "include": "#goperators"
+    },
+    {
+      "include": "#moperators"
+    },
+    {
+      "include": "#relationaloperators"
+    },
+    {
+      "include": "#basicmathoperators"
+    },
+    {
+      "include": "#logicaloperators"
+    },
+    {
+      "include": "#bitwiseoperators"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.semicolon.centroid-gcode",
+          "match": "(^:|;|%).*$\\n"
+        },
+        {
+          "match": "([\\%])",
+          "name": "string.gcode"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "match": "\\\".*?\\\"",
+          "name": "string.gcode"
+        }
+      ]
+    },
+    "speedfeeds": {
+      "patterns": [
+        {
+          "match": "(?i:S)(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "name": "constant.language.centroid-gcode"
+        },
+        {
+          "match": "(?i:F)(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "name": "constant.language.centroid-gcode"
+        }
+      ]
+    },
+    "controlkeywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.centroid-gcode",
+          "match": "\\b(?i:IF|THEN|ELSE|GOTO|DO|WHILE|END)\\b"
+        }
+      ]
+    },
+    "prognumbers": {
+      "patterns": [
+        {
+          "match": "(?i:[N])[0-9]+",
+          "name": "constant.numeric.centroid-gcode"
+        },
+        {
+          "match": "(?i:[O])[0-9]{1,5}",
+          "name": "string.regexp.centroid-gcode"
+        }
+      ]
+    },
+    "coords": {
+      "patterns": [
+        {
+          "match": "(?i:[UVWXYZ])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "name": "string.centroid-gcode"
+        },
+        {
+          "match": "(?i:[ABC])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "name": "constant.character.escape.centroid-gcode"
+        }
+      ]
+    },
+    "tools": {
+      "patterns": [
+        {
+          "match": "([dDhHtT])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "name": "constant.character.centroid-gcode"
+        }
+      ]
+    },
+    "modifiers": {
+      "patterns": [
+        {
+          "match": "(?i:[IJK])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "name": "constant.character.escape.centroid-gcode"
+        },
+        {
+          "match": "(?i:[PQR])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "name": "support.constant.math.centroid-gcode"
+        },
+        {
+          "match": "(?i:/[0-9A-Z])",
+          "name": "support.constant.math.centroid-gcode"
+        }
+      ]
+    },
+    "macrovars": {
+      "patterns": [
+        {
+          "match": "[#][0-9]+",
+          "name": "variable.other.centroid-gcode"
+        }
+      ]
+    },
+    "mathkeywords": {
+      "patterns": [
+        {
+          "name": "support.constant.math.centroid-gcode",
+          "match": "\\b(?i:SIN|COS|ASIN|ACOS|TAN|ABS|POW|SQRT|MOD|FIX|FUP|ROUND)\\b"
+        }
+      ]
+    },
+    "goperators": {
+      "patterns": [
+        {
+          "name": "entity.name.function.centroid-gcode",
+          "match": "(?i:G)[0-9]{1,4}"
+        }
+      ]
+    },
+    "moperators": {
+      "patterns": [
+        {
+          "name": "markup.bold.centroid-gcode",
+          "match": "(?i:M)[0-9]{1,4}"
+        }
+      ]
+    },
+    "basicmathoperators": {
+      "patterns": [
+        {
+          "name": "support.constant.math.centroid-gcode",
+          "match": "(\\*|\\/|\\+|\\-|%)"
+        }
+      ]
+    },
+    "relationaloperators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.relational.centroid-gcode",
+          "match": "(?i:EQ|NE|LT|GT|LE|GE|==|!=|<=|>=|<|>)"
+        }
+      ]
+    },
+    "logicaloperators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.logical.centroid-gcode",
+          "match": "(?i:!|\\^|\\|\\||NOT|&&)"
+        }
+      ]
+    },
+    "bitwiseoperators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.bitwise.centroid-gcode",
+          "match": "(?i:~|AND|OR|XOR)"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.centroidgcode"
+}
