@@ -1,9 +1,10 @@
 "use strict";
-import help_text from "./json/help_text.json";
-
 import * as path from "path";
 import { Trie } from "tiny-trie";
 import * as vscode from "vscode";
+import help_text from "./json/help_text.json";
+import machine_parameters from "./json/machine_parameters.json";
+import macro_variables from "./json/macro_variables.json";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
 
 const noLeadingZeroRegEx = new RegExp("^[A-Z]([0-9])$");
@@ -91,6 +92,8 @@ class DocumentSymbolManagerClass {
   private systemSymbols: SymbolInfo[] = [];
   init(context: vscode.ExtensionContext) {
     this.processSymbolList(help_text);
+    this.processSymbolList(machine_parameters);
+    this.processSymbolList(macro_variables);
   }
   private processSymbolList(
     symList: {

@@ -3,6 +3,8 @@ import * as vscode from "vscode";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
 import { DocumentSymbolManager } from "./DocumentManager";
 
+export const wordPatternRegExp = /(\#\d+)|(-?\d*\.\d\w*)|([^\`\~\!\@\#\%\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/;
+
 /**
  * Return symbol information (if we have any) for a given name in the document.
  *

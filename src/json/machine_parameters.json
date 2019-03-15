@@ -1,0 +1,2676 @@
+[
+  {
+    "name": "#9000",
+    "detail": "Machine parameter 0",
+    "documentation": "### E-Stop PLC Bit Number",
+    "kind": "system-variable",
+    "sortText": "09000"
+  },
+  {
+    "name": "#9001",
+    "detail": "Machine parameter 1",
+    "documentation": "### Y Jog Key Orientation",
+    "kind": "system-variable",
+    "sortText": "09001"
+  },
+  {
+    "name": "#9002",
+    "detail": "Machine parameter 2",
+    "documentation": "### G-Code Interpretation Control",
+    "kind": "system-variable",
+    "sortText": "09002"
+  },
+  {
+    "name": "#9003",
+    "detail": "Machine parameter 3",
+    "documentation": "### Modal Tool and Height Offset Control",
+    "kind": "system-variable",
+    "sortText": "09003"
+  },
+  {
+    "name": "#9004",
+    "detail": "Machine parameter 4",
+    "documentation": "### File Load Options",
+    "kind": "system-variable",
+    "sortText": "09004"
+  },
+  {
+    "name": "#9005",
+    "detail": "Machine parameter 5",
+    "documentation": "### Suppress Machine Home Setup",
+    "kind": "system-variable",
+    "sortText": "09005"
+  },
+  {
+    "name": "#9006",
+    "detail": "Machine parameter 6",
+    "documentation": "### Auto Tool Changer Installed",
+    "kind": "system-variable",
+    "sortText": "09006"
+  },
+  {
+    "name": "#9007",
+    "detail": "Machine parameter 7",
+    "documentation": "### Display Colors",
+    "kind": "system-variable",
+    "sortText": "09007"
+  },
+  {
+    "name": "#9008",
+    "detail": "Machine parameter 8",
+    "documentation": "### Available Coolant System(s)",
+    "kind": "system-variable",
+    "sortText": "09008"
+  },
+  {
+    "name": "#9009",
+    "detail": "Machine parameter 9",
+    "documentation": "### Display Language",
+    "kind": "system-variable",
+    "sortText": "09009"
+  },
+  {
+    "name": "#9010",
+    "detail": "Machine parameter 10",
+    "documentation": "### Macro M-Function Control.  \nDisplay M and G codes in M function macros ADD 1.  \nStep through M function macros in Block Mode ADD 2.  \nDecel on M105 and M106 ADD 4. Do NOT Move to Z home on M6 ADD 8.  ",
+    "kind": "system-variable",
+    "sortText": "09010"
+  },
+  {
+    "name": "#9011",
+    "detail": "Machine parameter 11",
+    "documentation": "### Touch Probe PLC Input",
+    "kind": "system-variable",
+    "sortText": "09011"
+  },
+  {
+    "name": "#9012",
+    "detail": "Machine parameter 12",
+    "documentation": "### Touch Probe Tool Number",
+    "kind": "system-variable",
+    "sortText": "09012"
+  },
+  {
+    "name": "#9013",
+    "detail": "Machine parameter 13",
+    "documentation": "### Probing Recovery Distance",
+    "kind": "system-variable",
+    "sortText": "09013"
+  },
+  {
+    "name": "#9014",
+    "detail": "Machine parameter 14",
+    "documentation": "### Fast Probing Rate",
+    "kind": "system-variable",
+    "sortText": "09014"
+  },
+  {
+    "name": "#9015",
+    "detail": "Machine parameter 15",
+    "documentation": "### Slow Probing Rate",
+    "kind": "system-variable",
+    "sortText": "09015"
+  },
+  {
+    "name": "#9016",
+    "detail": "Machine parameter 16",
+    "documentation": "### Probing Search Distance",
+    "kind": "system-variable",
+    "sortText": "09016"
+  },
+  {
+    "name": "#9017",
+    "detail": "Machine parameter 17",
+    "documentation": "### Tool Detector Reference Number",
+    "kind": "system-variable",
+    "sortText": "09017"
+  },
+  {
+    "name": "#9018",
+    "detail": "Machine parameter 18",
+    "documentation": "### PLC Input Spindle Inhibitor",
+    "kind": "system-variable",
+    "sortText": "09018"
+  },
+  {
+    "name": "#9019",
+    "detail": "Machine parameter 19",
+    "documentation": "### MPG Modes: Add 4 Enable Z axis MPG",
+    "kind": "system-variable",
+    "sortText": "09019"
+  },
+  {
+    "name": "#9020",
+    "detail": "Machine parameter 20",
+    "documentation": "### Ambient Temperature",
+    "kind": "system-variable",
+    "sortText": "09020"
+  },
+  {
+    "name": "#9021",
+    "detail": "Machine parameter 21",
+    "documentation": "### X Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09021"
+  },
+  {
+    "name": "#9022",
+    "detail": "Machine parameter 22",
+    "documentation": "### Y Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09022"
+  },
+  {
+    "name": "#9023",
+    "detail": "Machine parameter 23",
+    "documentation": "### Z Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09023"
+  },
+  {
+    "name": "#9024",
+    "detail": "Machine parameter 24",
+    "documentation": "### 4th Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09024"
+  },
+  {
+    "name": "#9025",
+    "detail": "Machine parameter 25",
+    "documentation": "### X Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09025"
+  },
+  {
+    "name": "#9026",
+    "detail": "Machine parameter 26",
+    "documentation": "### Y Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09026"
+  },
+  {
+    "name": "#9027",
+    "detail": "Machine parameter 27",
+    "documentation": "### Z Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09027"
+  },
+  {
+    "name": "#9028",
+    "detail": "Machine parameter 28",
+    "documentation": "### 4th Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09028"
+  },
+  {
+    "name": "#9029",
+    "detail": "Machine parameter 29",
+    "documentation": "### Overheat Warning Temperature",
+    "kind": "system-variable",
+    "sortText": "09029"
+  },
+  {
+    "name": "#9030",
+    "detail": "Machine parameter 30",
+    "documentation": "### Job Cancellation Temperature",
+    "kind": "system-variable",
+    "sortText": "09030"
+  },
+  {
+    "name": "#9031",
+    "detail": "Machine parameter 31",
+    "documentation": "### Legacy SPIN232 COM Port",
+    "kind": "system-variable",
+    "sortText": "09031"
+  },
+  {
+    "name": "#9032",
+    "detail": "Machine parameter 32",
+    "documentation": "### Autonomous Digitizing Offset Files  \nAdd  1: Raw Centerline Data        Add  2: Clean Centerline Data  \nAdd  4: Centerline Flow Splines    Add  8: Offset Data  \nAdd 16: Spline Offset Data          Add 32: Spline Offset Flow Splines  \nAdd 64: Offset Plus Flow  ",
+    "kind": "system-variable",
+    "sortText": "09032"
+  },
+  {
+    "name": "#9033",
+    "detail": "Machine parameter 33",
+    "documentation": "### Spindle Motor Gear Ratio",
+    "kind": "system-variable",
+    "sortText": "09033"
+  },
+  {
+    "name": "#9034",
+    "detail": "Machine parameter 34",
+    "documentation": "### Spindle Encoder Counts/Revolution",
+    "kind": "system-variable",
+    "sortText": "09034"
+  },
+  {
+    "name": "#9035",
+    "detail": "Machine parameter 35",
+    "documentation": "### Spindle Axis 1-8, 0 = disabled",
+    "kind": "system-variable",
+    "sortText": "09035"
+  },
+  {
+    "name": "#9036",
+    "detail": "Machine parameter 36",
+    "documentation": "### Rigid Tapping Enable/Disable",
+    "kind": "system-variable",
+    "sortText": "09036"
+  },
+  {
+    "name": "#9037",
+    "detail": "Machine parameter 37",
+    "documentation": "### Spindle Deceleration Time",
+    "kind": "system-variable",
+    "sortText": "09037"
+  },
+  {
+    "name": "#9038",
+    "detail": "Machine parameter 38",
+    "documentation": "### Multi-Axis Maximum Feedrate",
+    "kind": "system-variable",
+    "sortText": "09038"
+  },
+  {
+    "name": "#9039",
+    "detail": "Machine parameter 39",
+    "documentation": "### Feedrate Override Percentage Limit",
+    "kind": "system-variable",
+    "sortText": "09039"
+  },
+  {
+    "name": "#9040",
+    "detail": "Machine parameter 40",
+    "documentation": "### Basic Jog Increment",
+    "kind": "system-variable",
+    "sortText": "09040"
+  },
+  {
+    "name": "#9041",
+    "detail": "Machine parameter 41",
+    "documentation": "### Rotary Axis Jog Increment",
+    "kind": "system-variable",
+    "sortText": "09041"
+  },
+  {
+    "name": "#9042",
+    "detail": "Machine parameter 42",
+    "documentation": "### Configuration Password",
+    "kind": "system-variable",
+    "sortText": "09042"
+  },
+  {
+    "name": "#9043",
+    "detail": "Machine parameter 43",
+    "documentation": "### Auto Tool Measurement: Add 1 to Subtract height of TT-1,  \nAdd 2 to use TT1 input for setting Z ref  \nAdd 4 to get a warning connect TT-1 cable during batch tool measurement  ",
+    "kind": "system-variable",
+    "sortText": "09043"
+  },
+  {
+    "name": "#9044",
+    "detail": "Machine parameter 44",
+    "documentation": "### TT1 plc input",
+    "kind": "system-variable",
+    "sortText": "09044"
+  },
+  {
+    "name": "#9045",
+    "detail": "Machine parameter 45",
+    "documentation": "### WCS Lockout",
+    "kind": "system-variable",
+    "sortText": "09045"
+  },
+  {
+    "name": "#9046",
+    "detail": "Machine parameter 46",
+    "documentation": "### Active G-Codes Display  \n0: Always  \n1: MDI Only  \n2: Never  ",
+    "kind": "system-variable",
+    "sortText": "09046"
+  },
+  {
+    "name": "#9047",
+    "detail": "Machine parameter 47",
+    "documentation": "### Not used",
+    "kind": "system-variable",
+    "sortText": "09047"
+  },
+  {
+    "name": "#9048",
+    "detail": "Machine parameter 48",
+    "documentation": "### 'Rapid to' clearance amount for playback of Grid Digitizing output data",
+    "kind": "system-variable",
+    "sortText": "09048"
+  },
+  {
+    "name": "#9049",
+    "detail": "Machine parameter 49",
+    "documentation": "### Small Arc Feedrate Limiting - Lower Limits",
+    "kind": "system-variable",
+    "sortText": "09049"
+  },
+  {
+    "name": "#9050",
+    "detail": "Machine parameter 50",
+    "documentation": "### Small Arc Feedrate Limiting - Upper Limits",
+    "kind": "system-variable",
+    "sortText": "09050"
+  },
+  {
+    "name": "#9051",
+    "detail": "Machine parameter 51",
+    "documentation": "### Small Arc Feedrate Limiting Mode",
+    "kind": "system-variable",
+    "sortText": "09051"
+  },
+  {
+    "name": "#9052",
+    "detail": "Machine parameter 52",
+    "documentation": "### Reserved: Do Not Modify",
+    "kind": "system-variable",
+    "sortText": "09052"
+  },
+  {
+    "name": "#9053",
+    "detail": "Machine parameter 53",
+    "documentation": "### Reserved: Do Not Modify",
+    "kind": "system-variable",
+    "sortText": "09053"
+  },
+  {
+    "name": "#9056",
+    "detail": "Machine parameter 56",
+    "documentation": "### Override Properties: 2=Programmed Feedrate, 4=Meters On, 8=Inverse Time in Seconds",
+    "kind": "system-variable",
+    "sortText": "09056"
+  },
+  {
+    "name": "#9057",
+    "detail": "Machine parameter 57",
+    "documentation": "### Axis Bitmap for Generic Meter",
+    "kind": "system-variable",
+    "sortText": "09057"
+  },
+  {
+    "name": "#9061",
+    "detail": "Machine parameter 61",
+    "documentation": "### High Power Stall Time Limit",
+    "kind": "system-variable",
+    "sortText": "09061"
+  },
+  {
+    "name": "#9062",
+    "detail": "Machine parameter 62",
+    "documentation": "### High Power Stall PID Threshold",
+    "kind": "system-variable",
+    "sortText": "09062"
+  },
+  {
+    "name": "#9063",
+    "detail": "Machine parameter 63",
+    "documentation": "### High Power Idle PID Multiplier",
+    "kind": "system-variable",
+    "sortText": "09063"
+  },
+  {
+    "name": "#9064",
+    "detail": "Machine parameter 64",
+    "documentation": "### 4th/5th Axis Pairing",
+    "kind": "system-variable",
+    "sortText": "09064"
+  },
+  {
+    "name": "#9065",
+    "detail": "Machine parameter 65",
+    "documentation": "### Low Range Spindle Gear Ratio",
+    "kind": "system-variable",
+    "sortText": "09065"
+  },
+  {
+    "name": "#9066",
+    "detail": "Machine parameter 66",
+    "documentation": "### Medium-Low Range Spindle Gear Ratio",
+    "kind": "system-variable",
+    "sortText": "09066"
+  },
+  {
+    "name": "#9067",
+    "detail": "Machine parameter 67",
+    "documentation": "### Medium-High Range Spindle Gear Ratio",
+    "kind": "system-variable",
+    "sortText": "09067"
+  },
+  {
+    "name": "#9068",
+    "detail": "Machine parameter 68",
+    "documentation": "### Minimum Rigid Tapping Spindle Speed",
+    "kind": "system-variable",
+    "sortText": "09068"
+  },
+  {
+    "name": "#9069",
+    "detail": "Machine parameter 69",
+    "documentation": "### Duration for Minimum Spindle Speed",
+    "kind": "system-variable",
+    "sortText": "09069"
+  },
+  {
+    "name": "#9070",
+    "detail": "Machine parameter 70",
+    "documentation": "### Offset Library Inc/Decrement Amount",
+    "kind": "system-variable",
+    "sortText": "09070"
+  },
+  {
+    "name": "#9071",
+    "detail": "Machine parameter 71",
+    "documentation": "### Part Setup Detector Height",
+    "kind": "system-variable",
+    "sortText": "09071"
+  },
+  {
+    "name": "#9072",
+    "detail": "Machine parameter 72",
+    "documentation": "### M120-M123 options: suppress labels=1, insert commas=2, suppress spaces=4",
+    "kind": "system-variable",
+    "sortText": "09072"
+  },
+  {
+    "name": "#9073",
+    "detail": "Machine parameter 73",
+    "documentation": "### G73 Canned Cycle Parameter",
+    "kind": "system-variable",
+    "sortText": "09073"
+  },
+  {
+    "name": "#9074",
+    "detail": "Machine parameter 74",
+    "documentation": "### G74 Canned Cycle Parameter",
+    "kind": "system-variable",
+    "sortText": "09074"
+  },
+  {
+    "name": "#9075",
+    "detail": "Machine parameter 75",
+    "documentation": "### Axis Summing Display Control",
+    "kind": "system-variable",
+    "sortText": "09075"
+  },
+  {
+    "name": "#9076",
+    "detail": "Machine parameter 76",
+    "documentation": "### Manual Input Unrestricted Distance",
+    "kind": "system-variable",
+    "sortText": "09076"
+  },
+  {
+    "name": "#9077",
+    "detail": "Machine parameter 77",
+    "documentation": "### Manual Input Movement Tolerance",
+    "kind": "system-variable",
+    "sortText": "09077"
+  },
+  {
+    "name": "#9078",
+    "detail": "Machine parameter 78",
+    "documentation": "### Display of Spindle Speed: add 1  \nOverride feedrate if spindle boggs down add 2  \nWait for spindle at speed add 4  \nNOTE: All 3 functions require spindle encoder feedback.  ",
+    "kind": "system-variable",
+    "sortText": "09078"
+  },
+  {
+    "name": "#9079",
+    "detail": "Machine parameter 79",
+    "documentation": "### Paired Axes Resync Delay Time",
+    "kind": "system-variable",
+    "sortText": "09079"
+  },
+  {
+    "name": "#9080",
+    "detail": "Machine parameter 80",
+    "documentation": "### Voltage Brake Message Frequency",
+    "kind": "system-variable",
+    "sortText": "09080"
+  },
+  {
+    "name": "#9081",
+    "detail": "Machine parameter 81",
+    "documentation": "### G81 Canned Cycle Parameter",
+    "kind": "system-variable",
+    "sortText": "09081"
+  },
+  {
+    "name": "#9082",
+    "detail": "Machine parameter 82",
+    "documentation": "### Spindle Drift Adjustment",
+    "kind": "system-variable",
+    "sortText": "09082"
+  },
+  {
+    "name": "#9083",
+    "detail": "Machine parameter 83",
+    "documentation": "### G83 Canned Cycle Parameter",
+    "kind": "system-variable",
+    "sortText": "09083"
+  },
+  {
+    "name": "#9084",
+    "detail": "Machine parameter 84",
+    "documentation": "### G84 Canned Cycle Parameter",
+    "kind": "system-variable",
+    "sortText": "09084"
+  },
+  {
+    "name": "#9085",
+    "detail": "Machine parameter 85",
+    "documentation": "### Door closed interlock",
+    "kind": "system-variable",
+    "sortText": "09085"
+  },
+  {
+    "name": "#9086",
+    "detail": "Machine parameter 86",
+    "documentation": "### Vector Optimization",
+    "kind": "system-variable",
+    "sortText": "09086"
+  },
+  {
+    "name": "#9087",
+    "detail": "Machine parameter 87",
+    "documentation": "### X Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09087"
+  },
+  {
+    "name": "#9088",
+    "detail": "Machine parameter 88",
+    "documentation": "### Y Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09088"
+  },
+  {
+    "name": "#9089",
+    "detail": "Machine parameter 89",
+    "documentation": "### Z Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09089"
+  },
+  {
+    "name": "#9090",
+    "detail": "Machine parameter 90",
+    "documentation": "### 4th Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09090"
+  },
+  {
+    "name": "#9091",
+    "detail": "Machine parameter 91",
+    "documentation": "### X AXIS Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSupress park function ADD 8, Linear Display of Rotory axis ADD 32,  \nTilt rotary axis ADD 256, Hide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09091"
+  },
+  {
+    "name": "#9092",
+    "detail": "Machine parameter 92",
+    "documentation": "### Y AXIS Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSupress park function ADD 8, Linear Display of Rotory axis ADD 32,  \nTilt rotary axis ADD 256, Hide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09092"
+  },
+  {
+    "name": "#9093",
+    "detail": "Machine parameter 93",
+    "documentation": "### Z AXIS Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSuppress dir check during tool check ADD 4, Supress park function ADD 8,  \nLinear Display of Rotory axis ADD 32, Tilt rotary axis ADD 256,  \nHide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09093"
+  },
+  {
+    "name": "#9094",
+    "detail": "Machine parameter 94",
+    "documentation": "### 4th AXIS Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSupress park function ADD 8, Linear Display of Rotory axis ADD 32,  \n4th axis responds like Z axis ADD 64, Tilt rotary axis ADD 256  \nHide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09094"
+  },
+  {
+    "name": "#9095",
+    "detail": "Machine parameter 95",
+    "documentation": "### X Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09095"
+  },
+  {
+    "name": "#9096",
+    "detail": "Machine parameter 96",
+    "documentation": "### Y Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09096"
+  },
+  {
+    "name": "#9097",
+    "detail": "Machine parameter 97",
+    "documentation": "### Z Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09097"
+  },
+  {
+    "name": "#9098",
+    "detail": "Machine parameter 98",
+    "documentation": "### 4th Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09098"
+  },
+  {
+    "name": "#9099",
+    "detail": "Machine parameter 99",
+    "documentation": "### Lookahead Number of Events",
+    "kind": "system-variable",
+    "sortText": "09099"
+  },
+  {
+    "name": "#9100",
+    "detail": "Machine parameter 100",
+    "documentation": "### Intercon comment generation: 0 = FALSE,1 = TRUE",
+    "kind": "system-variable",
+    "sortText": "09100"
+  },
+  {
+    "name": "#9101",
+    "detail": "Machine parameter 101",
+    "documentation": "### Intercon clearance amount",
+    "kind": "system-variable",
+    "sortText": "09101"
+  },
+  {
+    "name": "#9102",
+    "detail": "Machine parameter 102",
+    "documentation": "### Intercon spindle coolant delay",
+    "kind": "system-variable",
+    "sortText": "09102"
+  },
+  {
+    "name": "#9103",
+    "detail": "Machine parameter 103",
+    "documentation": "### Intercon corner feedrate override",
+    "kind": "system-variable",
+    "sortText": "09103"
+  },
+  {
+    "name": "#9104",
+    "detail": "Machine parameter 104",
+    "documentation": "### Intercon modal line parameters: 0 = FALSE,1 = TRUE",
+    "kind": "system-variable",
+    "sortText": "09104"
+  },
+  {
+    "name": "#9105",
+    "detail": "Machine parameter 105",
+    "documentation": "### Intercon modal arc parameters: 0 = FALSE,1 = TRUE",
+    "kind": "system-variable",
+    "sortText": "09105"
+  },
+  {
+    "name": "#9106",
+    "detail": "Machine parameter 106",
+    "documentation": "### Intercon modal drilling cycle parameters: 0 = FALSE,1 = TRUE",
+    "kind": "system-variable",
+    "sortText": "09106"
+  },
+  {
+    "name": "#9115",
+    "detail": "Machine parameter 115",
+    "documentation": "### Intercon help: 0 = OFF, 1 = ON",
+    "kind": "system-variable",
+    "sortText": "09115"
+  },
+  {
+    "name": "#9116",
+    "detail": "Machine parameter 116",
+    "documentation": "### A axis Y coordinate",
+    "kind": "system-variable",
+    "sortText": "09116"
+  },
+  {
+    "name": "#9117",
+    "detail": "Machine parameter 117",
+    "documentation": "### A axis Z coordinate",
+    "kind": "system-variable",
+    "sortText": "09117"
+  },
+  {
+    "name": "#9118",
+    "detail": "Machine parameter 118",
+    "documentation": "### B axis X coordinate",
+    "kind": "system-variable",
+    "sortText": "09118"
+  },
+  {
+    "name": "#9119",
+    "detail": "Machine parameter 119",
+    "documentation": "### B axis Z coordinate",
+    "kind": "system-variable",
+    "sortText": "09119"
+  },
+  {
+    "name": "#9120",
+    "detail": "Machine parameter 120",
+    "documentation": "### Probe stuck clearance amount",
+    "kind": "system-variable",
+    "sortText": "09120"
+  },
+  {
+    "name": "#9121",
+    "detail": "Machine parameter 121",
+    "documentation": "### Grid digitizing prediction minimum Z pullback",
+    "kind": "system-variable",
+    "sortText": "09121"
+  },
+  {
+    "name": "#9122",
+    "detail": "Machine parameter 122",
+    "documentation": "### Grid digitizing deadband move distance",
+    "kind": "system-variable",
+    "sortText": "09122"
+  },
+  {
+    "name": "#9123",
+    "detail": "Machine parameter 123",
+    "documentation": "### Radial digitizing clearance move",
+    "kind": "system-variable",
+    "sortText": "09123"
+  },
+  {
+    "name": "#9124",
+    "detail": "Machine parameter 124",
+    "documentation": "### PLC input for jogging",
+    "kind": "system-variable",
+    "sortText": "09124"
+  },
+  {
+    "name": "#9125",
+    "detail": "Machine parameter 125",
+    "documentation": "### PLC input for jogging",
+    "kind": "system-variable",
+    "sortText": "09125"
+  },
+  {
+    "name": "#9126",
+    "detail": "Machine parameter 126",
+    "documentation": "### PLC input for jogging",
+    "kind": "system-variable",
+    "sortText": "09126"
+  },
+  {
+    "name": "#9127",
+    "detail": "Machine parameter 127",
+    "documentation": "### PLC input for jogging",
+    "kind": "system-variable",
+    "sortText": "09127"
+  },
+  {
+    "name": "#9130",
+    "detail": "Machine parameter 130",
+    "documentation": "### Z axis on/off selection",
+    "kind": "system-variable",
+    "sortText": "09130"
+  },
+  {
+    "name": "#9131",
+    "detail": "Machine parameter 131",
+    "documentation": "### Fourth axis on/off selection",
+    "kind": "system-variable",
+    "sortText": "09131"
+  },
+  {
+    "name": "#9132",
+    "detail": "Machine parameter 132",
+    "documentation": "### 5th Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09132"
+  },
+  {
+    "name": "#9133",
+    "detail": "Machine parameter 133",
+    "documentation": "### 6th Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09133"
+  },
+  {
+    "name": "#9134",
+    "detail": "Machine parameter 134",
+    "documentation": "### 7th Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09134"
+  },
+  {
+    "name": "#9135",
+    "detail": "Machine parameter 135",
+    "documentation": "### 8th Axis Heating Coefficient",
+    "kind": "system-variable",
+    "sortText": "09135"
+  },
+  {
+    "name": "#9136",
+    "detail": "Machine parameter 136",
+    "documentation": "### G76 Fine Bore Retract Angle (0-359)  \n0 = Y+, 90 = X-, 180 = Y-, 270 = X+  ",
+    "kind": "system-variable",
+    "sortText": "09136"
+  },
+  {
+    "name": "#9137",
+    "detail": "Machine parameter 137",
+    "documentation": "### Load Meter Filter Size",
+    "kind": "system-variable",
+    "sortText": "09137"
+  },
+  {
+    "name": "#9138",
+    "detail": "Machine parameter 138",
+    "documentation": "### DRO Encoder Deadband Count",
+    "kind": "system-variable",
+    "sortText": "09138"
+  },
+  {
+    "name": "#9139",
+    "detail": "Machine parameter 139",
+    "documentation": "### Special Dwell between moves",
+    "kind": "system-variable",
+    "sortText": "09139"
+  },
+  {
+    "name": "#9140",
+    "detail": "Machine parameter 140",
+    "documentation": "### Message log priority level",
+    "kind": "system-variable",
+    "sortText": "09140"
+  },
+  {
+    "name": "#9141",
+    "detail": "Machine parameter 141",
+    "documentation": "### Maximum message log lines",
+    "kind": "system-variable",
+    "sortText": "09141"
+  },
+  {
+    "name": "#9142",
+    "detail": "Machine parameter 142",
+    "documentation": "### Message log trim amount",
+    "kind": "system-variable",
+    "sortText": "09142"
+  },
+  {
+    "name": "#9143",
+    "detail": "Machine parameter 143",
+    "documentation": "### DRO properties: 1=load meters, 2=meter outline, 4=5 dig DRO prec, 8=Mini DRO on",
+    "kind": "system-variable",
+    "sortText": "09143"
+  },
+  {
+    "name": "#9144",
+    "detail": "Machine parameter 144",
+    "documentation": "### Comparison Roundoff: 0=none, 1-9=significant digits after decimal.",
+    "kind": "system-variable",
+    "sortText": "09144"
+  },
+  {
+    "name": "#9145",
+    "detail": "Machine parameter 145",
+    "documentation": "### Branching properties: 1=fast branch enabled",
+    "kind": "system-variable",
+    "sortText": "09145"
+  },
+  {
+    "name": "#9146",
+    "detail": "Machine parameter 146",
+    "documentation": "### Feed hold threshold for feedrate override",
+    "kind": "system-variable",
+    "sortText": "09146"
+  },
+  {
+    "name": "#9147",
+    "detail": "Machine parameter 147",
+    "documentation": "### Number of items to keep in Operator Message Window",
+    "kind": "system-variable",
+    "sortText": "09147"
+  },
+  {
+    "name": "#9148",
+    "detail": "Machine parameter 148",
+    "documentation": "### Miscellaneous Jogging Options.  \nEnable Fast Jog before Home Set ADD 1.  \nProhibit Keyboard Jogging ADD 2.  ",
+    "kind": "system-variable",
+    "sortText": "09148"
+  },
+  {
+    "name": "#9149",
+    "detail": "Machine parameter 149",
+    "documentation": "### Spindle Speed wait percent (0.5 - 1.0)",
+    "kind": "system-variable",
+    "sortText": "09149"
+  },
+  {
+    "name": "#9150",
+    "detail": "Machine parameter 150",
+    "documentation": "### Run-Time Graphics: Add 1,  \nShow CSR in backplot: Add 2,  \nDisable backplot machine geometry: Add 4,  \nEnable display of Skew Correction in backplot: Add 8,  \nEnable display of PC-based Backlash correction or Screw Comp in backplot: Add 16  ",
+    "kind": "system-variable",
+    "sortText": "09150"
+  },
+  {
+    "name": "#9151",
+    "detail": "Machine parameter 151",
+    "documentation": "### Probe Repeatability Tolerance",
+    "kind": "system-variable",
+    "sortText": "09151"
+  },
+  {
+    "name": "#9153",
+    "detail": "Machine parameter 153",
+    "documentation": "### Probe Protection  \n0: Off  \n1: On  ",
+    "kind": "system-variable",
+    "sortText": "09153"
+  },
+  {
+    "name": "#9154",
+    "detail": "Machine parameter 154",
+    "documentation": "### Touch Screen Options",
+    "kind": "system-variable",
+    "sortText": "09154"
+  },
+  {
+    "name": "#9155",
+    "detail": "Machine parameter 155",
+    "documentation": "### Probe Settings : Standard Probe = 0, DSP Probe = 1, DP7 Probe = 2",
+    "kind": "system-variable",
+    "sortText": "09155"
+  },
+  {
+    "name": "#9156",
+    "detail": "Machine parameter 156",
+    "documentation": "### 5th Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09156"
+  },
+  {
+    "name": "#9157",
+    "detail": "Machine parameter 157",
+    "documentation": "### 6th Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09157"
+  },
+  {
+    "name": "#9158",
+    "detail": "Machine parameter 158",
+    "documentation": "### 7th Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09158"
+  },
+  {
+    "name": "#9159",
+    "detail": "Machine parameter 159",
+    "documentation": "### 8th Axis Autotune Move Distance",
+    "kind": "system-variable",
+    "sortText": "09159"
+  },
+  {
+    "name": "#9160",
+    "detail": "Machine parameter 160",
+    "documentation": "### Enhanced ATC: 0 = Off, 1 = Nonrandom, 2 = Random",
+    "kind": "system-variable",
+    "sortText": "09160"
+  },
+  {
+    "name": "#9161",
+    "detail": "Machine parameter 161",
+    "documentation": "### ATC Maximum Tool Bins",
+    "kind": "system-variable",
+    "sortText": "09161"
+  },
+  {
+    "name": "#9162",
+    "detail": "Machine parameter 162",
+    "documentation": "### Intercon M6 Initial M-Code",
+    "kind": "system-variable",
+    "sortText": "09162"
+  },
+  {
+    "name": "#9164",
+    "detail": "Machine parameter 164",
+    "documentation": "### ATC feature bit",
+    "kind": "system-variable",
+    "sortText": "09164"
+  },
+  {
+    "name": "#9165",
+    "detail": "Machine parameter 165",
+    "documentation": "### Acceleration / Deceleration Options",
+    "kind": "system-variable",
+    "sortText": "09165"
+  },
+  {
+    "name": "#9166",
+    "detail": "Machine parameter 166",
+    "documentation": "### 5th Axis Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSupress park function ADD 8, Linear Display of Rotory axis ADD 32,  \nTilt rotary axis ADD 256, Hide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09166"
+  },
+  {
+    "name": "#9167",
+    "detail": "Machine parameter 167",
+    "documentation": "### 6th Axis Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSupress park function ADD 8, Linear Display of Rotory axis ADD 32,  \nTilt rotary axis ADD 256, Hide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09167"
+  },
+  {
+    "name": "#9168",
+    "detail": "Machine parameter 168",
+    "documentation": "### 7th Axis Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSupress park function ADD 8, Linear Display of Rotory axis ADD 32,  \nTilt rotary axis ADD 256, Hide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09168"
+  },
+  {
+    "name": "#9169",
+    "detail": "Machine parameter 169",
+    "documentation": "### 8th Axis Properties: Rotary axis ADD 1, Rotary display wrap around ADD 2,  \nSupress park function ADD 8, Linear Display of Rotory axis ADD 32,  \nTilt rotary axis ADD 256, Hide axis display ADD 512  ",
+    "kind": "system-variable",
+    "sortText": "09169"
+  },
+  {
+    "name": "#9170",
+    "detail": "Machine parameter 170",
+    "documentation": "### PLC Parameter LP0",
+    "kind": "system-variable",
+    "sortText": "09170"
+  },
+  {
+    "name": "#9171",
+    "detail": "Machine parameter 171",
+    "documentation": "### PLC Parameter LP1",
+    "kind": "system-variable",
+    "sortText": "09171"
+  },
+  {
+    "name": "#9172",
+    "detail": "Machine parameter 172",
+    "documentation": "### PLC Parameter LP2",
+    "kind": "system-variable",
+    "sortText": "09172"
+  },
+  {
+    "name": "#9173",
+    "detail": "Machine parameter 173",
+    "documentation": "### PLC Parameter LP3",
+    "kind": "system-variable",
+    "sortText": "09173"
+  },
+  {
+    "name": "#9174",
+    "detail": "Machine parameter 174",
+    "documentation": "### PLC Parameter LP4",
+    "kind": "system-variable",
+    "sortText": "09174"
+  },
+  {
+    "name": "#9175",
+    "detail": "Machine parameter 175",
+    "documentation": "### PLC Parameter LP5",
+    "kind": "system-variable",
+    "sortText": "09175"
+  },
+  {
+    "name": "#9176",
+    "detail": "Machine parameter 176",
+    "documentation": "### PLC Parameter LP6",
+    "kind": "system-variable",
+    "sortText": "09176"
+  },
+  {
+    "name": "#9177",
+    "detail": "Machine parameter 177",
+    "documentation": "### PLC Parameter LP7",
+    "kind": "system-variable",
+    "sortText": "09177"
+  },
+  {
+    "name": "#9178",
+    "detail": "Machine parameter 178",
+    "documentation": "### PLC Parameter LP8",
+    "kind": "system-variable",
+    "sortText": "09178"
+  },
+  {
+    "name": "#9179",
+    "detail": "Machine parameter 179",
+    "documentation": "### PLC Parameter LP9",
+    "kind": "system-variable",
+    "sortText": "09179"
+  },
+  {
+    "name": "#9180",
+    "detail": "Machine parameter 180",
+    "documentation": "### Serial Comm - COM port (1-4)",
+    "kind": "system-variable",
+    "sortText": "09180"
+  },
+  {
+    "name": "#9181",
+    "detail": "Machine parameter 181",
+    "documentation": "### Serial Comm - Baud rate (Kbps)",
+    "kind": "system-variable",
+    "sortText": "09181"
+  },
+  {
+    "name": "#9182",
+    "detail": "Machine parameter 182",
+    "documentation": "### Serial Comm - Data, Parity, Stop",
+    "kind": "system-variable",
+    "sortText": "09182"
+  },
+  {
+    "name": "#9183",
+    "detail": "Machine parameter 183",
+    "documentation": "### Serial Comm - Flow control",
+    "kind": "system-variable",
+    "sortText": "09183"
+  },
+  {
+    "name": "#9184",
+    "detail": "Machine parameter 184",
+    "documentation": "### Serial Comm - Timeout (in seconds)",
+    "kind": "system-variable",
+    "sortText": "09184"
+  },
+  {
+    "name": "#9185",
+    "detail": "Machine parameter 185",
+    "documentation": "### Serial Comm - Options",
+    "kind": "system-variable",
+    "sortText": "09185"
+  },
+  {
+    "name": "#9186",
+    "detail": "Machine parameter 186",
+    "documentation": "### Probe stuck retry disable",
+    "kind": "system-variable",
+    "sortText": "09186"
+  },
+  {
+    "name": "#9187",
+    "detail": "Machine parameter 187",
+    "documentation": "### Hard Stop Limit for Homing",
+    "kind": "system-variable",
+    "sortText": "09187"
+  },
+  {
+    "name": "#9188",
+    "detail": "Machine parameter 188",
+    "documentation": "### Aux 1 Key Function",
+    "kind": "system-variable",
+    "sortText": "09188"
+  },
+  {
+    "name": "#9189",
+    "detail": "Machine parameter 189",
+    "documentation": "### Aux 2 Key Function",
+    "kind": "system-variable",
+    "sortText": "09189"
+  },
+  {
+    "name": "#9190",
+    "detail": "Machine parameter 190",
+    "documentation": "### Aux 3 Key Function",
+    "kind": "system-variable",
+    "sortText": "09190"
+  },
+  {
+    "name": "#9191",
+    "detail": "Machine parameter 191",
+    "documentation": "### Aux 4 Key Function",
+    "kind": "system-variable",
+    "sortText": "09191"
+  },
+  {
+    "name": "#9192",
+    "detail": "Machine parameter 192",
+    "documentation": "### Aux 5 Key Function",
+    "kind": "system-variable",
+    "sortText": "09192"
+  },
+  {
+    "name": "#9193",
+    "detail": "Machine parameter 193",
+    "documentation": "### Aux 6 Key Function",
+    "kind": "system-variable",
+    "sortText": "09193"
+  },
+  {
+    "name": "#9194",
+    "detail": "Machine parameter 194",
+    "documentation": "### Aux 7 Key Function",
+    "kind": "system-variable",
+    "sortText": "09194"
+  },
+  {
+    "name": "#9195",
+    "detail": "Machine parameter 195",
+    "documentation": "### Aux 8 Key Function",
+    "kind": "system-variable",
+    "sortText": "09195"
+  },
+  {
+    "name": "#9196",
+    "detail": "Machine parameter 196",
+    "documentation": "### Aux 9 Key Function",
+    "kind": "system-variable",
+    "sortText": "09196"
+  },
+  {
+    "name": "#9197",
+    "detail": "Machine parameter 197",
+    "documentation": "### Aux 10 Key Function",
+    "kind": "system-variable",
+    "sortText": "09197"
+  },
+  {
+    "name": "#9198",
+    "detail": "Machine parameter 198",
+    "documentation": "### Aux 11 Key Function",
+    "kind": "system-variable",
+    "sortText": "09198"
+  },
+  {
+    "name": "#9199",
+    "detail": "Machine parameter 199",
+    "documentation": "### Aux 12 Key Function",
+    "kind": "system-variable",
+    "sortText": "09199"
+  },
+  {
+    "name": "#9200",
+    "detail": "Machine parameter 200",
+    "documentation": "### Drive 1 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09200"
+  },
+  {
+    "name": "#9201",
+    "detail": "Machine parameter 201",
+    "documentation": "### Drive 2 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09201"
+  },
+  {
+    "name": "#9202",
+    "detail": "Machine parameter 202",
+    "documentation": "### Drive 3 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09202"
+  },
+  {
+    "name": "#9203",
+    "detail": "Machine parameter 203",
+    "documentation": "### Drive 4 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09203"
+  },
+  {
+    "name": "#9204",
+    "detail": "Machine parameter 204",
+    "documentation": "### Drive 5 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09204"
+  },
+  {
+    "name": "#9205",
+    "detail": "Machine parameter 205",
+    "documentation": "### Drive 6 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09205"
+  },
+  {
+    "name": "#9206",
+    "detail": "Machine parameter 206",
+    "documentation": "### Drive 7 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09206"
+  },
+  {
+    "name": "#9207",
+    "detail": "Machine parameter 207",
+    "documentation": "### Drive 8 Tach volts per 1000 rpm",
+    "kind": "system-variable",
+    "sortText": "09207"
+  },
+  {
+    "name": "#9216",
+    "detail": "Machine parameter 216",
+    "documentation": "### PC-based backlash on/off: 1=PC-based, 0=MPU backlash",
+    "kind": "system-variable",
+    "sortText": "09216"
+  },
+  {
+    "name": "#9217",
+    "detail": "Machine parameter 217",
+    "documentation": "### PC-based Screw comp on/off: 1=PC-based, 0=MPU based",
+    "kind": "system-variable",
+    "sortText": "09217"
+  },
+  {
+    "name": "#9218",
+    "detail": "Machine parameter 218",
+    "documentation": "### USB MPG Options.  \nADD 1 = Axis 1 enabled.  \nADD 2 = Axis 2 enabled.  \nADD 4 = Axis 3 enabled.  \nADD 8 = Axis 4 enabled.  ",
+    "kind": "system-variable",
+    "sortText": "09218"
+  },
+  {
+    "name": "#9219",
+    "detail": "Machine parameter 219",
+    "documentation": "### Virtual Control Panel Options",
+    "kind": "system-variable",
+    "sortText": "09219"
+  },
+  {
+    "name": "#9220",
+    "detail": "Machine parameter 220",
+    "documentation": "### Smoothing mode on/off  \n1=on 0=off  ",
+    "kind": "system-variable",
+    "sortText": "09220"
+  },
+  {
+    "name": "#9221",
+    "detail": "Machine parameter 221",
+    "documentation": "### Smoothing Amount to round corners and smooth geometry (NBpts)  \nRounded corners can be cut faster, but check tolerances (see next)  ",
+    "kind": "system-variable",
+    "sortText": "09221"
+  },
+  {
+    "name": "#9222",
+    "detail": "Machine parameter 222",
+    "documentation": "### Smoothing Step size (STEP)  \nRounding Error is roughly (Parameter 221 * Parameter 222) / 3  ",
+    "kind": "system-variable",
+    "sortText": "09222"
+  },
+  {
+    "name": "#9223",
+    "detail": "Machine parameter 223",
+    "documentation": "### Smoothing vectors per second -- leave this at 800 (Umax)",
+    "kind": "system-variable",
+    "sortText": "09223"
+  },
+  {
+    "name": "#9224",
+    "detail": "Machine parameter 224",
+    "documentation": "### Smoothing Centripetal options:  \n0 = All axes and NO checking for excess accel  \n-1 = Linear axes only and NO checking for excess accel  \n-2 = All axes WITH checking for excess accel  \n-3 = Linear axes only WITH checking for excess accel  ",
+    "kind": "system-variable",
+    "sortText": "09224"
+  },
+  {
+    "name": "#9225",
+    "detail": "Machine parameter 225",
+    "documentation": "### Unused",
+    "kind": "system-variable",
+    "sortText": "09225"
+  },
+  {
+    "name": "#9226",
+    "detail": "Machine parameter 226",
+    "documentation": "### Smoothing Filter half-width for feature detection (W)  \nIncrease this value to smooth over small glitches in your gcode programs  ",
+    "kind": "system-variable",
+    "sortText": "09226"
+  },
+  {
+    "name": "#9227",
+    "detail": "Machine parameter 227",
+    "documentation": "### Smoothing Minimum angle for feature detection (Min_Angle)  \nMachine will round corners that are wider than this angle  ",
+    "kind": "system-variable",
+    "sortText": "09227"
+  },
+  {
+    "name": "#9228",
+    "detail": "Machine parameter 228",
+    "documentation": "### Smoothing S-Curve Filter Multiplier (S Curve)  \nSet this to 0 to turn off S-Curve, 1 for full S-Curve, Between 0 and 1 for partial  ",
+    "kind": "system-variable",
+    "sortText": "09228"
+  },
+  {
+    "name": "#9229",
+    "detail": "Machine parameter 229",
+    "documentation": "### Smoothing Movements Drawn in Backplot  \nSet this to 1 to use Smoothing for Backplotting (slows it down considerably)  ",
+    "kind": "system-variable",
+    "sortText": "09229"
+  },
+  {
+    "name": "#9230",
+    "detail": "Machine parameter 230",
+    "documentation": "### Smoothing Curve Feedrate Multiplier  \nIncrease this value to make your machine run faster (but bang more) -- 1 is normal  ",
+    "kind": "system-variable",
+    "sortText": "09230"
+  },
+  {
+    "name": "#9231",
+    "detail": "Machine parameter 231",
+    "documentation": "### Smoothing Acceleration Multiplier  \nIncrease this value to make your machine accelerate faster than normal -- 1 is normal  ",
+    "kind": "system-variable",
+    "sortText": "09231"
+  },
+  {
+    "name": "#9236",
+    "detail": "Machine parameter 236",
+    "documentation": "### 5th Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09236"
+  },
+  {
+    "name": "#9237",
+    "detail": "Machine parameter 237",
+    "documentation": "### 6th Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09237"
+  },
+  {
+    "name": "#9238",
+    "detail": "Machine parameter 238",
+    "documentation": "### 7th Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09238"
+  },
+  {
+    "name": "#9239",
+    "detail": "Machine parameter 239",
+    "documentation": "### 8th Axis Cooling Coefficient",
+    "kind": "system-variable",
+    "sortText": "09239"
+  },
+  {
+    "name": "#9240",
+    "detail": "Machine parameter 240",
+    "documentation": "### Accel/Decel distance for Rigid Tapping",
+    "kind": "system-variable",
+    "sortText": "09240"
+  },
+  {
+    "name": "#9241",
+    "detail": "Machine parameter 241",
+    "documentation": "### Accel/Decel rotational step size (in degrees) for Rigid Tapping",
+    "kind": "system-variable",
+    "sortText": "09241"
+  },
+  {
+    "name": "#9252",
+    "detail": "Machine parameter 252",
+    "documentation": "### 5th Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09252"
+  },
+  {
+    "name": "#9253",
+    "detail": "Machine parameter 253",
+    "documentation": "### 6th Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09253"
+  },
+  {
+    "name": "#9254",
+    "detail": "Machine parameter 254",
+    "documentation": "### 7th Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09254"
+  },
+  {
+    "name": "#9255",
+    "detail": "Machine parameter 255",
+    "documentation": "### 8th Axis Autotune Accel Time and Ka",
+    "kind": "system-variable",
+    "sortText": "09255"
+  },
+  {
+    "name": "#9256",
+    "detail": "Machine parameter 256",
+    "documentation": "### Drive Mode:  \n0 = Torque (Autotune Enabled)  \n1 = Velocity (Autotune Disabled)  \n2 = Precision (Auto Delay Enabled, Enables the Precision Mode Delay Parameters)  ",
+    "kind": "system-variable",
+    "sortText": "09256"
+  },
+  {
+    "name": "#9257",
+    "detail": "Machine parameter 257",
+    "documentation": "### Tool Touchoff Detect",
+    "kind": "system-variable",
+    "sortText": "09257"
+  },
+  {
+    "name": "#9258",
+    "detail": "Machine parameter 258",
+    "documentation": "### Velocity/Torque Mode override in Precision mode. Setting an axis bit allows that axis to run as if it were in velocity or torque mode, but prone to servo mismatch errors.",
+    "kind": "system-variable",
+    "sortText": "09258"
+  },
+  {
+    "name": "#9259",
+    "detail": "Machine parameter 259",
+    "documentation": "### Manual Axis Bits",
+    "kind": "system-variable",
+    "sortText": "09259"
+  },
+  {
+    "name": "#9260",
+    "detail": "Machine parameter 260",
+    "documentation": "### Accelerated Graphics Backplot... 1 = On, -1 = Off",
+    "kind": "system-variable",
+    "sortText": "09260"
+  },
+  {
+    "name": "#9261",
+    "detail": "Machine parameter 261",
+    "documentation": "### Precision Mode Standoff Tolerance Percentage",
+    "kind": "system-variable",
+    "sortText": "09261"
+  },
+  {
+    "name": "#9262",
+    "detail": "Machine parameter 262",
+    "documentation": "### Precision Mode Standoff Delay Time (seconds)",
+    "kind": "system-variable",
+    "sortText": "09262"
+  },
+  {
+    "name": "#9265",
+    "detail": "Machine parameter 265",
+    "documentation": "### Rotary A Axis Scale Encoder Home Position - DO NOT MODIFY EXCEPT TO SET TO ZERO FOR RECALIBRATION",
+    "kind": "system-variable",
+    "sortText": "09265"
+  },
+  {
+    "name": "#9266",
+    "detail": "Machine parameter 266",
+    "documentation": "### Rotary A Axis Scale Encoder Sign Extension - DO NO MODIFY",
+    "kind": "system-variable",
+    "sortText": "09266"
+  },
+  {
+    "name": "#9270",
+    "detail": "Machine parameter 270",
+    "documentation": "### Skew Correction: X Skew offset from Trusted/Intended X",
+    "kind": "system-variable",
+    "sortText": "09270"
+  },
+  {
+    "name": "#9271",
+    "detail": "Machine parameter 271",
+    "documentation": "### Skew Correction: Trusted/Intended Y",
+    "kind": "system-variable",
+    "sortText": "09271"
+  },
+  {
+    "name": "#9278",
+    "detail": "Machine parameter 278",
+    "documentation": "### Spindle Speed Display Precision",
+    "kind": "system-variable",
+    "sortText": "09278"
+  },
+  {
+    "name": "#9284",
+    "detail": "Machine parameter 284",
+    "documentation": "### ACDC Drive 1 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09284"
+  },
+  {
+    "name": "#9285",
+    "detail": "Machine parameter 285",
+    "documentation": "### ACDC Drive 2 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09285"
+  },
+  {
+    "name": "#9286",
+    "detail": "Machine parameter 286",
+    "documentation": "### ACDC Drive 3 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09286"
+  },
+  {
+    "name": "#9287",
+    "detail": "Machine parameter 287",
+    "documentation": "### ACDC Drive 4 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09287"
+  },
+  {
+    "name": "#9288",
+    "detail": "Machine parameter 288",
+    "documentation": "### ACDC Drive 5 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09288"
+  },
+  {
+    "name": "#9289",
+    "detail": "Machine parameter 289",
+    "documentation": "### ACDC Drive 6 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09289"
+  },
+  {
+    "name": "#9290",
+    "detail": "Machine parameter 290",
+    "documentation": "### ACDC Drive 7 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09290"
+  },
+  {
+    "name": "#9291",
+    "detail": "Machine parameter 291",
+    "documentation": "### ACDC Drive 8 Brake Resistor Wattage",
+    "kind": "system-variable",
+    "sortText": "09291"
+  },
+  {
+    "name": "#9316",
+    "detail": "Machine parameter 316",
+    "documentation": "### Absolute Encoder Bits",
+    "kind": "system-variable",
+    "sortText": "09316"
+  },
+  {
+    "name": "#9317",
+    "detail": "Machine parameter 317",
+    "documentation": "### Single Turn Absolute Encoder Bits",
+    "kind": "system-variable",
+    "sortText": "09317"
+  },
+  {
+    "name": "#9318",
+    "detail": "Machine parameter 318",
+    "documentation": "### Five Axis Configuration  \nStraight Rotary B axis Magnescale Scale Drive (1-8)  ",
+    "kind": "system-variable",
+    "sortText": "09318"
+  },
+  {
+    "name": "#9323",
+    "detail": "Machine parameter 323",
+    "documentation": "### MPU11 Encoder Filter Speed",
+    "kind": "system-variable",
+    "sortText": "09323"
+  },
+  {
+    "name": "#9332",
+    "detail": "Machine parameter 332",
+    "documentation": "### Disable differential encoder error faults",
+    "kind": "system-variable",
+    "sortText": "09332"
+  },
+  {
+    "name": "#9333",
+    "detail": "Machine parameter 333",
+    "documentation": "### Disable differential encoder error messages",
+    "kind": "system-variable",
+    "sortText": "09333"
+  },
+  {
+    "name": "#9334",
+    "detail": "Machine parameter 334",
+    "documentation": "### Disable quadrature encoder error faults",
+    "kind": "system-variable",
+    "sortText": "09334"
+  },
+  {
+    "name": "#9335",
+    "detail": "Machine parameter 335",
+    "documentation": "### Disable quadrature encoder error messages",
+    "kind": "system-variable",
+    "sortText": "09335"
+  },
+  {
+    "name": "#9336",
+    "detail": "Machine parameter 336",
+    "documentation": "### Axis meter overall gain",
+    "kind": "system-variable",
+    "sortText": "09336"
+  },
+  {
+    "name": "#9337",
+    "detail": "Machine parameter 337",
+    "documentation": "### Axis meter absolute error gain",
+    "kind": "system-variable",
+    "sortText": "09337"
+  },
+  {
+    "name": "#9338",
+    "detail": "Machine parameter 338",
+    "documentation": "### Axis meter sum error gain",
+    "kind": "system-variable",
+    "sortText": "09338"
+  },
+  {
+    "name": "#9339",
+    "detail": "Machine parameter 339",
+    "documentation": "### Axis meter delta error gain",
+    "kind": "system-variable",
+    "sortText": "09339"
+  },
+  {
+    "name": "#9365",
+    "detail": "Machine parameter 365",
+    "documentation": "### Drive Power On Delay (Milliseconds)",
+    "kind": "system-variable",
+    "sortText": "09365"
+  },
+  {
+    "name": "#9366",
+    "detail": "Machine parameter 366",
+    "documentation": "### Probe Deceleration Multiplier",
+    "kind": "system-variable",
+    "sortText": "09366"
+  },
+  {
+    "name": "#9367",
+    "detail": "Machine parameter 367",
+    "documentation": "### TT1 Deceleration Multiplier",
+    "kind": "system-variable",
+    "sortText": "09367"
+  },
+  {
+    "name": "#9368",
+    "detail": "Machine parameter 368",
+    "documentation": "### Autonomous Digitizing Angle Adjustment Default",
+    "kind": "system-variable",
+    "sortText": "09368"
+  },
+  {
+    "name": "#9369",
+    "detail": "Machine parameter 369",
+    "documentation": "### Tool Check Max Absolute Angle",
+    "kind": "system-variable",
+    "sortText": "09369"
+  },
+  {
+    "name": "#9370",
+    "detail": "Machine parameter 370",
+    "documentation": "### PID Filter Constant A1 (Dev Test)",
+    "kind": "system-variable",
+    "sortText": "09370"
+  },
+  {
+    "name": "#9371",
+    "detail": "Machine parameter 371",
+    "documentation": "### PID Filter Constant A2 (Dev Test)",
+    "kind": "system-variable",
+    "sortText": "09371"
+  },
+  {
+    "name": "#9372",
+    "detail": "Machine parameter 372",
+    "documentation": "### PID Filter Constant B0 (Dev Test)",
+    "kind": "system-variable",
+    "sortText": "09372"
+  },
+  {
+    "name": "#9373",
+    "detail": "Machine parameter 373",
+    "documentation": "### PID Filter Constant B1 (Dev Test)",
+    "kind": "system-variable",
+    "sortText": "09373"
+  },
+  {
+    "name": "#9374",
+    "detail": "Machine parameter 374",
+    "documentation": "### ACDC Drive Debug Log Axis Inclusion",
+    "kind": "system-variable",
+    "sortText": "09374"
+  },
+  {
+    "name": "#9375",
+    "detail": "Machine parameter 375",
+    "documentation": "### ACDC Drive Debug Log Size",
+    "kind": "system-variable",
+    "sortText": "09375"
+  },
+  {
+    "name": "#9376",
+    "detail": "Machine parameter 376",
+    "documentation": "### ACDC Drive Debug Log Collection Type",
+    "kind": "system-variable",
+    "sortText": "09376"
+  },
+  {
+    "name": "#9377",
+    "detail": "Machine parameter 377",
+    "documentation": "### ACDC Drive Debug Log Trigger Type",
+    "kind": "system-variable",
+    "sortText": "09377"
+  },
+  {
+    "name": "#9378",
+    "detail": "Machine parameter 378",
+    "documentation": "### ACDC Drive Debug Log Trigger Level",
+    "kind": "system-variable",
+    "sortText": "09378"
+  },
+  {
+    "name": "#9379",
+    "detail": "Machine parameter 379",
+    "documentation": "### ACDC Drive Debug Log Option",
+    "kind": "system-variable",
+    "sortText": "09379"
+  },
+  {
+    "name": "#9380",
+    "detail": "Machine parameter 380",
+    "documentation": "### Engine Block X Reference Position",
+    "kind": "system-variable",
+    "sortText": "09380"
+  },
+  {
+    "name": "#9381",
+    "detail": "Machine parameter 381",
+    "documentation": "### Engine Block Block WCS",
+    "kind": "system-variable",
+    "sortText": "09381"
+  },
+  {
+    "name": "#9382",
+    "detail": "Machine parameter 382",
+    "documentation": "### Engine Block Cam WCS",
+    "kind": "system-variable",
+    "sortText": "09382"
+  },
+  {
+    "name": "#9383",
+    "detail": "Machine parameter 383",
+    "documentation": "### Engine Block A axis Center Y",
+    "kind": "system-variable",
+    "sortText": "09383"
+  },
+  {
+    "name": "#9384",
+    "detail": "Machine parameter 384",
+    "documentation": "### Engine Block A axis Center Z",
+    "kind": "system-variable",
+    "sortText": "09384"
+  },
+  {
+    "name": "#9385",
+    "detail": "Machine parameter 385",
+    "documentation": "### Engine Block Surfacing Cycle B angle",
+    "kind": "system-variable",
+    "sortText": "09385"
+  },
+  {
+    "name": "#9386",
+    "detail": "Machine parameter 386",
+    "documentation": "### Reserved",
+    "kind": "system-variable",
+    "sortText": "09386"
+  },
+  {
+    "name": "#9389",
+    "detail": "Machine parameter 389",
+    "documentation": "### Debug Level",
+    "kind": "system-variable",
+    "sortText": "09389"
+  },
+  {
+    "name": "#9390",
+    "detail": "Machine parameter 390",
+    "documentation": "### AD1 CV on/off",
+    "kind": "system-variable",
+    "sortText": "09390"
+  },
+  {
+    "name": "#9391",
+    "detail": "Machine parameter 391",
+    "documentation": "### AD1 CV vectors per second",
+    "kind": "system-variable",
+    "sortText": "09391"
+  },
+  {
+    "name": "#9392",
+    "detail": "Machine parameter 392",
+    "documentation": "### DP7 pullback distance",
+    "kind": "system-variable",
+    "sortText": "09392"
+  },
+  {
+    "name": "#9393",
+    "detail": "Machine parameter 393",
+    "documentation": "### DP7 pullback feedrate",
+    "kind": "system-variable",
+    "sortText": "09393"
+  },
+  {
+    "name": "#9394",
+    "detail": "Machine parameter 394",
+    "documentation": "### DP7 measuring feedrate",
+    "kind": "system-variable",
+    "sortText": "09394"
+  },
+  {
+    "name": "#9395",
+    "detail": "Machine parameter 395",
+    "documentation": "### Probing Setup Traverse Speed",
+    "kind": "system-variable",
+    "sortText": "09395"
+  },
+  {
+    "name": "#9396",
+    "detail": "Machine parameter 396",
+    "documentation": "### Probing Setup Plunge Speed",
+    "kind": "system-variable",
+    "sortText": "09396"
+  },
+  {
+    "name": "#9397",
+    "detail": "Machine parameter 397",
+    "documentation": "### Combustion Chamber Digitizing Clearance Height",
+    "kind": "system-variable",
+    "sortText": "09397"
+  },
+  {
+    "name": "#9398",
+    "detail": "Machine parameter 398",
+    "documentation": "### Current Port Block Mode:  \n0 - 3 Axis Mode  \n1 - Engine Block Mode  \n2 - Tilt Table Mode  ",
+    "kind": "system-variable",
+    "sortText": "09398"
+  },
+  {
+    "name": "#9399",
+    "detail": "Machine parameter 399",
+    "documentation": "### Arc chord off-path tolerance adjustment factor",
+    "kind": "system-variable",
+    "sortText": "09399"
+  },
+  {
+    "name": "#9900",
+    "detail": "Machine parameter 900",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09900"
+  },
+  {
+    "name": "#9901",
+    "detail": "Machine parameter 901",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09901"
+  },
+  {
+    "name": "#9902",
+    "detail": "Machine parameter 902",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09902"
+  },
+  {
+    "name": "#9903",
+    "detail": "Machine parameter 903",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09903"
+  },
+  {
+    "name": "#9904",
+    "detail": "Machine parameter 904",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09904"
+  },
+  {
+    "name": "#9905",
+    "detail": "Machine parameter 905",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09905"
+  },
+  {
+    "name": "#9906",
+    "detail": "Machine parameter 906",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09906"
+  },
+  {
+    "name": "#9907",
+    "detail": "Machine parameter 907",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09907"
+  },
+  {
+    "name": "#9908",
+    "detail": "Machine parameter 908",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09908"
+  },
+  {
+    "name": "#9909",
+    "detail": "Machine parameter 909",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09909"
+  },
+  {
+    "name": "#9910",
+    "detail": "Machine parameter 910",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09910"
+  },
+  {
+    "name": "#9911",
+    "detail": "Machine parameter 911",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09911"
+  },
+  {
+    "name": "#9912",
+    "detail": "Machine parameter 912",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09912"
+  },
+  {
+    "name": "#9913",
+    "detail": "Machine parameter 913",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09913"
+  },
+  {
+    "name": "#9914",
+    "detail": "Machine parameter 914",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09914"
+  },
+  {
+    "name": "#9915",
+    "detail": "Machine parameter 915",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09915"
+  },
+  {
+    "name": "#9916",
+    "detail": "Machine parameter 916",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09916"
+  },
+  {
+    "name": "#9917",
+    "detail": "Machine parameter 917",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09917"
+  },
+  {
+    "name": "#9918",
+    "detail": "Machine parameter 918",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09918"
+  },
+  {
+    "name": "#9919",
+    "detail": "Machine parameter 919",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09919"
+  },
+  {
+    "name": "#9920",
+    "detail": "Machine parameter 920",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09920"
+  },
+  {
+    "name": "#9921",
+    "detail": "Machine parameter 921",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09921"
+  },
+  {
+    "name": "#9922",
+    "detail": "Machine parameter 922",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09922"
+  },
+  {
+    "name": "#9923",
+    "detail": "Machine parameter 923",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09923"
+  },
+  {
+    "name": "#9924",
+    "detail": "Machine parameter 924",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09924"
+  },
+  {
+    "name": "#9925",
+    "detail": "Machine parameter 925",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09925"
+  },
+  {
+    "name": "#9926",
+    "detail": "Machine parameter 926",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09926"
+  },
+  {
+    "name": "#9927",
+    "detail": "Machine parameter 927",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09927"
+  },
+  {
+    "name": "#9928",
+    "detail": "Machine parameter 928",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09928"
+  },
+  {
+    "name": "#9929",
+    "detail": "Machine parameter 929",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09929"
+  },
+  {
+    "name": "#9930",
+    "detail": "Machine parameter 930",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09930"
+  },
+  {
+    "name": "#9931",
+    "detail": "Machine parameter 931",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09931"
+  },
+  {
+    "name": "#9932",
+    "detail": "Machine parameter 932",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09932"
+  },
+  {
+    "name": "#9933",
+    "detail": "Machine parameter 933",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09933"
+  },
+  {
+    "name": "#9934",
+    "detail": "Machine parameter 934",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09934"
+  },
+  {
+    "name": "#9935",
+    "detail": "Machine parameter 935",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09935"
+  },
+  {
+    "name": "#9936",
+    "detail": "Machine parameter 936",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09936"
+  },
+  {
+    "name": "#9937",
+    "detail": "Machine parameter 937",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09937"
+  },
+  {
+    "name": "#9938",
+    "detail": "Machine parameter 938",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09938"
+  },
+  {
+    "name": "#9939",
+    "detail": "Machine parameter 939",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09939"
+  },
+  {
+    "name": "#9940",
+    "detail": "Machine parameter 940",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09940"
+  },
+  {
+    "name": "#9941",
+    "detail": "Machine parameter 941",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09941"
+  },
+  {
+    "name": "#9942",
+    "detail": "Machine parameter 942",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09942"
+  },
+  {
+    "name": "#9943",
+    "detail": "Machine parameter 943",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09943"
+  },
+  {
+    "name": "#9944",
+    "detail": "Machine parameter 944",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09944"
+  },
+  {
+    "name": "#9945",
+    "detail": "Machine parameter 945",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09945"
+  },
+  {
+    "name": "#9946",
+    "detail": "Machine parameter 946",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09946"
+  },
+  {
+    "name": "#9947",
+    "detail": "Machine parameter 947",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09947"
+  },
+  {
+    "name": "#9948",
+    "detail": "Machine parameter 948",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09948"
+  },
+  {
+    "name": "#9949",
+    "detail": "Machine parameter 949",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09949"
+  },
+  {
+    "name": "#9950",
+    "detail": "Machine parameter 950",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09950"
+  },
+  {
+    "name": "#9951",
+    "detail": "Machine parameter 951",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09951"
+  },
+  {
+    "name": "#9952",
+    "detail": "Machine parameter 952",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09952"
+  },
+  {
+    "name": "#9953",
+    "detail": "Machine parameter 953",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09953"
+  },
+  {
+    "name": "#9954",
+    "detail": "Machine parameter 954",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09954"
+  },
+  {
+    "name": "#9955",
+    "detail": "Machine parameter 955",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09955"
+  },
+  {
+    "name": "#9956",
+    "detail": "Machine parameter 956",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09956"
+  },
+  {
+    "name": "#9957",
+    "detail": "Machine parameter 957",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09957"
+  },
+  {
+    "name": "#9958",
+    "detail": "Machine parameter 958",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09958"
+  },
+  {
+    "name": "#9959",
+    "detail": "Machine parameter 959",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09959"
+  },
+  {
+    "name": "#9960",
+    "detail": "Machine parameter 960",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09960"
+  },
+  {
+    "name": "#9961",
+    "detail": "Machine parameter 961",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09961"
+  },
+  {
+    "name": "#9962",
+    "detail": "Machine parameter 962",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09962"
+  },
+  {
+    "name": "#9963",
+    "detail": "Machine parameter 963",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09963"
+  },
+  {
+    "name": "#9964",
+    "detail": "Machine parameter 964",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09964"
+  },
+  {
+    "name": "#9965",
+    "detail": "Machine parameter 965",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09965"
+  },
+  {
+    "name": "#9966",
+    "detail": "Machine parameter 966",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09966"
+  },
+  {
+    "name": "#9967",
+    "detail": "Machine parameter 967",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09967"
+  },
+  {
+    "name": "#9968",
+    "detail": "Machine parameter 968",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09968"
+  },
+  {
+    "name": "#9969",
+    "detail": "Machine parameter 969",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09969"
+  },
+  {
+    "name": "#9970",
+    "detail": "Machine parameter 970",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09970"
+  },
+  {
+    "name": "#9971",
+    "detail": "Machine parameter 971",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09971"
+  },
+  {
+    "name": "#9972",
+    "detail": "Machine parameter 972",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09972"
+  },
+  {
+    "name": "#9973",
+    "detail": "Machine parameter 973",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09973"
+  },
+  {
+    "name": "#9974",
+    "detail": "Machine parameter 974",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09974"
+  },
+  {
+    "name": "#9975",
+    "detail": "Machine parameter 975",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09975"
+  },
+  {
+    "name": "#9976",
+    "detail": "Machine parameter 976",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09976"
+  },
+  {
+    "name": "#9977",
+    "detail": "Machine parameter 977",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09977"
+  },
+  {
+    "name": "#9978",
+    "detail": "Machine parameter 978",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09978"
+  },
+  {
+    "name": "#9979",
+    "detail": "Machine parameter 979",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09979"
+  },
+  {
+    "name": "#9980",
+    "detail": "Machine parameter 980",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09980"
+  },
+  {
+    "name": "#9981",
+    "detail": "Machine parameter 981",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09981"
+  },
+  {
+    "name": "#9982",
+    "detail": "Machine parameter 982",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09982"
+  },
+  {
+    "name": "#9983",
+    "detail": "Machine parameter 983",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09983"
+  },
+  {
+    "name": "#9984",
+    "detail": "Machine parameter 984",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09984"
+  },
+  {
+    "name": "#9985",
+    "detail": "Machine parameter 985",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09985"
+  },
+  {
+    "name": "#9986",
+    "detail": "Machine parameter 986",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09986"
+  },
+  {
+    "name": "#9987",
+    "detail": "Machine parameter 987",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09987"
+  },
+  {
+    "name": "#9988",
+    "detail": "Machine parameter 988",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09988"
+  },
+  {
+    "name": "#9989",
+    "detail": "Machine parameter 989",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09989"
+  },
+  {
+    "name": "#9990",
+    "detail": "Machine parameter 990",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09990"
+  },
+  {
+    "name": "#9991",
+    "detail": "Machine parameter 991",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09991"
+  },
+  {
+    "name": "#9992",
+    "detail": "Machine parameter 992",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09992"
+  },
+  {
+    "name": "#9993",
+    "detail": "Machine parameter 993",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09993"
+  },
+  {
+    "name": "#9994",
+    "detail": "Machine parameter 994",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09994"
+  },
+  {
+    "name": "#9995",
+    "detail": "Machine parameter 995",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09995"
+  },
+  {
+    "name": "#9996",
+    "detail": "Machine parameter 996",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09996"
+  },
+  {
+    "name": "#9997",
+    "detail": "Machine parameter 997",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09997"
+  },
+  {
+    "name": "#9998",
+    "detail": "Machine parameter 998",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09998"
+  },
+  {
+    "name": "#9999",
+    "detail": "Machine parameter 999",
+    "documentation": "### Reserved for PLC",
+    "kind": "system-variable",
+    "sortText": "09999"
+  }
+]

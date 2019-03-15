@@ -1,16 +1,19 @@
 "use strict";
-import { Trie } from "tiny-trie";
 import * as vscode from "vscode";
 import { CentroidCompletionProvider } from "./CentroidCompletionProvider";
 import { CentroidDeclarationProvider } from "./CentroidDeclarationProvider";
 import { CentroidHoverProvider } from "./CentroidHoverProvider";
 import { CentroidReferenceProvider } from "./CentroidReferenceProvider";
 import { DocumentSymbolManager } from "./DocumentManager";
+import { wordPatternRegExp } from "./util";
 
 const centroidScheme = { language: "centroid-gcode", scheme: "file" };
 
 export function activate(context: vscode.ExtensionContext) {
   console.log("Activating!");
+  vscode.languages.setLanguageConfiguration("centroid-gcode", {
+    wordPattern: new RegExp(wordPatternRegExp)
+  });
   DocumentSymbolManager.init(context);
   context.subscriptions.push(
     vscode.languages.registerHoverProvider(
