@@ -14,6 +14,7 @@
     {
       "include": "#prognumbers"
     },
+  
     {
       "include": "#coords"
     },
@@ -50,6 +51,7 @@
     {
       "include": "#bitwiseoperators"
     }
+   
   ],
   "repository": {
     "comments": {
@@ -75,11 +77,11 @@
     "speedfeeds": {
       "patterns": [
         {
-          "match": "(?i:S)(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "match": "(?i:S)(?=[-+.]|\\d|\\[|#)[-+]?(\\d*\\.\\d+|\\d+)",
           "name": "constant.language.centroid-gcode"
         },
         {
-          "match": "(?i:F)(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "match": "(?i:F)(?=[-+.]|\\d|\\[|#)[-+]?(\\d*\\.\\d+|\\d+)",
           "name": "constant.language.centroid-gcode"
         }
       ]
@@ -107,11 +109,11 @@
     "coords": {
       "patterns": [
         {
-          "match": "(?i:[UVWXYZ])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "match": "(?i:[UVWXYZ])(?=[-+.]|\\d|\\[|#)[-+]?(\\d*\\.\\d+|\\d+)",
           "name": "string.centroid-gcode"
         },
         {
-          "match": "(?i:[ABC])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "match": "(?i:[ABC])(?=[-+.]|\\d|\\[|#)[-+]?(\\d*\\.\\d+|\\d+)",
           "name": "constant.character.escape.centroid-gcode"
         }
       ]
@@ -119,7 +121,7 @@
     "tools": {
       "patterns": [
         {
-          "match": "([dDhHtT])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "match": "(?i:[DHT])(?=[-+.]|\\d|\\[|#)[-+]?(\\d*\\.\\d+|\\d+)",
           "name": "constant.character.centroid-gcode"
         }
       ]
@@ -127,11 +129,11 @@
     "modifiers": {
       "patterns": [
         {
-          "match": "(?i:[IJK])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "match": "(?i:[IJK])(?=[-+.]|\\d|\\[|#)[-+]?(\\d*\\.\\d+|\\d+)",
           "name": "constant.character.escape.centroid-gcode"
         },
         {
-          "match": "(?i:[PQR])(?=-|\\d|\\[|#)-?(?:\\d+(?:\\.\\d*)?)?",
+          "match": "(?i:[PQR])(?=[-+.]|\\d|\\[|#)[-+]?(\\d*\\.\\d+|\\d+)",
           "name": "support.constant.math.centroid-gcode"
         },
         {
