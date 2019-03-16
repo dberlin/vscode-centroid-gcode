@@ -21,7 +21,7 @@
       "include": "#modifiers"
     },
     {
-      "include": "macrovars"
+      "include": "#macrovars"
     },
     {
       "include": "#tools"
@@ -143,7 +143,7 @@
     "macrovars": {
       "patterns": [
         {
-          "match": "[#][0-9]+",
+          "match": "#[0-9]+",
           "name": "variable.other.centroid-gcode"
         }
       ]
