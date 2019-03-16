@@ -72,7 +72,7 @@
         "convert-yaml": "ts-node src/scripts/yaml2expandedjs.ts yaml/original_help_text.yaml > src/json/help_text.json",
         "vscode:prepublish": "npm run compile",
         "compile": "npm run convert-yaml && tsc -p ./",
-        "watch": "tsc -watch -p ./",
+        "watch": "tsc -b -watch ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
@@ -89,6 +89,7 @@
         "vscode": "^1.1.2"
     },
     "dependencies": {
+        "node-interval-tree": "^1.3.3",
         "tiny-trie": "^0.2.6"
     }
 }

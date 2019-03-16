@@ -5,20 +5,9 @@ import * as vscode from "vscode";
 import help_text from "./json/help_text.json";
 import machine_parameters from "./json/machine_parameters.json";
 import macro_variables from "./json/macro_variables.json";
+import { ModalManager } from "./ModalManager";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
-
-const noLeadingZeroRegEx = new RegExp("^[A-Z]([0-9])$");
-function normalizeSymbolName(symbolName: string): string {
-  let upperName = symbolName.toUpperCase();
-  let matches;
-  // Convert all non-leading zero forms (G1, G2) to leading zero forms for symbol name
-  if ((matches = noLeadingZeroRegEx.exec(upperName))) {
-    let number = parseInt(matches[1]);
-    upperName = upperName[0] + "0" + number.toString();
-  }
-  return upperName;
-}
-
+import { normalizeSymbolName } from "./util";
 class FileTries {
   private allSymbols: Trie = new Trie();
   private symbolMap: Map<string, SymbolInfo> = new Map();
@@ -88,6 +77,7 @@ function convertKindtoSymbolType(kind: string) {
   return SymbolType.OtherCode;
 }
 class DocumentSymbolManagerClass {
+  private modes: Map<string, ModalManager> = new Map<string, ModalManager>();
   private tries: Map<string, FileTries> = new Map<string, FileTries>();
   private systemSymbols: SymbolInfo[] = [];
   init(context: vscode.ExtensionContext) {
@@ -138,6 +128,11 @@ class DocumentSymbolManagerClass {
       fileTries.add(symbolInfo);
     }
   }
+  getFoldingRanges(document: vscode.TextDocument): vscode.FoldingRange[] {
+    let modes = this.getModesForDocument(document);
+    if (!modes) return [];
+    return modes.getFoldingRanges();
+  }
   // Parse and add a document to our list of managed documents
   parseAndAddDocument(document: vscode.TextDocument) {
     let filename = this.normalizePathtoDoc(document);
@@ -146,13 +141,15 @@ class DocumentSymbolManagerClass {
     }
     let fileTries = new FileTries();
     this.tries.set(filename, fileTries);
+    let modalManager = new ModalManager();
+    this.modes.set(filename, modalManager);
     // Add system symbols
     // In theory we should only do this once, but it takes no appreciable time/memory anyway
     for (var sym of this.systemSymbols) {
       fileTries.add(sym);
     }
     // Parse out all the symbols
-    let docText = document.getText();
+    modalManager.parse(document);
     /*
     this.parseSymbolsUsingRegex(
       fileTries,
@@ -234,10 +231,15 @@ class DocumentSymbolManagerClass {
   private removeDocumentInternal(document: vscode.TextDocument) {
     let filename = this.normalizePathtoDoc(document);
     this.tries.delete(filename);
+    this.modes.delete(filename);
   }
   getTriesForDocument(document: vscode.TextDocument) {
     let filename = this.normalizePathtoDoc(document);
     return this.tries.get(filename);
+  }
+  getModesForDocument(document: vscode.TextDocument) {
+    let filename = this.normalizePathtoDoc(document);
+    return this.modes.get(filename);
   }
 }
 export const DocumentSymbolManager = new DocumentSymbolManagerClass();

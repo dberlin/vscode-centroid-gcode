@@ -2,6 +2,7 @@
 import * as vscode from "vscode";
 import { CentroidCompletionProvider } from "./CentroidCompletionProvider";
 import { CentroidDeclarationProvider } from "./CentroidDeclarationProvider";
+import { CentroidFoldingProvider } from "./CentroidFoldingProvider";
 import { CentroidHoverProvider } from "./CentroidHoverProvider";
 import { CentroidReferenceProvider } from "./CentroidReferenceProvider";
 import { DocumentSymbolManager } from "./DocumentManager";
@@ -15,6 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
     wordPattern: new RegExp(wordPatternRegExp)
   });
   DocumentSymbolManager.init(context);
+  context.subscriptions.push(
+    vscode.languages.registerFoldingRangeProvider(centroidScheme,
+      new CentroidFoldingProvider())
+  );
   context.subscriptions.push(
     vscode.languages.registerHoverProvider(
       centroidScheme,
