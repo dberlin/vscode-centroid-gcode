@@ -18,7 +18,7 @@ function tupleRange(str: string) {
   }
   return null;
 }
-let regularRangeRegex = /([0-9]+)-([0-9]+)/;
+let regularRangeRegex = /(\d+)\s*-\s*(\d+)/;
 function regularRange(str: string) {
   let matches;
   if ((matches = regularRangeRegex.exec(str))) {
