@@ -93,7 +93,7 @@ class DocumentSymbolManagerClass {
   init(context: vscode.ExtensionContext) {
     this.processSymbolList(help_text);
     this.processSymbolList(machine_parameters);
-    this.processSymbolList(macro_variables);
+    this.processSymbolList(<any>macro_variables);
   }
   private processSymbolList(
     symList: {

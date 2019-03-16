@@ -852,11 +852,12 @@
 
     Example:
 
+    ```
     M25 ; move Z to home
-
     M25 /Z ; same as M25 by itself – move Z to home
-
-    M25 /X/Y/Z ; move X, Y and Z to their Return #1 positions M25 /X ; move only X to its Return #1 position
+    M25 /X/Y/Z ; move X, Y and Z to their Return #1 positions
+    M25 /X ; move only X to its Return #1 position
+    ```
 
 - name: M26
   kind: m-code
@@ -865,10 +866,10 @@
     M26 sets the machine home position for the specified axis to the current position (after the line’s movement). If no axis is specified, M26 sets the Z-axis home position. The L word can be used to set home at the indicated encoder position provided the axis does not have an absolute encoder.
 
     Example:
-
+    ```
     M91/X ; home X axis to minus home switch M26/X ; set machine home for X-axis there M92/Z ; home Z-axis to plus home switch M26/Z ; set machine home for Z-axis there
-
     M26/X L4096 ; set machine home for the X-axis at encoder position of 4096
+    ```
 
 - name: M30
   kind: m-code
@@ -931,9 +932,18 @@
 
     Example:
 
-    M121 ”m60test.dig5” ; Open text file to record data too #29100 = -8.7999 ; X-Axis Start Position
-
-    #29101 = .3747 ; Y-Axis Start Position #29102 = -1.1832 ; Z-Axis Start Position #29103 = 85.957 ; A-Axis Start Position #29104 = 21.36 ; B-Axis Start Position #29110 = -8.7138 ; X-Axis End Position #29111 = -.0159 ; Y-Axis End Position #29112 = -1.183 ; Z-Axis End Position M60 ; Execute M60
+    ```
+    M121 ”m60test.dig5” ; Open text file to record data too 
+    #29100 = -8.7999 ; X-Axis Start Position
+    #29101 = .3747 ; Y-Axis Start Position
+    #29102 = -1.1832 ; Z-Axis Start Position 
+    #29103 = 85.957 ; A-Axis Start Position
+    #29104 = 21.36 ; B-Axis Start Position
+    #29110 = -8.7138 ; X-Axis End Position
+    #29111 = -.0159 ; Y-Axis End Position
+    #29112 = -1.183 ; Z-Axis End Position
+    #M60 ; Execute M60
+    ```
 
 - name: M91
   kind: m-code
@@ -945,7 +955,10 @@
 
     Example:
 
-    M91/X ; moves the X-axis to the minus home switch. G92 X-10 ; sets X minus home switch at -10
+    ```
+    M91/X ; moves the X-axis to the minus home switch.
+    G92 X-10 ; sets X minus home switch at -10
+    ```
 
 - name: M92
   kind: m-code
@@ -957,7 +970,10 @@
 
     Example:
 
-    M92/X ; moves the X-axis to the plus home switch. G92 X+10 ; Sets X plus home switch at +10
+    ```
+    M92/X ; moves the X-axis to the plus home switch.
+    G92 X+10 ; Sets X plus home switch at +10
+    ```
 
 - name: M93
   kind: m-code
@@ -969,18 +985,19 @@
 
     To release motor power:
 
+    ```
     M93/X ; releases the X axis.
-
     M93 ; releases the motors on all axes.
+    ```
 
     Example:
 
     To restore motor power:
 
+    ```
     M93/X P1 ; restore power to the X axis motor.
-
     M93 P1 ; restore power to the motors on all axes.
-
+    ```
     NOTE: Any axis freed within a CNC program should not be used in that program afterwards. Incorrect positioning may result.
 
 - name: 'M94, M95'
@@ -1003,7 +1020,9 @@
 
     Example:
 
+    ```
     M94/5/6 ; turns on SV M94 M95 5 and SV M94 M95 6.
+    ```
 
     NOTE: M94 and M95 will cause prior motion to decelerate to a stop before the requested bits are turned on or off
 
@@ -1017,9 +1036,10 @@
 
     Calling methods:
 
+    ```
     M98 Pxxxx Lrrrr OR
-
     M98 ”program.cnc” Lrrrr
+    ```
 
     where xxxx is the subprogram number (referring to file Oxxxx.cnc, 9100-9999 allowed, leading 0’s required in filename, capital O, lowercase .cnc), rrrr is the repeat value, and ”program.cnc” is the name of the subprogram file.
 
@@ -1035,43 +1055,45 @@
 
     Suppose that a drilling pattern of 4 holes is needed in 3 different locations:
 
+    ```
     :Main program
-
-    G90 G0 X2 Y5 Z0.5 ;Move to first hole pattern M98 P9101 L1 ;Call subprogram O9101.cnc G90 G0 X4Y1 Z0.5 ;Move to second hole pattern M98 P9101 L1 ;Call subprogram
-
-    G90 G0 X6 Y5 Z0.5 ;Move to third hole pattern M98 P9101 L1 ;Call subprogram
-
+    G90 G0 X2 Y5 Z0.5 ;Move to first hole pattern
+    M98 P9101 L1 ;Call subprogram O9101.cnc
+    G90 G0 X4Y1 Z0.5 ;Move to second hole pattern
+    M98 P9101 L1 ;Call subprogram
+    G90 G0 X6 Y5 Z0.5 ;Move to third hole pattern
+    M98 P9101 L1 ;Call subprogram
     :End program
+    ```
 
     The main program would call this subprogram three times:
-
+    ```
     O9101 ;Program O9101.cnc
-
-    G91 F10 ;Incremental positioning G81 X0 Y0 R -.4 Z-.6 ;Drill lower left hole Y1.5 R -.4 Z-.6 ;Drill upper left hole
-
+    G91 F10 ;Incremental positioning
+    G81 X0 Y0 R -.4 Z-.6 ;Drill lower left hole
+    Y1.5 R -.4 Z-.6 ;Drill upper left hole
     X1 R -.4 Z-.6 ;Drill upper right hole
-
     Y-1.5 R-.4 Z-.6 ;Drill lower right hole
-
     G80 ;Cancel canned cycles
-
     M99 ;End of subprogram
+    ```
 
     Example:
 
     Another example is ”looping” or consecutively repeating a section of code. Here, the subprogram will be part of the main program.
 
+    ```
     :Main program
-
-    G90 G0 X0 Y0 Z0.1 G1 Z0 F30
-
-    O9100 ;Beginning of subprogram G91 G1 Z-0.1 F5
-
+    G90 G0 X0 Y0 Z0.1
+    G1 Z0 F30
+    O9100 ;Beginning of subprogram
+    G91 G1 Z-0.1 F5
     G90 X2 F30 Y2
-
     X0 Y0
-
-    M99 ;End of subprogram 9100 M98 P9100 L3 ;Repeat O9100 3 times M25 G49 ;End main program
+    M99 ;End of subprogram 9100
+    M98 P9100 L3 ;Repeat O9100 3 times
+    M25 G49 ;End main program
+    ```
 
 - name: M99
   kind: m-code
@@ -1080,16 +1102,12 @@
     M99 designates the end of a subprogram or macro and transfers control back to the calling program when executed. M99 may be specified on a line with other G codes. M99 will be the last action executed on a line. If M99 is not specified in a subprogram file, M99 is assumed at the end of the file:
 
     Example:
-
+    ```
     G1 X3 M99 ;Move to X3 then return to calling program.
-
+    ```
     If M99 is encountered in the main job file, it will be interpreted as the end of the job. If M99 is encountered in an M function macro file, it will be interpreted as the end of any enclosing subprogram or macro, or as the end of the job.
 
-- name: M100
-  kind: m-code
-  detail: 'Wait for PLC bit (Open, Off, Reset)'
-  documentation: ''
-- name: M101
+- name: M100, M101
   kind: m-code
   detail: 'Wait for PLC bit (Closed, On, Set)'
   documentation: |+
@@ -1103,6 +1121,8 @@
     |90001 - 90064|T1 - T64 status bits|reset (not expired)|set (expired)|
     |93001 - 93256|STG1 - STG256 status bits|reset (disabled)|set (enabled)|
     |94001 - 94256|FSTG - FTSG256 status bits|reset (disabled)|set (enabled)|
+    
+    
     The number ranges 1-240 can be used to reference the first eighty INP, OUT, or MEM bits. It is recommended that existing CNC10 programs and macros be converted to the new ranges for use with CNC11.
 
     |Number|PLC bit|M100|M101|
@@ -1110,9 +1130,14 @@
     |1 - 80|INP1 - INP80|open|closed|
     |81 - 160|OUT1 - OUT80|off|on|
     |161 - 240|MEM1 – MEM80|reset|set|
-    Example:
 
-    M101/50001 ; wait for INP1 to close M100/60002 ; wait for OUT2 to turn off M101/70123 ; wait for MEM123 to be set (1)
+
+    Example:
+    ```
+    M101/50001 ; wait for INP1 to close
+    M100/60002 ; wait for OUT2 to turn off
+    M101/70123 ; wait for MEM123 to be set (1)
+    ```
 
     NOTE: The numbers assigned to the PLC bits (except 1-240) are the same as those that can be used when referencing system variables in M- and G-code programs.
 
@@ -1147,15 +1172,13 @@
     M105 moves the requested axis in the minus direction at the current feedrate until the specified switch opens (if the given P parameter is positive), or until the specified switch closes (if P parameter is negative).
 
     Example:
-
+    ```
     M105/X P5 F30 ; move the X axis in minus direction at 30”/min until
-
     ; the switch on INP5 opens
-
+    
     G92 X10 ; Sets X position to 10
-
     M105/Z P-6 ; move the Z axis in minus direction until switch on INP6 closes
-
+    ```
 - name: M106
   kind: m-code
   detail: Move Plus to Switch
@@ -1163,15 +1186,12 @@
     M106 moves the requested axis in the plus direction at the current feedrate until the specified switch opens (if the given P parameter is positive), or until the specified switch closes (if P parameter is negative).
 
     Example:
-
+    ```
     M106/Z P3 F30 ; move the Z axis in the plus direction at 30”/min, until
-
     ; the switch on INP3 opens
-
     G92 X10 ; Sets Z position to 10
-
     M106/X P-3 ; move the X axis in the plus direction until the switch on INP3 closes
-
+    ```
 - name: M107
   kind: m-code
   detail: Output Tool Number
@@ -1179,11 +1199,13 @@
     M107 sends the current tool number to the automatic tool changer, via the PLC. M107 does not set the tool changer strobe or look for an acknowledgement from the changer (see M6).
 
     Example:
-
-    M107 ; send request for tool to change M94/16 ; turn on tool changer strobe M101/5 ; wait for acknowledge on input 5 M95/16 ; turn off strobe
-
+    ```
+    M107 ; send request for tool to change
+    M94/16 ; turn on tool changer strobe
+    M101/5 ; wait for acknowledge on input 5
+    M95/16 ; turn off strobe
     M100/5 ; wait for acknowledge to be removed
-
+    ```
 - name: M108
   kind: m-code
   detail: Enable Override Controls
@@ -1191,11 +1213,11 @@
     M108 re-enables the feedrate override and/or spindle speed override controls if they were disabled with M109. A parameter of ”1” indicates the feedrate override; ”2” indicates the spindle speed override.
 
     Example:
-
-    M109/1/2 ; disables feedrate and spindle speed overrides M108/1 ; re-enables feedrate override
-
+    ```
+    M109/1/2 ; disables feedrate and spindle speed overrides
+    M108/1 ; re-enables feedrate override
     M108/2 ; re-enables spindle speed override
-
+    ```
 - name: M109
   kind: m-code
   detail: Disable Override Controls
@@ -1203,18 +1225,20 @@
     M109 disables the feedrate override and/or spindle speed override controls. It may be used before tapping with G85 to assure that the machine runs at the programmed feedrate and spindle speed. It is not necessary to specify M109 with G74 or G84; those cycles automatically disable and re-enable the override controls. M109 cannot be used in MDI mode.
 
     Example:
-
-    M3 S500 ; start spindle in clockwise direction, at 500 rpm F27.78 ; set feedrate for 18 pitch tap
-
-    M109/1/2 ; disable feedrate and spindle speed overrides G85 X0 Y0 R.1 Z-.5 ; tap a hole
-
+    ```
+    M3 S500 ; start spindle in clockwise direction, at 500 rpm
+    F27.78 ; set feedrate for 18 pitch tap
+    M109/1/2 ; disable feedrate and spindle speed overrides
+    G85 X0 Y0 R.1 Z-.5 ; tap a hole
     M108/1/2 ; re-enable overrides
+    ```
 
 - name: 'M115, M116, M125, M126'
   kind: m-code
   detail: Protected Move Probing Functions
   documentation: |+
-    The protected move probing functions provide the capability to program customized probing routines. The structure for these commands is: Mnnn /Axis pos Pp Ff L1
+    The protected move probing functions provide the capability to program customized probing routines. The structure for these commands is: 
+    ```Mnnn /Axis pos Pp Ff L1```
 
     Where:
 
@@ -1241,8 +1265,15 @@
     Example:
 
     Finding the center of a vertical slot. In this example, it is assumed that there is a probe connected to INP15 and that the probe tip is positioned somewhere in the slot, such that movement along the X-axis will cause a probe trigger.
-
-    M115/X P-15 F20 ; Move X minus at 20 ipm until probe trip M116/X P15 F5 ; Move X plus at 5 ipm until probe clears #100 = #5041 ; Record the point in user variable #100 M116/X P-15 F20 ; Move X plus at 20 ipm until probe trip M115/X P15 F5 ; Move X minus at 5 ipm until probe clears X[[#100+#5041]/2] ; Move X to center of slot
+    
+    ```
+    M115/X P-15 F20 ; Move X minus at 20 ipm until probe trip
+    M116/X P15 F5 ; Move X plus at 5 ipm until probe clears 
+    #100 = #5041 ; Record the point in user variable #100
+    M116/X P-15 F20 ; Move X plus at 20 ipm until probe trip
+    M115/X P15 F5 ; Move X minus at 5 ipm until probe clears
+    X[[#100+#5041]/2] ; Move X to center of slot
+    ```
 
     * Usage is slightly different when using a DSP type probe. Please see below for dissimilarities between a standard DP4 probe and the DSP type probe.
 
@@ -1253,13 +1284,13 @@
     This M function will open the requested data file for writing. If no drive or directory is specified with the file name, then the file will be opened in the same directory as the CNC program. If the file cannot be successfully opened, then an error will be returned, ultimately terminating the job. If a data file is already open when M120 is called, that file will first be closed, then the new file opened.
 
     Example:
-
+    ```
     M120 ”probetst.dat” ; Opens probetst.dat file to write data too
-
+    ```
     NOTE: M120 and M121 also allow use of the string user variables #300 - #399 to specify a filename. As an example, given that #300 = ”myfile” and #301 = ”cnc”
-
+    ```
     M120 ”#300.#301” ; Opens the file ”myfile.cnc” for data recording.
-
+    ```
     Keep in mind however that there is a quirk in the way that the M120/M121 operates that requires the ’.’ to be present so assigning #301 = ”.cnc” and executing M120 ”#300#301” does not work and generates a ”Could not open file” error message.
 
 - name: M121
@@ -1269,9 +1300,9 @@
     This M function will open the requested file for writing at the end of the file. If no drive or directory is specified with the file name, then the file will be opened in the same directory as the CNC program. If the file does not already exist, it will be created. This is not an error. If the file cannot be successfully opened, then an error will be returned, ultimately terminating the job. If a data file is already open when M121 is called, that file will first be closed, then the new file opened.
 
     Example:
-
+    ```
     M121 ”c:\probetst.dat” ; Opens probetst.dat file to add data to it
-
+    ```
     String variables #300-#399 may also be used to specify a file name. Please see M120 above for details.
 
 - name: M122
@@ -1311,9 +1342,11 @@
   detail: Record Date and Time in a data file
   documentation: |+
     **NOTE:** The M127 does not insert a semi-colon in front of the date. If desired, use the M123 as shown below.
-
-    M121 ”testdata.dat” M123 ;; M127
-
+    ```
+    M121 ”testdata.dat” 
+    M123 ;;
+    M127
+    ```
     If you opened testdata.dat you would see: Day of week, Month, day, time, and year. (i.e. ;Wed Aug 29 11:56:57 2007)
 
 - name: M128
@@ -1323,17 +1356,20 @@
     M128 moves the requested axis by L which specifies an encoder count position or quantity. The L parameter is subject to the current G90/G91 mode (absolute/incremental).
 
     Example:
-
+    ```
     G91 M128/X L-5000 ; move the X axis incrementally by -5000 counts
-
+    ```
 - name: M129
   kind: m-code
   detail: Record Current Job file path to data file
   documentation: |+
     This M function is used to write the current job’s file path to the specified data file called out by the M120 or M121.
 
-    Example: Run a job named job.cnc which contains the following 2 lines: M121 ”output.txt” M129
-
+    Example: Run a job named job.cnc which contains the following 2 lines:
+    ```
+    M121 ”output.txt”
+    M129
+    ```
     If you opened the output.txt file you would see: c:\cncm\ncfiles\job.cnc
 
 - name: M130
@@ -1343,9 +1379,9 @@
     This allows shell commands to be called from a CNC program or MDI. M130 takes one string argument which contains the system command to execute.
 
     For example:
-
+    ```
     M130 ”mycommand.bat”
-
+    ```
     will run the batch file mycommand.bat.
 
     Normally, the command will run asynchronously, meaning that the G-code program will not wait for the command to finish before continuing. However, if an L1 parameter is given, the command will prevent further G-code execution until a fault occurs (such as E-Stop).
@@ -1371,10 +1407,9 @@
     M200 formatted-string [[user var expr] ...]
 
     Example:
-
-    \
-
-    M200 “Please jog the %c and %c axes to the desired X0, Y0 position nPress Cycle Start to continue” #100 #101
+    ```
+    M200 “Please jog the %c and %c axes to the desired X0, Y0 position.\nPress Cycle Start to continue” #100 #101
+    ```
 
     M201 behaves exactly like M200 except that PLC bits SV PROGRAM RUNNING, SV MDI MODE, and SV JOB IN PROGRESS are turned off while the prompt is displayed.
 
@@ -1477,9 +1512,9 @@
     where nn is 1-32 and vvv is a 32-bit signed integer value. The parameter nn (1-32) maps to system variables SV FSIO1 - SV FSIO32. These commands work in conjunction with a PLC program that can read the SV FSIOx and act upon them.
 
     Example:
-
+    ```
     M300 /21 /-1234 ; set SV FSIO21 to integer value -1234
-
+    ```
     NOTE: Motion will be decelerated to a stop if Smoothing is turned on (P220 = 1).
 
 - name: M333
