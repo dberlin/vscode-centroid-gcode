@@ -1,7 +1,7 @@
 "use strict";
 import * as vscode from "vscode";
 import { getSymbolForPosition } from "./util";
-
+import { DocumentSymbolManager } from "./DocumentManager";
 export class CentroidHoverProvider implements vscode.HoverProvider {
   public provideHover(
     document: vscode.TextDocument,
@@ -23,8 +23,22 @@ export class CentroidHoverProvider implements vscode.HoverProvider {
       hoverText.appendMarkdown(
         (<vscode.MarkdownString>sym.documentation).value
       );
-      let hover = new vscode.Hover(hoverText);
-      return hover;
+      return new vscode.Hover(hoverText);
     }
+    // Provide the active gcode modes
+    let modeData = DocumentSymbolManager.getModesForDocument(document);
+    if (modeData) {
+      let activeModes = modeData
+        .getActiveModes(document.offsetAt(position))
+        .sort();
+      if (activeModes && activeModes.length > 0) {
+        let hoverText = new vscode.MarkdownString("### Active GCode modes\n\n");
+        for (let modeString of activeModes) {
+          hoverText.appendMarkdown("**" + modeString + "**\n");
+        }
+        return new vscode.Hover(hoverText);
+      }
+    }
+    return null;
   }
 }
