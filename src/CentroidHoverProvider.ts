@@ -17,6 +17,9 @@ export class CentroidHoverProvider implements vscode.HoverProvider {
         /* Don't produce a hover for the same position we declared the symbol on */
         if (position.line === symbolPos.line) return null;
       }
+      if ((<vscode.MarkdownString>sym.documentation).value.startsWith("\n\n")) {
+        hoverText.appendMarkdown("#### " + (sym.detail || "").trim());
+      }
       hoverText.appendMarkdown(
         (<vscode.MarkdownString>sym.documentation).value
       );
