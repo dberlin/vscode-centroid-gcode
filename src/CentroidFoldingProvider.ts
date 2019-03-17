@@ -3,8 +3,8 @@ import { DocumentSymbolManager } from "./DocumentManager";
 export class CentroidFoldingProvider implements vscode.FoldingRangeProvider {
   provideFoldingRanges(
     document: vscode.TextDocument,
-    context: vscode.FoldingContext,
-    token: vscode.CancellationToken
+    _context: vscode.FoldingContext,
+    _token: vscode.CancellationToken
   ): vscode.ProviderResult<vscode.FoldingRange[]> {
     return DocumentSymbolManager.getFoldingRanges(document);
   }
