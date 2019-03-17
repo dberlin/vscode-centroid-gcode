@@ -1,7 +1,8 @@
 # VSCode GCode language support
 
-Provides language support for G-Code.
+Provides real language support for G-Code.
 The exact variant of G-Code is that used by Centroid's CNC12 software.
+This is a pretty standard G-Code variant, so the hover help should be useful for most other vendors.
 
 ## Features
 
