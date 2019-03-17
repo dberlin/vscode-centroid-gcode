@@ -50,6 +50,7 @@ export class ModalManager {
   private codeIntervals: IntervalTree<string>;
   private currentRanges: Map<string, CodeOffset[]> = new Map();
   private finalRanges: vscode.FoldingRange[] = [];
+  private documentSymbols: vscode.DocumentSymbol[] = [];
   private readonly defaultModes = new Set([
     "G17",
     "G40",
@@ -84,6 +85,15 @@ export class ModalManager {
   private isDefaultMode(mode: string) {
     return this.defaultModes.has(mode);
   }
+
+  getDocumentSymbols(): vscode.DocumentSymbol[] {
+    return this.documentSymbols;
+  }
+
+  private isFoldingGroup(groupName: string) {
+    return groupName === "TGroupA";
+  }
+
   /**
    * Parse GCode and store the modes.
    * @param textToParse - Text to parse modes out of.
@@ -97,7 +107,6 @@ export class ModalManager {
     // slots and no capture group index or anything similar, so the entire list
     // of possible capture groups must be walked. Because the set of strings we
     // may capture is small, we just work around this.
-
     while ((matches = ModalRegex.exec(textToParse))) {
       let match = matches[0];
 
@@ -129,35 +138,29 @@ export class ModalManager {
           item2.offset = item1.offset;
           continue;
         }
-        if (this.isDefaultMode(item1.code)) break;
-        if (groupName === "MCodeA") {
-          this.finalRanges.push(
-            new vscode.FoldingRange(
-              document.positionAt(item1.offset).line,
-              document.positionAt(item2.offset).line,
-              vscode.FoldingRangeKind.Region
-            )
-          );
+        if (this.isDefaultMode(item1.code)) continue;
+        if (this.isFoldingGroup(groupName)) {
+          let item1Pos = document.positionAt(item1.offset);
+          let item2Pos = document.positionAt(item2.offset);
+          this.addFoldingRange(item1Pos, item2Pos);
+          this.addDocumentSymbol(item1Pos, item2Pos, item1);
         }
         this.codeIntervals.insert(item1.offset, item2.offset, item1.code);
       }
     }
 
     // At the end of the document, see what modes are left
-    let endPos = textToParse.length;
+    let endOffset = textToParse.length;
     for (let entry of this.currentRanges) {
       let item = <CodeOffset>entry[1].shift();
       if (this.isDefaultMode(item.code)) continue;
-      if (entry[0] === "MCodeA") {
-        this.finalRanges.push(
-          new vscode.FoldingRange(
-            document.positionAt(item.offset).line,
-            document.positionAt(endPos).line,
-            vscode.FoldingRangeKind.Region
-          )
-        );
+      if (this.isFoldingGroup(entry[0])) {
+        let itemPos = document.positionAt(item.offset);
+        let endPos = document.positionAt(endOffset);
+        this.addFoldingRange(itemPos, endPos);
+        this.addDocumentSymbol(itemPos, endPos, item);
       }
-      this.codeIntervals.insert(item.offset, endPos, item.code);
+      this.codeIntervals.insert(item.offset, endOffset, item.code);
     }
   }
   constructor() {
@@ -234,14 +237,14 @@ export class ModalManager {
       ["G184", "G"],
       ["G185", "G"],
       ["G189", "G"],
-      ["M03", "MCodeA"],
-      ["M04", "MCodeA"],
-      ["M05", "MCodeA"]
+      ["M03", "MGroupA"],
+      ["M04", "MGroupA"],
+      ["M05", "MGroupA"]
     ]);
     for (let i = 0; i <= 200; ++i) {
       this.gcodeToGroupName.set(
         normalizeSymbolName("T" + i.toString()),
-        "TCodeA"
+        "TGroupA"
       );
     }
     this.codeIntervals = new IntervalTree();
@@ -259,7 +262,52 @@ export class ModalManager {
       ["K", [{ code: "G20", offset: 0 }]],
       ["M", [{ code: "G50", offset: 0 }]],
       ["N", [{ code: "G69", offset: 0 }]],
-      ["MCodeA", [{ code: normalizeSymbolName("M5"), offset: 0 }]]
+      ["MGroupA", [{ code: normalizeSymbolName("M5"), offset: 0 }]]
     ]);
+  }
+
+  private addFoldingRange(itemPos: vscode.Position, endPos: vscode.Position) {
+    this.finalRanges.push(
+      new vscode.FoldingRange(
+        itemPos.line,
+        endPos.line - 1,
+        vscode.FoldingRangeKind.Region
+      )
+    );
+  }
+  /**
+   *
+   * Add a document symbol for a region where a given gcode/etc is active
+   *
+   * @param beginPos - Position where region begins
+   * @param endPos - Position right after where region ends
+   * @param activeCode - Item that goes with region
+   */
+  private addDocumentSymbol(
+    beginPos: vscode.Position,
+    endPos: vscode.Position,
+    activeCode: CodeOffset
+  ) {
+    // The end is really where the next match began. Back it up to the previous line
+
+    let toolRegion = new vscode.Range(
+      beginPos.with(undefined, 0),
+      endPos.with(endPos.line - 1, 0)
+    );
+    let symbolNameRegion = new vscode.Range(
+      beginPos,
+      beginPos.with(undefined, beginPos.character + activeCode.code.length)
+    );
+    if (activeCode.code.startsWith("T")) {
+      this.documentSymbols.push(
+        new vscode.DocumentSymbol(
+          "Tool " + activeCode.code + " region",
+          "Region where tool " + activeCode.code + " is active",
+          vscode.SymbolKind.Function,
+          toolRegion,
+          symbolNameRegion
+        )
+      );
+    }
   }
 }

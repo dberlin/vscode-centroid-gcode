@@ -2,6 +2,7 @@
 import * as vscode from "vscode";
 import { CentroidCompletionProvider } from "./CentroidCompletionProvider";
 import { CentroidDeclarationProvider } from "./CentroidDeclarationProvider";
+import { CentroidDocumentSymbolProvider } from "./CentroidDocumentSymbolProvider";
 import { CentroidFoldingProvider } from "./CentroidFoldingProvider";
 import { CentroidHoverProvider } from "./CentroidHoverProvider";
 import { CentroidReferenceProvider } from "./CentroidReferenceProvider";
@@ -12,18 +13,16 @@ const centroidScheme = { language: "centroid-gcode", scheme: "file" };
 
 export function activate(context: vscode.ExtensionContext) {
   console.log("Activating!");
+  DocumentSymbolManager.init(context);
+
   vscode.languages.setLanguageConfiguration("centroid-gcode", {
     wordPattern: new RegExp(wordPatternRegExp)
   });
-  DocumentSymbolManager.init(context);
+
   context.subscriptions.push(
-    vscode.languages.registerFoldingRangeProvider(centroidScheme,
-      new CentroidFoldingProvider())
-  );
-  context.subscriptions.push(
-    vscode.languages.registerHoverProvider(
+    vscode.languages.registerCompletionItemProvider(
       centroidScheme,
-      new CentroidHoverProvider()
+      new CentroidCompletionProvider()
     )
   );
 
@@ -35,16 +34,28 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.languages.registerReferenceProvider(
+    vscode.languages.registerDocumentSymbolProvider(
       centroidScheme,
-      new CentroidReferenceProvider()
+      new CentroidDocumentSymbolProvider()
+    )
+  );
+  context.subscriptions.push(
+    vscode.languages.registerFoldingRangeProvider(
+      centroidScheme,
+      new CentroidFoldingProvider()
+    )
+  );
+  context.subscriptions.push(
+    vscode.languages.registerHoverProvider(
+      centroidScheme,
+      new CentroidHoverProvider()
     )
   );
 
   context.subscriptions.push(
-    vscode.languages.registerCompletionItemProvider(
+    vscode.languages.registerReferenceProvider(
       centroidScheme,
-      new CentroidCompletionProvider()
+      new CentroidReferenceProvider()
     )
   );
 
