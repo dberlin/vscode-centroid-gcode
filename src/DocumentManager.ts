@@ -27,8 +27,9 @@ class FileTries {
    * Test whether we have any information about a named symbol.
    *
    * @param label - Symbol name to look for.
-   * @returns Whether the symbol was found.  This will be true if we processed the symbol, even
-   * if various forms of lookups may not find it due to type not matching, etc.
+   * @returns Whether the symbol was found.  This will be true if we processed
+   * the symbol, even if various forms of lookups may not find it due to type
+   * not matching, etc.
    */
   contains(label: string): boolean {
     return this.allSymbols.test(normalizeSymbolName(label));
@@ -150,77 +151,9 @@ class DocumentSymbolManagerClass {
     }
     // Parse out all the symbols
     modalManager.parse(document);
-    /*
-    this.parseSymbolsUsingRegex(
-      fileTries,
-      docText,
-      typedVariableWithComment,
-      this.getSymbolInfoFromTypedVariable
-    );
-    this.parseSymbolsUsingRegex(
-      fileTries,
-      docText,
-      constantVariableWithComment,
-      this.getSymbolInfoFromConstantVariable
-    );*/
     fileTries.freeze();
   }
-  /**
-   * Convert a capture array into a typed variable symbol.
-   *
-   * The current format of the capture array is an internal detail.
-   * @remarks This handles the X IS <type> style of variable
-   * @param captures - An array of captured strings from micromatch.
-   * @returns Newly created symbol info, or null if we could not create symbol info.
-   */
-  private getSymbolInfoFromTypedVariable(captures: Array<string>) {
-    /* // Ignore system variables here, we process them separately
-    if (isSystemSymbolName(captures[1])) return null;
 
-    let symbolType = getSymbolTypeFromString(captures[3]);
-    if (!symbolType) return null;
-
-    let possibleComment = !captures[5] ? "" : captures[5].trim();
-    let symbolDoc = isComment(possibleComment)
-      ? formatDocComment(possibleComment)
-      : "";
-    return new SymbolInfo(
-      captures[1],
-      symbolType,
-      captures[2],
-      parseInt(captures[4]),
-      0,
-      symbolDoc
-    );
-    */
-  }
-
-  /**
-   * Convert a capture array into a constant symbol.
-   *
-   * The current format of the capture array is an internal detail.
-   * @remarks This handles the X IS <value> style of variable
-   * @param captures - An array of captured strings from micromatch.
-   * @returns Newly created symbol info, or null if we could not create symbol info.
-   */
-  private getSymbolInfoFromConstantVariable(captures: Array<string>) {
-    /*// Ignore system variables here, we process them separately
-    if (isSystemSymbolName(captures[1])) return null;
-
-    let symbolType = SymbolType.MessageOrConstant;
-    let possibleComment = !captures[3] ? "" : captures[3].trim();
-    let symbolDoc = isComment(possibleComment)
-      ? formatDocComment(possibleComment)
-      : "";
-    return new SymbolInfo(
-      captures[1],
-      symbolType,
-      captures[2],
-      0,
-      parseInt(captures[2]),
-      symbolDoc
-    );*/
-  }
   resetDocument(document: vscode.TextDocument) {
     this.removeDocumentInternal(document);
     this.parseAndAddDocument(document);
