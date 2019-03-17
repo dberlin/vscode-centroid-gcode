@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2019-03-16
 ### Added
 - Add tracking of active GCode modes
-- Add folding
+- Add folding for tool regions
+
 ### Fixed
 - Numeric highlighting was a little off
 
