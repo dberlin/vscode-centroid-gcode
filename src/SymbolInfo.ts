@@ -8,14 +8,9 @@ export enum SymbolType {
   OtherCode,
   SystemVariable
 }
-export class SymbolInfo extends vscode.CompletionItem {
-  /* If this is a constant symbol, what is the value. */
-  symbolValue: number;
+export class SymbolInfo extends BaseSymbolInfo {
   /* What kind of symbol is it. */
   symbolType: SymbolType;
-  /* What offset in the file did the symbol appear at. */
-  symbolPos: number;
-
   constructor(
     name: string,
     type: SymbolType,
@@ -29,12 +24,9 @@ export class SymbolInfo extends vscode.CompletionItem {
       type == SymbolType.SystemVariable
         ? vscode.CompletionItemKind.Variable
         : vscode.CompletionItemKind.Operator;
-    super(name, kind);
-    this.documentation = new vscode.MarkdownString(doc);
-    this.detail = detail;
+
+    super(name, kind, doc, detail, sortText, value, pos);
+
     this.symbolType = type;
-    this.symbolValue = value;
-    this.symbolPos = pos;
-    this.sortText = sortText;
   }
 }
