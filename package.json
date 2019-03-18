@@ -85,7 +85,6 @@
         "jsdom": "^14.0.0",
         "mocha": "^6.0.2",
         "tslint": "^5.14.0",
-        "typescript": "^3.2.4",
         "vscode": "^1.1.2"
     },
     "dependencies": {

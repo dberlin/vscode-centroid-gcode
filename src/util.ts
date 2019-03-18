@@ -11,7 +11,7 @@ const noLeadingZeroRegEx = new RegExp("^[A-Z]([0-9])$");
  * @param symbolName - symbol to normaize
  */
 export function normalizeSymbolName(symbolName: string): string {
-  let upperName = symbolName.toUpperCase();
+  let upperName = symbolName.toUpperCase().trim();
   let matches;
   // Convert all non-leading zero forms (G1, G2) to leading zero forms for symbol name
   if ((matches = noLeadingZeroRegEx.exec(upperName))) {
