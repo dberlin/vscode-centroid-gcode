@@ -7,6 +7,7 @@ import machine_parameters from "./json/machine_parameters.json";
 import macro_variables from "./json/macro_variables.json";
 import { ModalManager } from "./ModalManager";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
+import { BaseFileTries } from "./vscode-centroid-common/BaseFileTries";
 
 function convertKindtoSymbolType(kind: string) {
   switch (kind) {
@@ -79,7 +80,7 @@ class DocumentSymbolManagerClass {
       let symbolInfo = callback(captures);
       if (!symbolInfo) continue;
       // Set the position we found it as
-      symbolInfo.symbolPos = captures.index;
+      symbolInfo.symbolDeclPos = captures.index;
       fileTries.add(symbolInfo);
     }
   }
@@ -94,12 +95,12 @@ class DocumentSymbolManagerClass {
     if (this.tries.has(filename)) {
       return;
     }
-    let fileTries = new FileTries();
+    let fileTries: FileTries = new BaseFileTries();
     this.tries.set(filename, fileTries);
     let modalManager = new ModalManager();
     this.modes.set(filename, modalManager);
-    ß;
-    // Add system symbols.  ßIn theory we should only do this once, but it takes
+
+    // Add system symbols.  In theory we should only do this once, but it takes
     // no appreciable time/memory anyway.
     for (var sym of this.systemSymbols) {
       fileTries.add(sym);

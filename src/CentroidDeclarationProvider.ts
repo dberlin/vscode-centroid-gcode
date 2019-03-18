@@ -11,10 +11,10 @@ export class CentroidDeclarationProvider implements vscode.DeclarationProvider {
     vscode.Location | vscode.Location[] | vscode.LocationLink[]
   > {
     let sym = getSymbolForPosition(document, position);
-    if (sym && sym.symbolPos != -1) {
+    if (sym && sym.symbolDeclPos != -1) {
       return new vscode.Location(
         document.uri,
-        document.positionAt(sym.symbolPos)
+        document.positionAt(sym.symbolDeclPos)
       );
     }
     return null;

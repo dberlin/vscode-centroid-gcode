@@ -89,5 +89,5 @@ export function getSymbolForPosition(
 ): SymbolInfo | null {
   let wordText = getWordForPosition(document, position);
   if (!wordText) return null;
-  return getSymbolByName(document, wordText);
+  return getSymbolByName(document, wordText) as SymbolInfo;
 }

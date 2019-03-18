@@ -12,10 +12,10 @@ export class CentroidHoverProvider implements vscode.HoverProvider {
     let sym = getSymbolForPosition(document, position);
     if (sym) {
       let hoverText = new vscode.MarkdownString();
-      if (sym.symbolPos != -1) {
-        let symbolPos = document.positionAt(sym.symbolPos);
+      if (sym.symbolDeclPos != -1) {
+        let symbolDeclPos = document.positionAt(sym.symbolDeclPos);
         /* Don't produce a hover for the same position we declared the symbol on */
-        if (position.line === symbolPos.line) return null;
+        if (position.line === symbolDeclPos.line) return null;
       }
       if ((<vscode.MarkdownString>sym.documentation).value.startsWith("\n\n")) {
         hoverText.appendMarkdown("#### " + (sym.detail || "").trim());
