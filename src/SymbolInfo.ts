@@ -1,5 +1,6 @@
 "use strict";
 import * as vscode from "vscode";
+import { BaseSymbolInfo } from "./vscode-centroid-common/BaseSymbolInfo";
 
 export enum SymbolType {
   GCode,
