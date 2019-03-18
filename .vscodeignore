@@ -1,7 +1,7 @@
 .vscode/**
 .vscode-test/**
 out/test/**
-ncfiles/**
+testfiles/**
 yaml/**
 json/**
 test/**
