@@ -1,4 +1,2 @@
-import { BaseFileTries } from "./vscode-centroid-common/FileTries";
-import { SymbolInfo } from "./SymbolInfo";
-import { normalizeSymbolName } from "./util";
+import { BaseFileTries } from "./vscode-centroid-common/BaseFileTries";
 export type FileTries = BaseFileTries;
