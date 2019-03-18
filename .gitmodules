@@ -1,0 +1,3 @@
+[submodule "src/vscode-centroid-common"]
+	path = src/vscode-centroid-common
+	url = https://github.com/dberlin/vscode-centroid-common.git
