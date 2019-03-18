@@ -72,7 +72,7 @@ class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
     if (this.hasDocument(document)) return;
 
     let filename = this.normalizePathtoDoc(document);
-    let fileTries: FileTries = new BaseFileTries();
+    let fileTries: FileTries = new FileTries();
     this.tries.set(filename, fileTries);
 
     let modalManager = new ModalManager();
@@ -93,6 +93,9 @@ class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
   getModesForDocument(document: vscode.TextDocument) {
     let filename = this.normalizePathtoDoc(document);
     return this.modes.get(filename);
+  }
+  getTriesForDocument(document: vscode.TextDocument) {
+    return super.getTriesForDocument(document) as FileTries;
   }
 }
 export const DocumentSymbolManager = new DocumentSymbolManagerClass();

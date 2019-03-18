@@ -54,7 +54,7 @@ export function RegExpAny(...args: RegExp[]) {
 export function getSymbolByName(
   document: vscode.TextDocument,
   symbolName: string
-) {
+): SymbolInfo | null {
   let tries = DocumentSymbolManager.getTriesForDocument(document);
   if (!tries) return null;
   return tries.getSymbol(symbolName);
@@ -89,5 +89,5 @@ export function getSymbolForPosition(
 ): SymbolInfo | null {
   let wordText = getWordForPosition(document, position);
   if (!wordText) return null;
-  return getSymbolByName(document, wordText) as SymbolInfo;
+  return getSymbolByName(document, wordText);
 }
