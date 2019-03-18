@@ -7,7 +7,6 @@ import macro_variables from "./json/macro_variables.json";
 import { ModalManager } from "./ModalManager";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
 import { BaseDocumentSymbolManagerClass } from "./vscode-centroid-common/BaseDocumentManager";
-import { BaseFileTries } from "./vscode-centroid-common/BaseFileTries";
 
 function convertKindtoSymbolType(kind: string) {
   switch (kind) {
