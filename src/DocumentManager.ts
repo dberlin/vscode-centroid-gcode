@@ -32,14 +32,14 @@ interface JSONSymbol {
 /**
  * Main class handling managing open VSCode documents and associated symbols.
  */
-class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
+export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
   private modes: Map<string, ModalManager> = new Map<string, ModalManager>();
 
-  init(context: vscode.ExtensionContext) {
+  constructor() {
+    super();
     this.processSymbolList(help_text);
     this.processSymbolList(machine_parameters);
     this.processSymbolList(<any>macro_variables);
-    super.init(context);
   }
 
   /**
@@ -48,7 +48,7 @@ class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
    * @param symList - list of symbols from JSON.
    */
   protected processSymbolList(symList: JSONSymbol[]) {
-    symList.forEach((val, index, arr) => {
+    symList.forEach(val => {
       this.systemSymbols.push(
         new SymbolInfo(
           val.name,
