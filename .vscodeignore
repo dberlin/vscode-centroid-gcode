@@ -5,6 +5,7 @@ testfiles/**
 yaml/**
 json/**
 test/**
+html/**
 src/**
 **/*.map
 .gitignore
