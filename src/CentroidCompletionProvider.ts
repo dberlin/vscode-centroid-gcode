@@ -5,12 +5,12 @@ import { getWordForPosition } from "./util";
 
 export class CentroidCompletionProvider
   implements vscode.CompletionItemProvider {
-  provideCompletionItems(
+  async provideCompletionItems(
     document: vscode.TextDocument,
     position: vscode.Position,
     token: vscode.CancellationToken,
     context: vscode.CompletionContext
-  ): vscode.ProviderResult<vscode.CompletionItem[] | vscode.CompletionList> {
+  ): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
     let wordText = getWordForPosition(document, position);
     wordText = !wordText ? "" : wordText;
     let tries = DocumentSymbolManager.getTriesForDocument(document);
