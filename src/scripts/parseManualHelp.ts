@@ -11,7 +11,7 @@ for (let fileName of process.argv.slice(2)) {
   let fileDOMDoc = fileDOM.window.document;
   let listCollection = fileDOMDoc.getElementsByTagName("li");
   let outputList = [];
-  let noteRegEx = new RegExp("^.*?Note:");
+  let noteRegEx = /^.*?Note:/;
   for (let i = 0; i < listCollection.length; ++i) {
     const listItem = listCollection[i];
     if (
@@ -21,7 +21,7 @@ for (let fileName of process.argv.slice(2)) {
       continue;
     let originalName = listItem.firstElementChild.textContent;
     if (!originalName) continue;
-    let codeSplit = originalName.split(new RegExp(" - "));
+    let codeSplit = originalName.split(/ - /);
     if (codeSplit.length != 2) continue;
     let codeNameUnsplit = codeSplit[0].trim();
     let detail = codeSplit[1].trim();

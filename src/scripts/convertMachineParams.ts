@@ -16,11 +16,11 @@ for (let param of machine_parameters) {
   // Only parameters 0-399 and 900-999 are accessible from G-Code.
   if (paramNum > 399 && paramNum < 900) continue;
   outputList.push({
-    name: "#" + (9000 + paramNum).toString(),
-    detail: "Machine parameter " + paramNum.toString(),
+    name: `#${9000 + paramNum}`,
+    detail: `"Machine parameter ${paramNum}`,
     documentation: param.documentation,
     kind: param.kind,
-    sortText: (9000 + paramNum).toString().padStart(5, "0")
+    sortText: `${9000 + paramNum}`.padStart(5, "0")
   });
 }
 console.log(JSON.stringify(outputList, null, 2));

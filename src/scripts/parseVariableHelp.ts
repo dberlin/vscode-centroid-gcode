@@ -39,7 +39,7 @@ for (let fileName of process.argv.slice(2)) {
   let tableCollection = fileDOMDoc.getElementsByTagName("table");
   let outputList = [];
   let tableArray = [];
-  let noteRegEx = new RegExp("^.*?Note:");
+  let noteRegEx = /^.*?Note:/;
   for (let i = 0; i < tableCollection.length; ++i) {
     let tableItem = tableCollection[i];
 
@@ -64,7 +64,7 @@ for (let fileName of process.argv.slice(2)) {
     for (let idx of rowRange) {
       let indexRegex = /\$i/;
       let replacedRow1 = arrayRow[1].replace(indexRegex, num.toString());
-      let name = "#" + idx.toString();
+      let name = `#${idx}`;
       let kind = "system-variable";
       let detail = replacedRow1.trim();
       let documentation = "";
@@ -89,7 +89,7 @@ for (let fileName of process.argv.slice(2)) {
         kind: kind,
         detail: detail,
         documentation: documentation,
-        sortText: idx.toString().padStart(5, "0")
+        sortText: `${idx}`.padStart(5, "0")
       });
     }
   }

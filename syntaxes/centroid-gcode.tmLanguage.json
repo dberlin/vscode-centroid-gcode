@@ -97,11 +97,11 @@
     "prognumbers": {
       "patterns": [
         {
-          "match": "(?i:[N])[0-9]+",
+          "match": "(?i:[N])\\d+",
           "name": "constant.numeric.centroid-gcode"
         },
         {
-          "match": "(?i:[O])[0-9]{1,5}",
+          "match": "(?i:[O])\\d{1,5}",
           "name": "string.regexp.centroid-gcode"
         }
       ]
@@ -145,7 +145,7 @@
     "macrovars": {
       "patterns": [
         {
-          "match": "#[0-9]+",
+          "match": "#\\d+",
           "name": "variable.other.centroid-gcode"
         }
       ]
@@ -162,7 +162,7 @@
       "patterns": [
         {
           "name": "entity.name.function.centroid-gcode",
-          "match": "(?i:G)[0-9]{1,4}"
+          "match": "(?i:G)\\d{1,4}"
         }
       ]
     },
@@ -170,7 +170,7 @@
       "patterns": [
         {
           "name": "markup.bold.centroid-gcode",
-          "match": "(?i:M)[0-9]{1,4}"
+          "match": "(?i:M)\\d{1,4}"
         }
       ]
     },
