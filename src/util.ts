@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
 import { DocumentSymbolManager } from "./DocumentManager";
 
-export const wordPatternRegExp = /(\#\d+)|(-?\d*\.\d\w*)|([^\`\~\!\@\#\%\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/;
+export const wordPatternRegExp = /(\#\d*)|(-?\d*\.\d\w*)|([^\`\~\!\@\#\%\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/;
 
 const noLeadingZeroRegEx = /^[A-Z](\d)$/;
 /**

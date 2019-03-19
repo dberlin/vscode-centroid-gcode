@@ -4,909 +4,909 @@
     "kind": "g-code",
     "detail": "Rapid Positioning",
     "documentation": "G0 moves to the specified position at the maximum motor rate. The coordinates may be either absolute positions (G90) or incremental positions (G91). G0 is modal and remains in effect until another positioning mode (G1, G2, G3 etc.) is commanded. G0 is the default-positioning mode.\n\nWhen the Z axis is commanded to move in the + direction, the Z axis will move up to its new position first, then the other axes will move to their new position along a straight line.\n\nWhen the Z axis is commanded to move in the - direction, all axes but the Z axis will move to their new position along a straight line, then the Z axis will move down to its new position.\n\nExample:\n\n```\nG0 X0.0 Y0.0 Z0.0 ; Rapid move to X0, Y0, Z0\n```\n\nThe feedrate override knob has no effect on G0 moves unless rapid override is turned ON.\n\n",
-    "sortText": "G0000"
+    "sortText": "#G0000"
   },
   {
     "name": "G01",
     "kind": "g-code",
     "detail": "Linear Interpolation",
     "documentation": "G1 moves to the specified position at the programmed feedrate. The coordinates may be either absolute positions (G90) or incremental positions (G91). The movement will be along a straight line. G1 is modal and remains in effect until another positioning mode (G0, G2, G3 etc.) is commanded.\n\nExample:\n\n```\nG01 X2 Y3 Z4 W5 F10 ; Linear move to X2, Y3, Z4, W5 at a 10in/min\nG91 X6 Y7 ; Linear move to X8, Y10\nZ3 W4 F20 ; Linear move to Z7, W9 at 20in/min (G91 is modal)\n```\n\n",
-    "sortText": "G0001"
+    "sortText": "#G0001"
   },
   {
     "name": "G02",
     "kind": "g-code",
     "detail": "Circular or Helical Interpolation",
     "documentation": "G2 moves in a clockwise circular motion, and G3 moves in a counterclockwise circular motion. This clockwise and counterclockwise motion is relative to your point of view, however. See the diagram below. The X, Y or Z position specified in the G2 or G3 command is the end position of the arc, and may be an absolute position (G90) or an incremental position (G91). G2 and G3 are modal and remain in effect until another positioning mode (G0, G1, etc.) is commanded.\n\n**NOTE:** When using G18, the G2 command moves in a counterclockwise direction in the XZ plane.\n\nThe axes included in the currently selected circular plane (G17, G18, or G19) will move in a circular motion. Any other axes specified will move along a straight line (helical movement). The programmed feedrate is used for the interpolated motion along the movement of all axes.\n\nHelical and circular motion can be programmed in two different ways: specifying the final point and the radius of the arc, or specifying the final point and the parameters I, J, K (center point of the arc as incremental values from the start position).\n\n**NOTE:** For closed circles (arc of 360 degrees), use method 2: specify final point and parameters I, J and\n\nK. Method 1 (specify final point and radius) will not work.\n\nMETHOD 1: USING FINAL POINT AND RADIUS\n\nThe commands G2 and G3 will have the following structure:\n\n```G2 Xa Yb Zc Rd G3 Xa Yb Zc Rd```\n\nwhere a, b, and c will be the X, Y, and Z coordinates of the final point of the arc, and d will be the radius. In most cases there will be two possible arcs of the same radius connecting two given points. This occurs because the center of the arc is not specified. To choose the bigger arc, make the radius negative. To choose the smaller arc, make the radius positive. See examples 1 and 2 for graphical explanations of this concept.\n\nExample 1 (small arc solution: positive radius):\n\n```\nG17 G90 F25 ; selects XY plane and absolute positioning\nG00 X1.0 Y1.0 Z0 ; rapid to start position X1, Y1, Z0\nG02 X2 Y2 Z0 R1 ; arc to X2 Y2 Z0 with radius of 1\n                ; (small arc solution)\n```\nExample 2 (big arc solution: negative radius):\n\n```\nG17 G90 F25 ; selects XY plane and absolute positioning\nG00 X1.0 Y1.0 Z0 ; rapid to start position X1, Y1, Z0\nG02 X2 Y2 Z0 R -1 ; arc to X2 Y2 Z0 with radius of 1\n                  ; (big arc solution)\n```\nMETHOD 2: USING FINAL POINT AND PARAMETERS I, J, K\n\nAnother way to specify a helical or circular operation is using the parameters I, J, K instead of the radius\n\nR. The parameters I, J, and K are the incremental distances from the start point to the center of the arc. For absolute positioning on I, J, and K, parameter 2 bit 0 will need set. See the parameter section in Chapter 14.\n\nI = X center - X start (valid for G17 & G18) J = Y center - Y start (valid for G17 & G19) K = Z center - Z start (valid for G18 & G19)\n\nExamples:\n\nCircular motion (See graph in method 1, example 2)\n\n```\nG17 G90 F25 ; selects XY plane and absolute positioning\nG00 X1.0 Y1.0 Z0 ; rapid to start position X1, Y1, Z0\nG02 X2 Y2 Z0 J1 ; arc to X2 Y2 Z0 with radius of 1\nG17 G90 F30 ; select XY plane and absolute positioning\nG00 X3.0 Y2.0 Z1.0 ; rapid to start position X3, Y2, Z1\nG02 X2.0 Y1.0 I-1.0 J0.0 Z0.0 ; CW XY arc from X3, Y2 to X2, Y1.\n                              ; Center at X2, Y2\n                              ; Helical Z move from 1 to 0\n```\n",
-    "sortText": "G0002"
+    "sortText": "#G0002"
   },
   {
     "name": "G03",
     "kind": "g-code",
     "detail": "Circular or Helical Interpolation",
     "documentation": "G2 moves in a clockwise circular motion, and G3 moves in a counterclockwise circular motion. This clockwise and counterclockwise motion is relative to your point of view, however. See the diagram below. The X, Y or Z position specified in the G2 or G3 command is the end position of the arc, and may be an absolute position (G90) or an incremental position (G91). G2 and G3 are modal and remain in effect until another positioning mode (G0, G1, etc.) is commanded.\n\n**NOTE:** When using G18, the G2 command moves in a counterclockwise direction in the XZ plane.\n\nThe axes included in the currently selected circular plane (G17, G18, or G19) will move in a circular motion. Any other axes specified will move along a straight line (helical movement). The programmed feedrate is used for the interpolated motion along the movement of all axes.\n\nHelical and circular motion can be programmed in two different ways: specifying the final point and the radius of the arc, or specifying the final point and the parameters I, J, K (center point of the arc as incremental values from the start position).\n\n**NOTE:** For closed circles (arc of 360 degrees), use method 2: specify final point and parameters I, J and\n\nK. Method 1 (specify final point and radius) will not work.\n\nMETHOD 1: USING FINAL POINT AND RADIUS\n\nThe commands G2 and G3 will have the following structure:\n\n```G2 Xa Yb Zc Rd G3 Xa Yb Zc Rd```\n\nwhere a, b, and c will be the X, Y, and Z coordinates of the final point of the arc, and d will be the radius. In most cases there will be two possible arcs of the same radius connecting two given points. This occurs because the center of the arc is not specified. To choose the bigger arc, make the radius negative. To choose the smaller arc, make the radius positive. See examples 1 and 2 for graphical explanations of this concept.\n\nExample 1 (small arc solution: positive radius):\n\n```\nG17 G90 F25 ; selects XY plane and absolute positioning\nG00 X1.0 Y1.0 Z0 ; rapid to start position X1, Y1, Z0\nG02 X2 Y2 Z0 R1 ; arc to X2 Y2 Z0 with radius of 1\n                ; (small arc solution)\n```\nExample 2 (big arc solution: negative radius):\n\n```\nG17 G90 F25 ; selects XY plane and absolute positioning\nG00 X1.0 Y1.0 Z0 ; rapid to start position X1, Y1, Z0\nG02 X2 Y2 Z0 R -1 ; arc to X2 Y2 Z0 with radius of 1\n                  ; (big arc solution)\n```\nMETHOD 2: USING FINAL POINT AND PARAMETERS I, J, K\n\nAnother way to specify a helical or circular operation is using the parameters I, J, K instead of the radius\n\nR. The parameters I, J, and K are the incremental distances from the start point to the center of the arc. For absolute positioning on I, J, and K, parameter 2 bit 0 will need set. See the parameter section in Chapter 14.\n\nI = X center - X start (valid for G17 & G18) J = Y center - Y start (valid for G17 & G19) K = Z center - Z start (valid for G18 & G19)\n\nExamples:\n\nCircular motion (See graph in method 1, example 2)\n\n```\nG17 G90 F25 ; selects XY plane and absolute positioning\nG00 X1.0 Y1.0 Z0 ; rapid to start position X1, Y1, Z0\nG02 X2 Y2 Z0 J1 ; arc to X2 Y2 Z0 with radius of 1\nG17 G90 F30 ; select XY plane and absolute positioning\nG00 X3.0 Y2.0 Z1.0 ; rapid to start position X3, Y2, Z1\nG02 X2.0 Y1.0 I-1.0 J0.0 Z0.0 ; CW XY arc from X3, Y2 to X2, Y1.\n                              ; Center at X2, Y2\n                              ; Helical Z move from 1 to 0\n```\n",
-    "sortText": "G0003"
+    "sortText": "#G0003"
   },
   {
     "name": "G04",
     "kind": "g-code",
     "detail": "Dwell",
     "documentation": "G4 causes motion to stop for the specified time. The P parameter is used to specify the time in seconds to delay. G4 causes the block to decelerate to a full stop.\n\nThe minimum delay is 0.01 seconds and the maximum is 327.67 seconds. The dwell time is performed after all motion is stopped and M functions on the line are com- pleted. If the P parameter is not specified, X will be used instead. If neither P nor X is specified, the default dwell time of 0.01 seconds will be used.\n\nExample:\n\n```\nG0 X1 Y1 ; rapid to X1, Y1\nG4 P2.51 ; pause for 2.51 seconds\nG1 X2 Y2 ; Linear move to X2, Y2\n```\n",
-    "sortText": "G0004"
+    "sortText": "#G0004"
   },
   {
     "name": "G09",
     "kind": "g-code",
     "detail": "Decelerate and Stop (formerly known as Exact Stop)",
     "documentation": "G9 causes motion to decelerate to a stop and dwell for 1/100 seconds. G9 is equivalent to G4 P0.01. G9 is not modal; it is only effective for the block in which it appears. See G61 (Modal Decelerate and Stop).\n\nExample:\n\n```\nG9 G0 X1 Y1 ; rapid to X1 Y1 and stop \nX2 Y2 ; continue to X2 Y2\n```\n",
-    "sortText": "G0009"
+    "sortText": "#G0009"
   },
   {
     "name": "G10",
     "kind": "g-code",
     "detail": "Parameter Setting",
     "documentation": "G10 allows you to set parameters for different program operations.\n\nExample:\n\n```\nG10 P73 R.05 ; Sets the peck drilling retract amount to .05\nG10 P83 R.05 ; Sets the deep drill rapid down clearance to .05\nG10 P81 R15 ; Sets G81 to use M15 instead of Z movement\nG10 H5 R-1.3 ; Sets tool length offset #5 to -1.3 in the offset lib. \nG10 D3 R.25 ; Sets tool diameter offset #3 to .25 in the offset lib.\n```\n\n",
-    "sortText": "G0010"
+    "sortText": "#G0010"
   },
   {
     "name": "G17",
     "kind": "g-code",
     "detail": "Circular Interpolation Plane Selection",
     "documentation": "G17, G18, and G19 select the plane for circular interpolation commands (G02 & G03). G17 is the default plane. See figure under G2 and G3.\n\nG17 is the XY plane G18 is the ZX plane G19 is the YZ plane\n\n",
-    "sortText": "G0017"
+    "sortText": "#G0017"
   },
   {
     "name": "G18",
     "kind": "g-code",
     "detail": "Circular Interpolation Plane Selection",
     "documentation": "G17, G18, and G19 select the plane for circular interpolation commands (G02 & G03). G17 is the default plane. See figure under G2 and G3.\n\nG17 is the XY plane G18 is the ZX plane G19 is the YZ plane\n\n",
-    "sortText": "G0018"
+    "sortText": "#G0018"
   },
   {
     "name": "G19",
     "kind": "g-code",
     "detail": "Circular Interpolation Plane Selection",
     "documentation": "G17, G18, and G19 select the plane for circular interpolation commands (G02 & G03). G17 is the default plane. See figure under G2 and G3.\n\nG17 is the XY plane G18 is the ZX plane G19 is the YZ plane\n\n",
-    "sortText": "G0019"
+    "sortText": "#G0019"
   },
   {
     "name": "G20",
     "kind": "g-code",
     "detail": "Select Inch Units",
     "documentation": "G20 selects inch units, affecting the interpretation of all subsequent dimensions and feedrates in the job file. G20 does not change the native machine units as set on the control setup menu.\n\n",
-    "sortText": "G0020"
+    "sortText": "#G0020"
   },
   {
     "name": "G21",
     "kind": "g-code",
     "detail": "Select Metric Units",
     "documentation": "G21 selects metric units, affecting the interpretation of all subsequent dimensions and feedrates in the job file. G21 does not change the native machine units, as set on the control setup menu.\n\n",
-    "sortText": "G0021"
+    "sortText": "#G0021"
   },
   {
     "name": "G28",
     "kind": "g-code",
     "detail": "Return to Reference Point",
     "documentation": "G28 moves to the first reference point, by way of an intermediate point. The location of the reference point, in machine coordinates, may be set in Work Coordinate System Configuration. The intermediate point is specified in the local coordinate system, and may be at the current location (resulting in a move directly to the reference point). If an intermediate point is specified, only those axes for which positions are specified will be moved. If no axes are specified, all axes will be moved.The location of the intermediate\n\npoint is stored for later use with G29. Movement is executed at the maximum (rapid) rate but can be changed using the L word.\n\nExample:\n\n```\nG28 G91 Z0 ; move Z-axis directly to reference point ( X and Y don’t move)\nG28 G91 X-.5 Y0 Z0 ; move X -0.5 (from current position), then move all three axes to reference point\nG28 G90 X2 Y4 Z.1 ; move all axes to (X2, Y4, Z0.1), then to reference point\nG28 ; move all axes to the reference point ( no intermediate point)\nG28 L100 ; move all axes to the reference point at 100 units/minute\n```\n**NOTE:** As with G0 positioning moves, the Z-axis will move separately. If Z is moving up (the usual case) Z will move first, then the other axes. If Z is moving down, the other axes will move first, then Z. Because of this, it is rarely necessary to specify an intermediate point different from the current position.\n\n",
-    "sortText": "G0028"
+    "sortText": "#G0028"
   },
   {
     "name": "G29",
     "kind": "g-code",
     "detail": "Return from Reference Point",
     "documentation": "G29 moves all axes to the intermediate point stored in a preceding G28 or G30 command. It may be used to return to the work piece. If a position is specified, the machine will move to that position (in local coordinates) after reaching the intermediate point. G29 may only be specified after G28 or G30, though there may be intervening moves.\n\nExample:\n\n```\nG29 ; move all axes back from reference point to intermediate point\nG29 X1 Y2 ; move all axes to intermediate point, then move to X1 Y2\n```\n**NOTE:** As with G0 positioning moves, the Z-axis will move separately. If Z is moving up, Z will move first, then the other axes. If Z is moving down (the usual case for G29), the other axes will move first, then Z will move.\n\n",
-    "sortText": "G0029"
+    "sortText": "#G0029"
   },
   {
     "name": "G30",
     "kind": "g-code",
     "detail": "Return to Secondary Reference Point",
     "documentation": "G30 functions exactly like G28, except that by default it uses the second reference point from the Work Coordinate System Configuration table, and the P parameter may be used to request either reference point.\n\nExample:\n\n```\nG30 G91 Z0 ; move Z axis directly to second reference point\nG30 P1 ; move all axes to first reference point\n```\n**NOTE:** G30 P1 is equivalent to G28.\n\n",
-    "sortText": "G0030"
+    "sortText": "#G0030"
   },
   {
     "name": "G40",
     "kind": "g-code",
     "detail": "Cutter Compensation",
     "documentation": "G41 and G42 in conjunction with the selected tool diameter (D code) apply cutter compensation to the programmed tool path.\n\nG41 offsets the cutter tool one half of the tool diameter selected with a D code, to the left of the work piece, relative to the direction of travel.\n\nG42 offsets the cutter tool one half of the tool diameter selected with a D code, to the right of the work piece, relative to the direction of travel.\n\nG40 cancels G41 and G42.\n\nExample:\n```\nG41 D03 ; Tells the machine to compensate left half of the\n        ; diameter of the amount that corresponds to D03 in the\n        ; Tool Library\n```\nWhenever cutter compensation is applied, the following factors must be taken into account in order to obtain proper results.\n\n",
-    "sortText": "G0040"
+    "sortText": "#G0040"
   },
   {
     "name": "G41",
     "kind": "g-code",
     "detail": "Cutter Compensation",
     "documentation": "G41 and G42 in conjunction with the selected tool diameter (D code) apply cutter compensation to the programmed tool path.\n\nG41 offsets the cutter tool one half of the tool diameter selected with a D code, to the left of the work piece, relative to the direction of travel.\n\nG42 offsets the cutter tool one half of the tool diameter selected with a D code, to the right of the work piece, relative to the direction of travel.\n\nG40 cancels G41 and G42.\n\nExample:\n```\nG41 D03 ; Tells the machine to compensate left half of the\n        ; diameter of the amount that corresponds to D03 in the\n        ; Tool Library\n```\nWhenever cutter compensation is applied, the following factors must be taken into account in order to obtain proper results.\n\n",
-    "sortText": "G0041"
+    "sortText": "#G0041"
   },
   {
     "name": "G42",
     "kind": "g-code",
     "detail": "Cutter Compensation",
     "documentation": "G41 and G42 in conjunction with the selected tool diameter (D code) apply cutter compensation to the programmed tool path.\n\nG41 offsets the cutter tool one half of the tool diameter selected with a D code, to the left of the work piece, relative to the direction of travel.\n\nG42 offsets the cutter tool one half of the tool diameter selected with a D code, to the right of the work piece, relative to the direction of travel.\n\nG40 cancels G41 and G42.\n\nExample:\n```\nG41 D03 ; Tells the machine to compensate left half of the\n        ; diameter of the amount that corresponds to D03 in the\n        ; Tool Library\n```\nWhenever cutter compensation is applied, the following factors must be taken into account in order to obtain proper results.\n\n",
-    "sortText": "G0042"
+    "sortText": "#G0042"
   },
   {
     "name": "G43",
     "kind": "g-code",
     "detail": "Tool Length Compensation",
     "documentation": "G43 and G44 apply tool length compensation to a selected tool to allow the control to utilize multiple tools in a single CNC program.\n\nG43 applies positive compensation (from Z zero up). Work from part surface up. G44 applies negative compensation (from Z zero down), used only when there is an absolute machine home. The spindle face is considered a zero length tool and all offsets are from there down.\n\nG49 cancels tool length compensation (also canceled by issuing G43 H00).\n\nExample:\n```\nG43 H01 ; tells the machine to offset the amount that\n        ; corresponds to H01 in the Offset Library\n```\n",
-    "sortText": "G0043"
+    "sortText": "#G0043"
   },
   {
     "name": "G44",
     "kind": "g-code",
     "detail": "Tool Length Compensation",
     "documentation": "G43 and G44 apply tool length compensation to a selected tool to allow the control to utilize multiple tools in a single CNC program.\n\nG43 applies positive compensation (from Z zero up). Work from part surface up. G44 applies negative compensation (from Z zero down), used only when there is an absolute machine home. The spindle face is considered a zero length tool and all offsets are from there down.\n\nG49 cancels tool length compensation (also canceled by issuing G43 H00).\n\nExample:\n```\nG43 H01 ; tells the machine to offset the amount that\n        ; corresponds to H01 in the Offset Library\n```\n",
-    "sortText": "G0044"
+    "sortText": "#G0044"
   },
   {
     "name": "G49",
     "kind": "g-code",
     "detail": "Tool Length Compensation",
     "documentation": "G43 and G44 apply tool length compensation to a selected tool to allow the control to utilize multiple tools in a single CNC program.\n\nG43 applies positive compensation (from Z zero up). Work from part surface up. G44 applies negative compensation (from Z zero down), used only when there is an absolute machine home. The spindle face is considered a zero length tool and all offsets are from there down.\n\nG49 cancels tool length compensation (also canceled by issuing G43 H00).\n\nExample:\n```\nG43 H01 ; tells the machine to offset the amount that\n        ; corresponds to H01 in the Offset Library\n```\n",
-    "sortText": "G0049"
+    "sortText": "#G0049"
   },
   {
     "name": "G43.3",
     "kind": "g-code",
     "detail": "Tool Length Compensation (+) with Axis Tilt Compensation",
     "documentation": "G43.3 is a special compensation mode which applies positive tool length compensation on a selected tool, just like G43, but also with additional X and Z compensations due to 5th axis tilt. This compensation mode is available only on those machines configured with a triangular rotary 5th axis (see parameter 166 in Chapter 14). Note that this compensation mode is the equivalent to G43 as long as the 5th axis is not tilted (i.e. local position is 0). G49 cancels this compensation mode.\n\n",
-    "sortText": "G0043"
+    "sortText": "#G0043"
   },
   {
     "name": "G43.4",
     "kind": "g-code",
     "detail": "Rotary Tool Center Point (with G43.3 Compensation",
     "documentation": "When G43.4 is active then any feed move (G1) will be made such that the tip of the tool moves in a straight line (this typically causes the Z-axis to move up and down during the move). G43.3 Compensation applies in this mode.\n\n",
-    "sortText": "G0043"
+    "sortText": "#G0043"
   },
   {
     "name": "G50",
     "kind": "g-code",
     "detail": "Scaling / Mirroring (Optional)",
     "documentation": "G50 and G51 scales program G-codes relative to a scaling center point defined as position (X, Y, Z). A G51 applies scaling/mirror to all positions, lines, and arcs following this G-code, until a G50 is entered. Specify scaling factors with a value I, J, K. The X, Y, and Z parameters are the coordinates of the scaling center. If the scaling center is not specified, the default scaling center is the current cutter position as shown on the DRO. To mirror, enter a negative value for the scaling factor.\n\nExample, Scaling:\n```\nG51 X0.0 Y0.0 Z0.0 I3.0 J2 K1 ; turn scaling on\nG00 X0.0 Y0.0 Z1.0 ; rapid to X0, Y0, Z1\nG01 X1.0 Y0.0 Z1.0 ; line to X1, Y0, Z1\nG01 X1.0 Y1.0 Z1.0 ; line to X1, Y1, Z1\nG01 X0.0 Y1.0 Z1.0 ; line to X0, Y1, Z1\nG01 X0.0 Y0.0 Z1.0 ; line to X0, Y0, Z1\nG01 X0.0 Y0.0 Z0.0 ; line to X0, Y0, Z0\nG50 ; cancel scale\n```\nFor this G51, the following program lines were scaled 3:1 in the X direction, 2:1 in the Y direction, and 1:1 in the Z direction. If no scale factor is specified, the default is 1:1 for all axes.\n\nExample, Mirroring:\n```\nG51 X-0.5 Y0.0 Z.0 I-1 J1 K1 ; turn mirror on (x axis -0.5 mirror\n                             ; line)\nG00 X0.0 Y0.0 Z1.0 ; rapid traverse to X0, Y0, Z1\nG01 X1.0 Y0.5 Z1.0 ; line to X1, Y.5, Z1\nG01 X0.0 Y1.0 Z1.0 ; line to X0, Y1, Z1\nG01 X0.0 Y0.0 Z1.0 ; line to X0, Y0, Z1\nG50 ; cancel mirror\n```\nIf an arc is scaled with uneven scaling factors, the result will depend on how the arc center and radius were specified:\n\n",
-    "sortText": "G0050"
+    "sortText": "#G0050"
   },
   {
     "name": "G51",
     "kind": "g-code",
     "detail": "Scaling / Mirroring (Optional)",
     "documentation": "G50 and G51 scales program G-codes relative to a scaling center point defined as position (X, Y, Z). A G51 applies scaling/mirror to all positions, lines, and arcs following this G-code, until a G50 is entered. Specify scaling factors with a value I, J, K. The X, Y, and Z parameters are the coordinates of the scaling center. If the scaling center is not specified, the default scaling center is the current cutter position as shown on the DRO. To mirror, enter a negative value for the scaling factor.\n\nExample, Scaling:\n```\nG51 X0.0 Y0.0 Z0.0 I3.0 J2 K1 ; turn scaling on\nG00 X0.0 Y0.0 Z1.0 ; rapid to X0, Y0, Z1\nG01 X1.0 Y0.0 Z1.0 ; line to X1, Y0, Z1\nG01 X1.0 Y1.0 Z1.0 ; line to X1, Y1, Z1\nG01 X0.0 Y1.0 Z1.0 ; line to X0, Y1, Z1\nG01 X0.0 Y0.0 Z1.0 ; line to X0, Y0, Z1\nG01 X0.0 Y0.0 Z0.0 ; line to X0, Y0, Z0\nG50 ; cancel scale\n```\nFor this G51, the following program lines were scaled 3:1 in the X direction, 2:1 in the Y direction, and 1:1 in the Z direction. If no scale factor is specified, the default is 1:1 for all axes.\n\nExample, Mirroring:\n```\nG51 X-0.5 Y0.0 Z.0 I-1 J1 K1 ; turn mirror on (x axis -0.5 mirror\n                             ; line)\nG00 X0.0 Y0.0 Z1.0 ; rapid traverse to X0, Y0, Z1\nG01 X1.0 Y0.5 Z1.0 ; line to X1, Y.5, Z1\nG01 X0.0 Y1.0 Z1.0 ; line to X0, Y1, Z1\nG01 X0.0 Y0.0 Z1.0 ; line to X0, Y0, Z1\nG50 ; cancel mirror\n```\nIf an arc is scaled with uneven scaling factors, the result will depend on how the arc center and radius were specified:\n\n",
-    "sortText": "G0051"
+    "sortText": "#G0051"
   },
   {
     "name": "G52",
     "kind": "g-code",
     "detail": "Offset Local Coordinate System",
     "documentation": "G52 shifts the local coordinate system origin by a specified distance. Multiple G52 codes are not cumulative; subsequent shifts replace earlier ones. The G52 shift may therefore be canceled by specifying a shift of zero. If you are using multiple coordinate systems, the G52 shift amount will affect all coordinate systems.\n\nExample:\n```\nG0 X0 Y0 ; move to origin\nM98 P9100 ; call subprogram\nG52 Y4 ; shift coordinate system 4 inches in Y\nG0 X0 Y0 ; move to new origin\nM98 P9100 ; call subprogram again with new coordinates\nG52 Y0 ; restore unshifted coordinate system\n```\n",
-    "sortText": "G0052"
+    "sortText": "#G0052"
   },
   {
     "name": "G53",
     "kind": "g-code",
     "detail": "Rapid Positioning in Machine Coordinates",
     "documentation": "G53 is a one shot code that performs a rapid traverse using machine coordinates. It does not affect the current movement mode (G0-G3) or coordinate system (G54-G59). G53 may only be used with absolute\n\npositioning (G90). Movement rate can be overridden using the L word.\n\nExample:\n```\nG53 X15 Y4 Z0 ; move to 15,4,0 in machine coordinates\nG53 X15 Y4 Z0 L100 ; move to 15,4,0 in machine coordinates at 100 units/minute\n```\n",
-    "sortText": "G0053"
+    "sortText": "#G0053"
   },
   {
     "name": "G61",
     "kind": "g-code",
     "detail": "Modal Decelerate and Stop (formerly known as Exact Stop Mode)",
     "documentation": "G61 activates Decelerate and Stop mode for every block processed. This forces motion to decelerate to a stop and invokes a brief dwell (1/100 seconds) at the end of each block (equivalent to G9 in each block). G61 is modal and remains in effect until it is canceled with G64. Note that G61 also turns off Smoothing mode.\n\nExample:\n```\nG0 X0 Y0 ; move to origin\nG61 X2 ; move and decelerate and stop at X2\nX4 ; move and decelerate and stop at X4\nX5 ; move and decelerate and stop at X5\n```\n",
-    "sortText": "G0061"
+    "sortText": "#G0061"
   },
   {
     "name": "G65",
     "kind": "g-code",
     "detail": "Call Macro",
     "documentation": "G65 calls a macro with user-specified values. A macro is a subprogram that executes a certain operation (e.g. drill pattern, contours, etc.) with values assigned to variable parameters within the operation.\n\nCalling methods:\n\n```G65 Pxxxx Lrrrr Arguments```\n\nor\n\n```G65 ”program.cnc” Lrrrr Arguments```\n\nwhere xxxx is the macro number (referring to file Oxxxx.cnc, 0000-9999 allowed, leading zeros required in filename, capital O, lowercase .cnc), rrrr is the repeat value, ”program.cnc” is the name of the macro file, and Arguments is a list of variable identifiers and values.\n\nArguments to macro calls are specified by using letters A-Z, excluding G, L, N, O, and P.\n\nMacros are written just like normal programs. However, macro programs may access their arguments by using #A, #B, etc., or by using numbers: #1 for A, #2 for B, etc. (exceptions: #4-6 for I-K, #7-11 for\n\nD-H). Arguments I, J, and K can be used more than once in a macro call, with the first set of values stored as #4-6, the second as #7-9, etc., to a maximum of 10 sets. See example at the end of this G65 section.\n\nMacros 9100 - 9999 may be embedded into a main program, using O91xx to designate the beginning of the macro and M99 to end it. The CNC software will read the macro and generate a file O91xx.cnc, but will not execute the macro. It will be executed when G65 is issued.\n\nExample 1:\n\nMain Program:\n```\nG65 ”TEST.cnc” A5 B3 X4\n```\nMacro TEST.cnc:\n```\nG1 X#X Y#A Z-#B\n```\nThis call will produce:\n```\nG1 X4 Y5 Z-3\n```\nExample 2:\n\nMain Program:\n```\nG65 ”TEST2.cnc” I5 J3 K40 I-1 J2 I0 J0\n```\nMacro TEST2.cnc: \n```\nG1 X#4 Y#5 F#6 \nG1 X#7 Y#8 Z#9\nG1 X#10 Y#11 Z#12\n```\nThis call will produce:\n```\nG1 X5 Y3 F40\nG1 X-1 Y2 Z0\nG1 X0 Y0 Z0\n```\nExample 3:\n\nSuppose a piece is to have notches of different lengths and depths along the x-axis:\n\nThe macro variables would handle the length in the Y direction and depth in the Z direction: \n```\nO0002\n\nG90 G1 Z0 F30 ; Linear move to Z0\nZ#Z F5 ; Cut to variable depth \nG91Y#Y F10 ; Cut variable length \nG90 G0 Z0.1 ; Retract\n```\nThe main program would call this macro five times, each time specifying the depth and length required.\n\n```\n: Main Program\nG90 G0 X1 Y1 Z0.1 ; Move to first notch\nG65 P0002 L1 Y1 Z.25 ; Call macro and assign Y=1” and Z=.25”\nG90 G0 X2.5 Y1 ; Move to second notch\nG65 P0002 L1 Y1.5 Z.5 ; Call macro and assign Y=1.5” and Z=.5”\nG90 G0 X4 Y1 ; Move to third notch\nG65 P0002 L1 Y2 Z.25 ; Call macro again\nG90 G0 X5.5 Y1 ; Move to fourth notch\nG65 P0002 L1 Y1.5 Z.5 ; Call macro again\nG90 G0 X7 Y1 ; Move to fifth notch\nG65 P0002 L1 Y1 Z.25 ; Call macro again\n: End program\n```\n",
-    "sortText": "G0065"
+    "sortText": "#G0065"
   },
   {
     "name": "G68",
     "kind": "g-code",
     "detail": "Coordinate Rotation on/off",
     "documentation": "G68 rotates program G-codes a specified angle R. G68 rotates all positions, lines, and arcs until a G69 is entered. The center of rotation can be specified by X, Y and Z values (X, Y for G17 plane). If the center is not specified then a default center of rotation is used as determined by machine parameter 2 (see Chapter 14 for parameter 2). The default plane of rotation is G17 (X, Y).\n\nExample:\n```\nG68 R45 X4 Y2 ; Rotate 45 degrees centered on X4 Y2\nG0 X3.0 Y1.0 ; Rapid to position\nG1 X5.0 Y1.0 F20 ; Start part profile X5.0 Y3.0\nX4.125 Y3.0\nG3 X4.0 Y2.875 J-0.125 G1 X4.0 Y2.125\nG2 X3.875 Y2.0 I-0.125 G1 X3.125 Y2.0\nG3 X3.0 Y1.875 J-0.125\nG1 X3.0 Y1.0 ; End part profile\nG69 ; Rotate Off\n```\n",
-    "sortText": "G0068"
+    "sortText": "#G0068"
   },
   {
     "name": "G69",
     "kind": "g-code",
     "detail": "Coordinate Rotation on/off",
     "documentation": "G68 rotates program G-codes a specified angle R. G68 rotates all positions, lines, and arcs until a G69 is entered. The center of rotation can be specified by X, Y and Z values (X, Y for G17 plane). If the center is not specified then a default center of rotation is used as determined by machine parameter 2 (see Chapter 14 for parameter 2). The default plane of rotation is G17 (X, Y).\n\nExample:\n```\nG68 R45 X4 Y2 ; Rotate 45 degrees centered on X4 Y2\nG0 X3.0 Y1.0 ; Rapid to position\nG1 X5.0 Y1.0 F20 ; Start part profile X5.0 Y3.0\nX4.125 Y3.0\nG3 X4.0 Y2.875 J-0.125 G1 X4.0 Y2.125\nG2 X3.875 Y2.0 I-0.125 G1 X3.125 Y2.0\nG3 X3.0 Y1.875 J-0.125\nG1 X3.0 Y1.0 ; End part profile\nG69 ; Rotate Off\n```\n",
-    "sortText": "G0069"
+    "sortText": "#G0069"
   },
   {
     "name": "G73",
     "kind": "g-code",
     "detail": "High Speed Peck Drilling",
     "documentation": "G73 is the peck drilling cycle. The hole is drilled in a series of moves: down a distance Q at a given feedrate, up the retract distance at the rapid rate, and then down again at the given feedrate. The retract amount is set with G10 as shown in the example below.\n\nExample:\n```\nG90 ; Absolute positioning\nG01 X3.00 Y1.50 Z.5 ; G01 mode before canned cycle\nG98 ; Set for initial point return\nG10 P73 R.1 ; Sets the retract amount to .1\nG73 X3.250 Y1.75 Z-.650 R.1 Q0.325 F3 ; Peck drill at X3.25 Y1.75\nX4.5 Y3.5 ; Peck drill at X4.5 Y3.5\nG80 ; Cancel canned cycle, return\n```\n",
-    "sortText": "G0073"
+    "sortText": "#G0073"
   },
   {
     "name": "G74",
     "kind": "g-code",
     "detail": "Counter Tapping",
     "documentation": "G74 performs left-hand tapping. The spindle speed (and feedrate, if you are doing floating tapping) should be set and the spindle started in the CCW direction before issuing G74. G74 will normally use the default M3 to select spindle CW (at the bottom of the hole) and M4 to re-select spindle CCW (after backing out of the hole) depending on the settings of parameters 74 and 84.\n\nThe tap may continue to cut a short distance beyond the programmed Z height as the spindle comes to a stop before reversing. When tapping blind holes, be sure to specify a Z height slightly above the bottom of the hole to prevent the tool from reaching bottom before the spindle stops.\n\n**NOTE:** If rigid tapping is enabled, a Q may be used to set the thread lead or pitch. However, because Q is not modal in the case of Rigid Tapping, you must specify Q on every line at which Rigid Tapping is to occur.\n\n**NOTE:** At the bottom of the hole, G74 will call the default version of the specified M function even if it has been customized by an M function macro.\n\n                FEED HOLD is temporarily disabled during the tapping cycle, but it will be re-enabled at the end of the cycle.\n\nPressing CYCLE CANCEL while the tap is in the hole will very probably                               break the tap or strip the threads in the tap hole. However, do so if it is\n\nan emergency.\n\nExample:\n```\nM4 S500 F27.78 ; start spindle CCW, set up for 18 pitch tap \nG74 X1 Y1 R.1 Z-.5 ; counter-tap a 0.5 deep hole at X1 Y1\nY1.5 ; ... and another one at X1 Y1.5\nG80 ; cancel canned cycles\n```\n",
-    "sortText": "G0074"
+    "sortText": "#G0074"
   },
   {
     "name": "G81",
     "kind": "g-code",
     "detail": "Drilling and Spot Drilling",
     "documentation": "G81 is a general purpose drilling cycle. The hole is drilled in a single feedrate move, and then the tool is retracted at the rapid rate.\n\nExample:\n```\nG90 ; Absolute positioning\nG01 X3.00 Y1.50 Z.5 ; G01 mode before canned cycle\nG99 ; Set for R point return\nG81 X3.250 Y1.75 Z-.650 R.1 F3 ; Drill at X3.25 Y1.75\nX4.5 Y3.5 ; Drill at X4.5 Y3.5\nG80 ; Cancel canned cycle, return to G1\n```\n",
-    "sortText": "G0081"
+    "sortText": "#G0081"
   },
   {
     "name": "G81",
     "kind": "g-code",
     "detail": "Drill Cycle Transformation to G81 Air Drill Cycle",
     "documentation": "G81 may be modified to execute an M function instead of moving the Z-axis by setting parameter 81 to the desired M function. Example use is for air-actuated drills.\n\nExample: Execute M39 each time a new G81 position is given:\n\n```\nG10 P81 R39 ; Set parameter 81 to 39 (G81 air drill with M39)\nG81 X5 ; Move to X5 and execute M39\nY3 ; Move to Y3 and execute M39\n```\nTo revert to Z-axis drilling, specify M function #-1.\n\nExample:\n```\nG10 P81 R-1 ; Set parameter 81 to -1 (G81 drilling cycle)\n```\nM function #39 is designed for general air drill use. See the description of M39 in the M functions section.\n\nA different M function may be used instead, but any M function used must be a macro file that uses the M103 and M104 commands to time the cycle (see the example in the M function section under M103). If the macro file does not use M103, the control will automatically cancel the job 1/2 second after starting G81. For information on creating customized M functions, review Macro M functions in Chapter 13.\n\nThe M39 default air drill cycle has a time out of 2.0 seconds. As a result, if the cycle does not complete within 2 seconds then the cycle aborts and the output relay is turned off under PLC program control.\n\n**NOTE:** The PLC program must be involved in the execution of the cycle. The PLC program is responsible for turning on relays based on M function requests and the status of program execution. The PLC program must also stop all programmed machine functions when the program is canceled. See the M39 description (Chapter 13) for a sample of an air drill cycle M function.\n\n",
-    "sortText": "G0081"
+    "sortText": "#G0081"
   },
   {
     "name": "G82",
     "kind": "g-code",
     "detail": "Drill With Dwell",
     "documentation": "G82 is a general purpose drilling cycle similar to G81. However, G82 includes an optional dwell at the bottom of the hole before retracting the tool. This can make the depth of blind holes more accurate.\n\nExample:\n```\nG82 X1 Y1 R.1 Z-.5 P.5 ; drill to Z-.5, dwell .5 seconds\n```\n",
-    "sortText": "G0082"
+    "sortText": "#G0082"
   },
   {
     "name": "G83",
     "kind": "g-code",
     "detail": "Deep Hole Drilling",
     "documentation": "G83 is a deep hole drilling cycle. It periodically retracts the tool to the surface to clear accumulated chips, then returns to resume drilling where it left off. The retract and return are performed at the rapid rate.\n\nBecause there may be chips in the bottom of the hole, the tool does not return all the way to the bottom at the rapid rate. Instead it slows to feedrate a short distance above the bottom. This clearance distance is selected by setting Parameter 83 with G10 (see example below).\n\n2 Line Format\n\nLine 1: G10 P83 R_*\n\nLine 2: G83 X_ Z_ Q_ R_ L_\n\nLine 1 — R = Z Rapid to Clearance Amount * Line 2 — X = X Position\n\nLine 2 — Z = Final Z depth\n\nLine 2 — Q = Z Peck Cutting Increment †\n\nLine 2 — R = R(Z) Return point for clearance Line 2 — L = Dwell time at each Final Z depth\n\n* The modal default for Z Rapid to Clearance Amount is from Parameter 83. If Line 1 is not present, the default value in parameter 83 will be used.\n\n† Q value is subject to the ”implied floating point” re-interpretation rules of Parameters 245 and 246,\n\nFinal Z depth, the Z Peck Cutting Increment (Q), and Return Point (R) are the minimal required parameters. All others are optional. If X is not specified, the last X position will be used. X should always X0.0 unless the machine is set up with C-axis and live tooling.\n\nDwell Time (L) should be left out entirely if no dwell is desired because L0 will still cause a (albeit very brief) dwell.\n\nExample:\n```\nG10 P83 R.05 ; set clearance to .05”\nG83 X0 Y0 R.1 Z-2 Q.5 ; drill 2” deep hole in 0.5” steps\nG80 ; cancel canned cycle\n```\n",
-    "sortText": "G0083"
+    "sortText": "#G0083"
   },
   {
     "name": "G84",
     "kind": "g-code",
     "detail": "Tapping",
     "documentation": "G84 performs right-hand tapping. The spindle speed (and feedrate, if you are doing floating tapping) should be set and the spindle started in the CW direction before issuing G84. G84 will normally use the default M4 to select spindle CCW (at the bottom of the hole) and M3 to re-select spindle CW (after backing out of the hole) depending on the settings of parameters 74 and 84.\n\nThe tap may continue to cut a short distance beyond the programmed Z height as the spindle comes to a stop before reversing. When tapping blind holes, be sure to specify a Z height slightly above the bottom of the hole to prevent the tool from reaching bottom before the spindle stops.\n\n**NOTE:** If rigid tapping is enabled, a Q may be used to set the thread lead or pitch. However, because Q is not modal in the case of Rigid Tapping, you must specify Q on every line at which Rigid Tapping is to occur.\n\n**NOTE:** At the bottom of the hole, G84 will call the default version of the specified M function even if it has been customized by an M function macro.\n\nThe Tap/Counter Tap cycle might cut a short distance beyond the programmed Z height as the spindle comes to a stop before reversing. When tapping blind holes, be sure to specify a Z height slightly above the bottom of the hole to prevent the tool from reaching bottom before the spindle stops. The exact distance you must allow will depend on your machine and the diameter and pitch of the tapping tool.\n\n                FEED HOLD is temporarily disabled during the tapping cycle, but it will be reenabled at the end of the cycle.\n\nPressing CYCLE CANCEL while the tap is in the hole will very probably                               break the tap or strip the threads in the tap hole. However, do so if it is\n\nan emergency.\n\nExample:\n```\nM3 S500 F27.78 ; start spindle CW, set up for 18 pitch tap\nG84 X1 Y1 R.1 Z-.5 ; tap a 0.5 deep hole at X1 Y1\nY1.5 ; ... and another one at X1 Y1.5\nG80 ; cancel canned cycle\n```\n...\n\n```\n; Using Tool 15 Rigid Tap 6-32\nG84 X0.337 Y0.925 Q0.03125 Z-0.35 R0.1 ; tap first hole\nG84 X3.312 Y0.925 Q0.03125 Z-0.35 R0.1 ; tap second hole, must use Q\nG80 ; cancel canned cycle\n```\n...\n```\n; Using Tool 22 Rigid Tap 4-40\nG84 X1.862 Y1.627 Q0.025 Z-0.19 R0.1 ; tap first hole\nG84 X2.862 Y1.627 Q0.025 Z-0.19 R0.1 ; tap second hole, must use Q\nG84 X4.262 Y1.627 Q0.025 Z-0.19 R0.1 ; tap third hole, must use Q\nG80 ; cancel canned cycle\n```\n",
-    "sortText": "G0084"
+    "sortText": "#G0084"
   },
   {
     "name": "G89",
     "kind": "g-code",
     "detail": "Boring cycle with dwell",
     "documentation": "G89 is similar to G85, except that it includes an optional dwell at the bottom of the hole before retracting the tool.\n\nExample:\n```\nG89 X1 Y1 R.1 Z-.5 P.1 ; bore 0.5” hole at X1Y1, dwell .1 seconds \nG80 ; cancel canned cycle\n```\n",
-    "sortText": "G0089"
+    "sortText": "#G0089"
   },
   {
     "name": "G90",
     "kind": "g-code",
     "detail": "Absolute/Incremental Positioning Mode",
     "documentation": "G90 selects absolute positioning, and G91 selects incremental positioning. In absolute positioning, all coordinates are relative to the origin (0,0,0,0). In incremental positioning, all coordinates are distances relative to the last point.\n\nG90 Absolute positioning G91 Incremental coordinates\n\nExample:\n```\nG90 X2 Y3 ; moves the X and Y axes from the current position\n          ; to X2, Y3.\nG91 X1 Y0 ; moves the X axis 1 inch referenced from the last X\n          ; position, the Y axis does not move.\n```\n",
-    "sortText": "G0090"
+    "sortText": "#G0090"
   },
   {
     "name": "G91",
     "kind": "g-code",
     "detail": "Absolute/Incremental Positioning Mode",
     "documentation": "G90 selects absolute positioning, and G91 selects incremental positioning. In absolute positioning, all coordinates are relative to the origin (0,0,0,0). In incremental positioning, all coordinates are distances relative to the last point.\n\nG90 Absolute positioning G91 Incremental coordinates\n\nExample:\n```\nG90 X2 Y3 ; moves the X and Y axes from the current position\n          ; to X2, Y3.\nG91 X1 Y0 ; moves the X axis 1 inch referenced from the last X\n          ; position, the Y axis does not move.\n```\n",
-    "sortText": "G0091"
+    "sortText": "#G0091"
   },
   {
     "name": "G92",
     "kind": "g-code",
     "detail": "Set Absolute Position",
     "documentation": "G92 sets the current absolute position to the coordinates specified. This command only affects the currently set Work Coordinate System.\n\nExample:\n```\nG0 X5 Y3 Z-2 W5 ; Moves to the specified location\nG92 X1 Y0 Z0 W1 ; Sets the current position to the absolute\n                ;  position specified.\n```\n",
-    "sortText": "G0092"
+    "sortText": "#G0092"
   },
   {
     "name": "G93",
     "kind": "g-code",
     "detail": "Inverse Time",
     "documentation": "Rather than using a conventional federate in Inch per Minute or MM per Minute, F in inverse time mode specifies the movement frequency for subsequent moves. Specifically, the inverse time feedrate is the inverse of the amount of time that a move is allowed to take.\n\nFor example, using inverse time, the block:\n\n```\nG1 G93 X10 F1\n```\ntakes 1 minute to cut, regardless of X length. At F2.0 (1/2.0 minute) it takes 30 seconds; At F3.0 it takes 20 seconds, and so on.\n\nG93 is Modal, and remains in effect until a G94 is issued to cancel the G93.\n\nExample of use in a program:\n\n```\nG0 G54 G90 X2.2126 Y-1.1995 A94.75 B-.161 S3000 M3 ; Move to start\nG43 H26 Z7.0002\nM8 Z3.1002\nG1 G93 X2.2048 Y-1.2593 Z3.0204 F100. ; Enable Inverse Time\nX2.2052 Y-1.2586 Z3.0202 A94.756 B-.162 F30000. ; 1/30000 min for move \nX.2079 Y-1.2578 Z3.0197 A94.763 B-.173 F30000. ; 1/30000 min for move \nX2.2124 Y-1.2566 Z3.0189 A94.773 B-.189 F30000. ; 1/30000 min for move \nX2.2184 Y-1.2551 Z3.0179 A94.786 B-.212 F24065.56 ; 1/24065 min for move\nX2.2258 Y-1.2533 Z3.0167 A94.802 B-.24 F19736.14 ; 1/19736 min for move\nX2.2345 Y-1.2512 Z3.0155 A94.819 B-.272 F17187.45 ; 1/17187 min for move\n```\n",
-    "sortText": "G0093"
+    "sortText": "#G0093"
   },
   {
     "name": "G94",
     "kind": "g-code",
     "detail": "Cancel Inverse Time",
     "documentation": "G94 is used to cancel Inverse Time feedrates, and return to regular Feed per Minute feedrates.\n\n",
-    "sortText": "G0094"
+    "sortText": "#G0094"
   },
   {
     "name": "G98",
     "kind": "g-code",
     "detail": "Initial Point Return",
     "documentation": "G98 sets the +Z return level to point I as pictured in Figure 1 in the Canned Cycle Section. (G98 is the default setting)\n\n",
-    "sortText": "G0098"
+    "sortText": "#G0098"
   },
   {
     "name": "G99",
     "kind": "g-code",
     "detail": "R Point Return",
     "documentation": "G99 sets the +Z return level to point R as pictured in Figure 1 in the Canned Cycle Section.\n\n",
-    "sortText": "G0099"
+    "sortText": "#G0099"
   },
   {
     "name": "G117",
     "kind": "g-code",
     "detail": "Rotation of Pre-set Arc Planes",
     "documentation": "G117, G118 and G119 have the same functionality as G17, G18 and G19, respectively, except that they include 2 optional parameters P and Q to specify the arc plane rotation away from the pre-set arc plane: P specifies the arc plane angle of rotation (in degrees) around the first axis and Q specifies the arc plane angle of rotation around the second axis.\n\nFor the G117 plane, the ”first axis” is X and the ”second axis” is Y. For the G118 plane, the ”first axis” is Z and the ”second axis” is X.\n\nFor the G119 plane, the ”first axis” is Y and the ”second axis” is Z. If P and/or Q are not specified, the angles are assumed to be 0 degrees. If both P and Q parameters are 0, then the plane is assumed to be an orthogonal (pre-set) arc plane. The center of the arc can be specified by the user in a 3D form both in\n\nG17-G19 and in G117-G119 (all I, J, K values are allowed at the same time with G2 and G3). Any arc center component outside the circular plane is ignored.\n\nExample:\n```\nG00 X0 Y0 Z1 ; rapid move\nG03 G18 X1 Y0 Z0 K-1 F20 ; arc mill\nG00 X0 Y0 Z1.1 ; retract move\nG01 Z1 ; move to start of contour\nG03 G118 P1.000000 X0.9998 Y0.0175 Z0 K-1 ; arc mill rotated about Z\n```\n**NOTE:** G117-G119 will not be permitted while cutter compensation is turned on. Also, scaling is not allowed while G117-G119 is specified and G117-G119 is not allowed while scaling is active.\n\n**NOTE:** G117-G119 will not work when Smoothing is turned on (P220 = 1).\n\n\n",
-    "sortText": "G0117"
+    "sortText": "#G0117"
   },
   {
     "name": "G118",
     "kind": "g-code",
     "detail": "Rotation of Pre-set Arc Planes",
     "documentation": "G117, G118 and G119 have the same functionality as G17, G18 and G19, respectively, except that they include 2 optional parameters P and Q to specify the arc plane rotation away from the pre-set arc plane: P specifies the arc plane angle of rotation (in degrees) around the first axis and Q specifies the arc plane angle of rotation around the second axis.\n\nFor the G117 plane, the ”first axis” is X and the ”second axis” is Y. For the G118 plane, the ”first axis” is Z and the ”second axis” is X.\n\nFor the G119 plane, the ”first axis” is Y and the ”second axis” is Z. If P and/or Q are not specified, the angles are assumed to be 0 degrees. If both P and Q parameters are 0, then the plane is assumed to be an orthogonal (pre-set) arc plane. The center of the arc can be specified by the user in a 3D form both in\n\nG17-G19 and in G117-G119 (all I, J, K values are allowed at the same time with G2 and G3). Any arc center component outside the circular plane is ignored.\n\nExample:\n```\nG00 X0 Y0 Z1 ; rapid move\nG03 G18 X1 Y0 Z0 K-1 F20 ; arc mill\nG00 X0 Y0 Z1.1 ; retract move\nG01 Z1 ; move to start of contour\nG03 G118 P1.000000 X0.9998 Y0.0175 Z0 K-1 ; arc mill rotated about Z\n```\n**NOTE:** G117-G119 will not be permitted while cutter compensation is turned on. Also, scaling is not allowed while G117-G119 is specified and G117-G119 is not allowed while scaling is active.\n\n**NOTE:** G117-G119 will not work when Smoothing is turned on (P220 = 1).\n\n\n",
-    "sortText": "G0118"
+    "sortText": "#G0118"
   },
   {
     "name": "G119",
     "kind": "g-code",
     "detail": "Rotation of Pre-set Arc Planes",
     "documentation": "G117, G118 and G119 have the same functionality as G17, G18 and G19, respectively, except that they include 2 optional parameters P and Q to specify the arc plane rotation away from the pre-set arc plane: P specifies the arc plane angle of rotation (in degrees) around the first axis and Q specifies the arc plane angle of rotation around the second axis.\n\nFor the G117 plane, the ”first axis” is X and the ”second axis” is Y. For the G118 plane, the ”first axis” is Z and the ”second axis” is X.\n\nFor the G119 plane, the ”first axis” is Y and the ”second axis” is Z. If P and/or Q are not specified, the angles are assumed to be 0 degrees. If both P and Q parameters are 0, then the plane is assumed to be an orthogonal (pre-set) arc plane. The center of the arc can be specified by the user in a 3D form both in\n\nG17-G19 and in G117-G119 (all I, J, K values are allowed at the same time with G2 and G3). Any arc center component outside the circular plane is ignored.\n\nExample:\n```\nG00 X0 Y0 Z1 ; rapid move\nG03 G18 X1 Y0 Z0 K-1 F20 ; arc mill\nG00 X0 Y0 Z1.1 ; retract move\nG01 Z1 ; move to start of contour\nG03 G118 P1.000000 X0.9998 Y0.0175 Z0 K-1 ; arc mill rotated about Z\n```\n**NOTE:** G117-G119 will not be permitted while cutter compensation is turned on. Also, scaling is not allowed while G117-G119 is specified and G117-G119 is not allowed while scaling is active.\n\n**NOTE:** G117-G119 will not work when Smoothing is turned on (P220 = 1).\n\n\n",
-    "sortText": "G0119"
+    "sortText": "#G0119"
   },
   {
     "name": "M00",
     "kind": "m-code",
     "detail": "Stop for Operator",
     "documentation": "Motion stops, and the operator is prompted to press the CYCLE START button to continue.\n\n",
-    "sortText": "M0000"
+    "sortText": "#M0000"
   },
   {
     "name": "M01",
     "kind": "m-code",
     "detail": "Optional Stop for Operator",
     "documentation": "M1 is an optional pause, whose action can be selected by the operator.\n\nWhen optional stops are turned on, M1 will pause the currently running job until CYCLE START is pressed.However, if optional stops are turned off, M1 will not pause the program.\n\nNOTE: If you plan to override the default action of M1 with a macro file, you may want to include a call to M1 within the macro file so that the default actions of M1 will still be effective in the overridden M1. Otherwise, if a call to M1 is not included within the macro file, the new overridden M1 will cause optional stops to be ineffective.\n\n",
-    "sortText": "M0001"
+    "sortText": "#M0001"
   },
   {
     "name": "M02",
     "kind": "m-code",
     "detail": "Restart Program",
     "documentation": "M2 moves the Z-axis to the home position, performs any movement requested, and restarts the program from the first line. The operator is prompted to press the CYCLE START button to continue.\n\n",
-    "sortText": "M0002"
+    "sortText": "#M0002"
   },
   {
     "name": "M03",
     "kind": "m-code",
     "detail": "Spindle On Clockwise",
     "documentation": "M3 requests the PLC to start the spindle in the clockwise direction. Default action:\n\nM95/2 M94/1\n\n",
-    "sortText": "M0003"
+    "sortText": "#M0003"
   },
   {
     "name": "M04",
     "kind": "m-code",
     "detail": "Spindle On Counterclockwise",
     "documentation": "M4 requests the PLC to start the spindle in the counterclockwise direction. Default action:\n\nM95/1 M94/2\n\n",
-    "sortText": "M0004"
+    "sortText": "#M0004"
   },
   {
     "name": "M05",
     "kind": "m-code",
     "detail": "Spindle Stop",
     "documentation": "M5 requests the PLC to stop the spindle.\n\nDefault action if the spindle had been spinning CW:\n\nM95/2 M95/1\n\nDefault action if the spindle was OFF or was spinning CCW:\n\nM95/1 M95/2\n\n",
-    "sortText": "M0005"
+    "sortText": "#M0005"
   },
   {
     "name": "M06",
     "kind": "m-code",
     "detail": "Tool Change",
     "documentation": "M6 moves the Z-axis to the home position and stops the spindle and coolant. If an automatic tool changer is installed, it then commands the tool changer to switch to the requested tool. Otherwise, it prompts the operator to insert the tool and then press the CYCLE START button on the Operator Panel.\n\nDefault action (tool changer installed):\n\nDefault action (no tool changer):\n```\nM25 ; always does M25 first\nM95/1/2/3/5 ; turn off spindle & coolant \nM100/75 ; wait for CYCLE START button\nM25 ; always does M25 first \nM95/1/2/3/5 ; turn off spindle & coolant\nM95/16 ; turn off tool changer strobe\nM107 ; send tool number to tool changer\nM94/16 ; turn on tool changer strobe\nM101/32 ; wait for acknowledge from changer\nM95/16 ; turn off tool changer strobe\nM100/32 ; wait for acknowledge from changer\n```\nManual tool changes are selected by setting Parameter 6 to 0 in the Machine Parameters table. The automatic tool changer is selected by setting Parameter 6 to 1 (see Chapter 14).\n\nThe PLC program must be involved in commanding an automatic tool changer and its associated strobe, BCD and Acknowledge lines. See Chapter 5 of the service manual for details of how such a PLC program could be constructed.\n\n",
-    "sortText": "M0006"
+    "sortText": "#M0006"
   },
   {
     "name": "M07",
     "kind": "m-code",
     "detail": "Mist Coolant On",
     "documentation": "M7 causes the PLC to start the mist coolant system. Default action:\n\nM95/3\n\nM94/5\n\n",
-    "sortText": "M0007"
+    "sortText": "#M0007"
   },
   {
     "name": "M08",
     "kind": "m-code",
     "detail": "Flood Coolant On",
     "documentation": "M8 causes the PLC to start the flood coolant system. Default action:\n\nM95/5\n\nM94/3\n\n",
-    "sortText": "M0008"
+    "sortText": "#M0008"
   },
   {
     "name": "M09",
     "kind": "m-code",
     "detail": "Coolant Off",
     "documentation": "M9 causes the PLC to stop the coolant system. Default action:\n\nM95/3/5\n\n",
-    "sortText": "M0009"
+    "sortText": "#M0009"
   },
   {
     "name": "M10",
     "kind": "m-code",
     "detail": "Clamp On",
     "documentation": "M10 causes the PLC to activate the clamp–also referred to as a ’chuck’. Default action:\n\nM94/4\n\nNOTE: adding 256 to parameter 178 can switch M10 and M11.\n\n",
-    "sortText": "M0010"
+    "sortText": "#M0010"
   },
   {
     "name": "M11",
     "kind": "m-code",
     "detail": "Clamp Off",
     "documentation": "M11 causes the PLC to release the clamp–also referred to as a ’chuck’. Default action:\n\nM95/4\n\n",
-    "sortText": "M0011"
+    "sortText": "#M0011"
   },
   {
     "name": "M17",
     "kind": "m-code",
     "detail": "Prepare for Tool Change (Macro)",
     "documentation": "M17 has no default action, therefore a custom M17 macro must be defined for this feature to work. If defined, the M17 macro turns off spindle and coolant and starts the spindle orientation process in preparation for M6 (Tool Change). The M17 macro is allocated for use with Intercon and the setting in Parameter 162. See Parameter 162 in Chapter 14 for more information.\n\n",
-    "sortText": "M0017"
+    "sortText": "#M0017"
   },
   {
     "name": "M19",
     "kind": "m-code",
     "detail": "Spindle Orient (Macro)",
     "documentation": "M19 has no default action, therefore a custom M19 macro must be defined for this feature to work. If defined, the M19 macro sends a request to the PLC to rotate the spindle to its pre-set orient position.\n\n",
-    "sortText": "M0019"
+    "sortText": "#M0019"
   },
   {
     "name": "M25",
     "kind": "m-code",
     "detail": "Move to Z Home",
     "documentation": "By default, M25 moves the Z axis to the home position at the Z axis maximum rate. The Z axis home position is the Z axis component of the Return #1 (G28) machine position. (The Return #1 position is first machine coordinate position defined in the Return sub-menu of the Work Coordinate System Configuration.)\n\nThe default action of M25 only involves the Z axis. However, if you specify axis arguments (up to 3), then those axes specified will be moved to their axis home positions (Return #1 machine position).\n\nExample:\n\n```\nM25 ; move Z to home\nM25 /Z ; same as M25 by itself – move Z to home\nM25 /X/Y/Z ; move X, Y and Z to their Return #1 positions\nM25 /X ; move only X to its Return #1 position\n```\n\n",
-    "sortText": "M0025"
+    "sortText": "#M0025"
   },
   {
     "name": "M26",
     "kind": "m-code",
     "detail": "Set Axis Home",
     "documentation": "M26 sets the machine home position for the specified axis to the current position (after the line’s movement). If no axis is specified, M26 sets the Z-axis home position. The L word can be used to set home at the indicated encoder position provided the axis does not have an absolute encoder.\n\nExample:\n```\nM91/X ; home X axis to minus home switch M26/X ; set machine home for X-axis there M92/Z ; home Z-axis to plus home switch M26/Z ; set machine home for Z-axis there\nM26/X L4096 ; set machine home for the X-axis at encoder position of 4096\n```\n\n",
-    "sortText": "M0026"
+    "sortText": "#M0026"
   },
   {
     "name": "M30",
     "kind": "m-code",
     "detail": "Custom M Code",
     "documentation": "Intercon posts an M30 at the end of every G code program. By default M30 performs no operation. If you wish to perform certain operations at the end of every program, this M code can be customized to meet you needs. For more information on customizing M codes see the beginning of this chapter.\n\n",
-    "sortText": "M0030"
+    "sortText": "#M0030"
   },
   {
     "name": "M39",
     "kind": "m-code",
     "detail": "Air Drill",
     "documentation": "M39 is a default air drill activation sequence with a timeout. The sequence of operations is as follows:\n\nM94/15 ; activate M function request 15 M103/2 ; start 2 second timer M100/50015 ; wait for input 15 to open M95/15 ; deactivate M function request 15 M104 ; cancel timer\n\nNOTE: This program will be canceled by timer expiration if input 15 does not open within 2 seconds after M function request 15 is activated. The PLC program must be involved in taking away the drill output when the CNC program stops:\n\nExample:\n\n; PLC program fragment\n\nCNC program running is SV PROGRAM RUNNING ;program running indicator M15 is SV M94 M95 15 ; M function 15 indicator\n\ndrill out is OUT5 ; air drill output relay\n\nif M15 && CNC program running then (drill out) ; Drill On if M94/15 and the\n\n; CNC program is running. Drill\n\n; Off if M95/15 or the CNC\n\n",
-    "sortText": "M0039"
+    "sortText": "#M0039"
   },
   {
     "name": "M41",
     "kind": "m-code",
     "detail": "Select Spindle Gear Range (Macros)",
     "documentation": "M41, M42, and M43 have no default actions, and therefore custom macros must be defined for these M codes in order to make this feature work. If defined, these macros notify the PLC of which spindle gear range is selected according to the following table:\n\n|Macro M Function|Action|\n|:---|:---|\n|M41|Select Low Gear Range|\n|M42|Select Medium-Low Gear Range|\n|M43|Select High Gear Range|\nNote that selecting a ”Medium-High” Gear Range is currently not supported by this schema, although that would not prevent a system integrator from defining another custom macro M function to do that.\n\n",
-    "sortText": "M0041"
+    "sortText": "#M0041"
   },
   {
     "name": "M42",
     "kind": "m-code",
     "detail": "Select Spindle Gear Range (Macros)",
     "documentation": "M41, M42, and M43 have no default actions, and therefore custom macros must be defined for these M codes in order to make this feature work. If defined, these macros notify the PLC of which spindle gear range is selected according to the following table:\n\n|Macro M Function|Action|\n|:---|:---|\n|M41|Select Low Gear Range|\n|M42|Select Medium-Low Gear Range|\n|M43|Select High Gear Range|\nNote that selecting a ”Medium-High” Gear Range is currently not supported by this schema, although that would not prevent a system integrator from defining another custom macro M function to do that.\n\n",
-    "sortText": "M0042"
+    "sortText": "#M0042"
   },
   {
     "name": "M43",
     "kind": "m-code",
     "detail": "Select Spindle Gear Range (Macros)",
     "documentation": "M41, M42, and M43 have no default actions, and therefore custom macros must be defined for these M codes in order to make this feature work. If defined, these macros notify the PLC of which spindle gear range is selected according to the following table:\n\n|Macro M Function|Action|\n|:---|:---|\n|M41|Select Low Gear Range|\n|M42|Select Medium-Low Gear Range|\n|M43|Select High Gear Range|\nNote that selecting a ”Medium-High” Gear Range is currently not supported by this schema, although that would not prevent a system integrator from defining another custom macro M function to do that.\n\n",
-    "sortText": "M0043"
+    "sortText": "#M0043"
   },
   {
     "name": "M60",
     "kind": "m-code",
     "detail": "5-Axis Digitizing Macro",
     "documentation": "The M60 is used only when digitizing with the 5-Axis Tilt Table system.\n\nThe M60 uses user variables to assign a ”Start Position” and a ”Finish Position” for 5-Axis Digitizing. When the M60 is executed, the probe will be moved from the start position to the end position. If during the motion the probe detects a surface, the surface position is recorded, and the probe returns to the start position. If no surface is found the probe returns to the start position.\n\nThe following variables are to be assigned before the M60 is called, the M60 will then use the positions as assigned by the user variables:\n\n#29100 = X-Axis Probing vector start point (Initial Position) #29101 = Y-Axis Probing vector start point (Initial Position) #29102 = Z-Axis Probing vector start point (Initial Position) #29103 = A-Axis Probing vector start point (Initial Position) #29104 = B-Axis Probing vector start point (Initial Position) #29110 = X-Axis Probing vector end point\n\n#29111 = Y-Axis Probing vector end point #29112 = Z-Axis Probing vector end point\n\nUpon a successful probe the M60 will use an M122 to save the probed position to a text file that should be opened using an M120 or M121 before calling the M60.\n\nExample:\n\n```\nM121 ”m60test.dig5” ; Open text file to record data too \n#29100 = -8.7999 ; X-Axis Start Position\n#29101 = .3747 ; Y-Axis Start Position\n#29102 = -1.1832 ; Z-Axis Start Position \n#29103 = 85.957 ; A-Axis Start Position\n#29104 = 21.36 ; B-Axis Start Position\n#29110 = -8.7138 ; X-Axis End Position\n#29111 = -.0159 ; Y-Axis End Position\n#29112 = -1.183 ; Z-Axis End Position\n#M60 ; Execute M60\n```\n\n",
-    "sortText": "M0060"
+    "sortText": "#M0060"
   },
   {
     "name": "M91",
     "kind": "m-code",
     "detail": "Move to Minus Home",
     "documentation": "M91 moves to the minus home switch of the axis specified at the slow jog rate for that axis. After the minus home switch is tripped, the axis reverses until the home switch clears, and stops when it detects the index pulse. When reversing until the home switch clears, the clear state must be reached within 0.25 inches for a linear axis and 45 degrees for a rotary axis or an error occurs.\n\nIf the control configuration \"Machine home at pwrup\" field is set to \"Ref Mark-HS\" and the \"Home -\" field in the Motor Parameter menu is set to 0 (zero) to specify reference mark homing, the behavior of this command is to start moving and then stop when the index pulse is detected.\n\nExample:\n\n```\nM91/X ; moves the X-axis to the minus home switch.\nG92 X-10 ; sets X minus home switch at -10\n```\n\n",
-    "sortText": "M0091"
+    "sortText": "#M0091"
   },
   {
     "name": "M92",
     "kind": "m-code",
     "detail": "Move to Plus Home",
     "documentation": "M92 moves to the plus home switch of the axis specified at the slow jog rate for that axis. After the plus home switch is tripped, the axis reverses until the home switch clears, and stops when it detects the index pulse. When reversing until the home switch clears, the clear state must be reached within 0.25 inches for a linear axis and 45 degrees for a rotary axis or an error occurs.\n\nIf the control configuration \"Machine home at pwrup\" field is set to \"Ref Mark-HS\" and the \"Home +\" field in the Motor Parameter menu is set to 0 (zero) to specify reference mark homing, the behavior of this command is to start moving and then stop when the index pulse is detected.\n\nExample:\n\n```\nM92/X ; moves the X-axis to the plus home switch.\nG92 X+10 ; Sets X plus home switch at +10\n```\n\n",
-    "sortText": "M0092"
+    "sortText": "#M0092"
   },
   {
     "name": "M93",
     "kind": "m-code",
     "detail": "Release/Restore Motor Power",
     "documentation": "M93 releases or restores motor power for the axis specified. If no axis is specified, then all axes are released.\n\nExample:\n\nTo release motor power:\n\n```\nM93/X ; releases the X axis.\nM93 ; releases the motors on all axes.\n```\n\nExample:\n\nTo restore motor power:\n\n```\nM93/X P1 ; restore power to the X axis motor.\nM93 P1 ; restore power to the motors on all axes.\n```\nNOTE: Any axis freed within a CNC program should not be used in that program afterwards. Incorrect positioning may result.\n\n",
-    "sortText": "M0093"
+    "sortText": "#M0093"
   },
   {
     "name": "M94",
     "kind": "m-code",
     "detail": "Output On/Off",
     "documentation": "There are 128 user definable system variable bits that can be used to communicate with the PLC. M94 and M95 are used to request those system variable bits to turn on or off respectively. Requests 1-128 are mapped to the PLC as system variables SV M94 M95 1 through SV M94 M95 128 as shown in the following table:\n\n|On|Off|PLC bit|\n|:---|:---|:---|\n|M94/1|M95/1|SV M94 M95 1|\n|M94/2|M95/2|SV M94 M95 2|\n|M94/3|M95/3|SV M94 M95 3|\n|M94/4|M95/4|SV M94 M95 4|\n|.|.|.|\n|.|.|.|\n|.|.|.|\n|M94/128|M95/128|SV M94 M95 128|\nTo use M94 and M95 to control a function external to the servo control, such as an indexer, the input request must be mapped to one of the PLC outputs in the PLC program. See M94/M95 function usage in the PLC section of the service manual.\n\nExample:\n\n```\nM94/5/6 ; turns on SV M94 M95 5 and SV M94 M95 6.\n```\n\nNOTE: M94 and M95 will cause prior motion to decelerate to a stop before the requested bits are turned on or off\n\nNOTE: Requests 1-5, 15, and 16 are controlled by the default actions of M3, M4, M5, M6, M7, M8, M9, M10, M11, and M39. To override or disable a bit used in one of these M codes, define a custom M-function.\n\n",
-    "sortText": "M0094"
+    "sortText": "#M0094"
   },
   {
     "name": "M95",
     "kind": "m-code",
     "detail": "Output On/Off",
     "documentation": "There are 128 user definable system variable bits that can be used to communicate with the PLC. M94 and M95 are used to request those system variable bits to turn on or off respectively. Requests 1-128 are mapped to the PLC as system variables SV M94 M95 1 through SV M94 M95 128 as shown in the following table:\n\n|On|Off|PLC bit|\n|:---|:---|:---|\n|M94/1|M95/1|SV M94 M95 1|\n|M94/2|M95/2|SV M94 M95 2|\n|M94/3|M95/3|SV M94 M95 3|\n|M94/4|M95/4|SV M94 M95 4|\n|.|.|.|\n|.|.|.|\n|.|.|.|\n|M94/128|M95/128|SV M94 M95 128|\nTo use M94 and M95 to control a function external to the servo control, such as an indexer, the input request must be mapped to one of the PLC outputs in the PLC program. See M94/M95 function usage in the PLC section of the service manual.\n\nExample:\n\n```\nM94/5/6 ; turns on SV M94 M95 5 and SV M94 M95 6.\n```\n\nNOTE: M94 and M95 will cause prior motion to decelerate to a stop before the requested bits are turned on or off\n\nNOTE: Requests 1-5, 15, and 16 are controlled by the default actions of M3, M4, M5, M6, M7, M8, M9, M10, M11, and M39. To override or disable a bit used in one of these M codes, define a custom M-function.\n\n",
-    "sortText": "M0095"
+    "sortText": "#M0095"
   },
   {
     "name": "M98",
     "kind": "m-code",
     "detail": "Call Subprogram",
     "documentation": "M98 calls a user-specified subprogram. A subprogram is a separate program that can be used to perform a certain operation (e.g. a drilling pattern, contour, etc.) many times throughout a main program.\n\nCalling methods:\n\n```\nM98 Pxxxx Lrrrr OR\nM98 ”program.cnc” Lrrrr\n```\n\nwhere xxxx is the subprogram number (referring to file Oxxxx.cnc, 9100-9999 allowed, leading 0’s required in filename, capital O, lowercase .cnc), rrrr is the repeat value, and ”program.cnc” is the name of the subprogram file.\n\nSubprograms are written just like normal programs, with one exception: an M99 should be at the end of the subprogram. M99 transfers control back to the calling program.\n\nSubprograms can call other subprograms (up to 20 nested levels of calling may be used), Macro M-functions, and Macros. Macro M-functions and Macros can similarly call subprograms.\n\nSubprograms 9100-9999 can also be embedded into a main program, using O9xxx to designate the beginning of the subprogram and M99 to end it. The CNC software will read the subprogram and generate a file O9xxx.cnc. The CNC will not execute the subprogram until it encounters M98 P9xxx.\n\nNOTE: An embedded subprogram definition must be placed before any calls to the subprogram.\n\nExample:\n\nSuppose that a drilling pattern of 4 holes is needed in 3 different locations:\n\n```\n:Main program\nG90 G0 X2 Y5 Z0.5 ;Move to first hole pattern\nM98 P9101 L1 ;Call subprogram O9101.cnc\nG90 G0 X4Y1 Z0.5 ;Move to second hole pattern\nM98 P9101 L1 ;Call subprogram\nG90 G0 X6 Y5 Z0.5 ;Move to third hole pattern\nM98 P9101 L1 ;Call subprogram\n:End program\n```\n\nThe main program would call this subprogram three times:\n```\nO9101 ;Program O9101.cnc\nG91 F10 ;Incremental positioning\nG81 X0 Y0 R -.4 Z-.6 ;Drill lower left hole\nY1.5 R -.4 Z-.6 ;Drill upper left hole\nX1 R -.4 Z-.6 ;Drill upper right hole\nY-1.5 R-.4 Z-.6 ;Drill lower right hole\nG80 ;Cancel canned cycles\nM99 ;End of subprogram\n```\n\nExample:\n\nAnother example is ”looping” or consecutively repeating a section of code. Here, the subprogram will be part of the main program.\n\n```\n:Main program\nG90 G0 X0 Y0 Z0.1\nG1 Z0 F30\nO9100 ;Beginning of subprogram\nG91 G1 Z-0.1 F5\nG90 X2 F30 Y2\nX0 Y0\nM99 ;End of subprogram 9100\nM98 P9100 L3 ;Repeat O9100 3 times\nM25 G49 ;End main program\n```\n\n",
-    "sortText": "M0098"
+    "sortText": "#M0098"
   },
   {
     "name": "M99",
     "kind": "m-code",
     "detail": "Return from Macro or Subprogram",
     "documentation": "M99 designates the end of a subprogram or macro and transfers control back to the calling program when executed. M99 may be specified on a line with other G codes. M99 will be the last action executed on a line. If M99 is not specified in a subprogram file, M99 is assumed at the end of the file:\n\nExample:\n```\nG1 X3 M99 ;Move to X3 then return to calling program.\n```\nIf M99 is encountered in the main job file, it will be interpreted as the end of the job. If M99 is encountered in an M function macro file, it will be interpreted as the end of any enclosing subprogram or macro, or as the end of the job.\n\n",
-    "sortText": "M0099"
+    "sortText": "#M0099"
   },
   {
     "name": "M100",
     "kind": "m-code",
     "detail": "Wait for PLC bit (Closed, On, Set)",
     "documentation": "The M100/M101 commands wait for a PLC bit to reach a state as indicated in the table below:\n\n|Number|PLC bit|M100|M101|\n|:---|:---|:---|:---|\n|50001 - 51312|INP1 - INP1312|open|closed|\n|60001 - 61312|OUT1 - OUT1312|off|on|\n|70001 - 71024|MEM1 - MEM1024|reset|set|\n|90001 - 90064|T1 - T64 status bits|reset (not expired)|set (expired)|\n|93001 - 93256|STG1 - STG256 status bits|reset (disabled)|set (enabled)|\n|94001 - 94256|FSTG - FTSG256 status bits|reset (disabled)|set (enabled)|\n\n\nThe number ranges 1-240 can be used to reference the first eighty INP, OUT, or MEM bits. It is recommended that existing CNC10 programs and macros be converted to the new ranges for use with CNC11.\n\n|Number|PLC bit|M100|M101|\n|:---|:---|:---|:---|\n|1 - 80|INP1 - INP80|open|closed|\n|81 - 160|OUT1 - OUT80|off|on|\n|161 - 240|MEM1 – MEM80|reset|set|\n\n\nExample:\n```\nM101/50001 ; wait for INP1 to close\nM100/60002 ; wait for OUT2 to turn off\nM101/70123 ; wait for MEM123 to be set (1)\n```\n\nNOTE: The numbers assigned to the PLC bits (except 1-240) are the same as those that can be used when referencing system variables in M- and G-code programs.\n\n",
-    "sortText": "M0100"
+    "sortText": "#M0100"
   },
   {
     "name": "M101",
     "kind": "m-code",
     "detail": "Wait for PLC bit (Closed, On, Set)",
     "documentation": "The M100/M101 commands wait for a PLC bit to reach a state as indicated in the table below:\n\n|Number|PLC bit|M100|M101|\n|:---|:---|:---|:---|\n|50001 - 51312|INP1 - INP1312|open|closed|\n|60001 - 61312|OUT1 - OUT1312|off|on|\n|70001 - 71024|MEM1 - MEM1024|reset|set|\n|90001 - 90064|T1 - T64 status bits|reset (not expired)|set (expired)|\n|93001 - 93256|STG1 - STG256 status bits|reset (disabled)|set (enabled)|\n|94001 - 94256|FSTG - FTSG256 status bits|reset (disabled)|set (enabled)|\n\n\nThe number ranges 1-240 can be used to reference the first eighty INP, OUT, or MEM bits. It is recommended that existing CNC10 programs and macros be converted to the new ranges for use with CNC11.\n\n|Number|PLC bit|M100|M101|\n|:---|:---|:---|:---|\n|1 - 80|INP1 - INP80|open|closed|\n|81 - 160|OUT1 - OUT80|off|on|\n|161 - 240|MEM1 – MEM80|reset|set|\n\n\nExample:\n```\nM101/50001 ; wait for INP1 to close\nM100/60002 ; wait for OUT2 to turn off\nM101/70123 ; wait for MEM123 to be set (1)\n```\n\nNOTE: The numbers assigned to the PLC bits (except 1-240) are the same as those that can be used when referencing system variables in M- and G-code programs.\n\n",
-    "sortText": "M0101"
+    "sortText": "#M0101"
   },
   {
     "name": "M102",
     "kind": "m-code",
     "detail": "Restart Program",
     "documentation": "M102 performs any movement requested, and restarts the program from the first line. The Z axis is NOT moved to the home position, and the operator is NOT prompted to press the CYCLE START button to continue.\n\n",
-    "sortText": "M0102"
+    "sortText": "#M0102"
   },
   {
     "name": "M103",
     "kind": "m-code",
     "detail": "Programmed Action Timer",
     "documentation": "M103 is used to set up the time limit for a timed operation. If the timer is canceled (usually by M104) before the specified time limit , the program will be canceled and the message ”Programmed action timer expired” will be displayed. If another M103 is issued before the time limit expires, then this time limit is nullified and the new time limit will be set up as specified by the latest occurring M103. Note also that if M0 or M1 causes the program to stop momentarily and the ”M0 jogging” feature is enabled, then the the timer will also be canceled without the need to issue M104.\n\nExample:\n\nActivate a device and wait for a response. If there is no response within 4.5 seconds, cancel the program: M94/12 ; turn on input request 12\n\nM103/4.5 ; start 4.5 second timer M100/4 ; wait for input 4 to open M104 ; input 4 opened, cancel timer\n\n",
-    "sortText": "M0103"
+    "sortText": "#M0103"
   },
   {
     "name": "M104",
     "kind": "m-code",
     "detail": "Cancel Programmed Action Timer",
     "documentation": "M104 stops the timer started by the last M103 executed.\n\n",
-    "sortText": "M0104"
+    "sortText": "#M0104"
   },
   {
     "name": "M105",
     "kind": "m-code",
     "detail": "Move Minus to Switch",
     "documentation": "M105 moves the requested axis in the minus direction at the current feedrate until the specified switch opens (if the given P parameter is positive), or until the specified switch closes (if P parameter is negative).\n\nExample:\n```\nM105/X P5 F30 ; move the X axis in minus direction at 30”/min until\n; the switch on INP5 opens\n\nG92 X10 ; Sets X position to 10\nM105/Z P-6 ; move the Z axis in minus direction until switch on INP6 closes\n```\n",
-    "sortText": "M0105"
+    "sortText": "#M0105"
   },
   {
     "name": "M106",
     "kind": "m-code",
     "detail": "Move Plus to Switch",
     "documentation": "M106 moves the requested axis in the plus direction at the current feedrate until the specified switch opens (if the given P parameter is positive), or until the specified switch closes (if P parameter is negative).\n\nExample:\n```\nM106/Z P3 F30 ; move the Z axis in the plus direction at 30”/min, until\n; the switch on INP3 opens\nG92 X10 ; Sets Z position to 10\nM106/X P-3 ; move the X axis in the plus direction until the switch on INP3 closes\n```\n",
-    "sortText": "M0106"
+    "sortText": "#M0106"
   },
   {
     "name": "M107",
     "kind": "m-code",
     "detail": "Output Tool Number",
     "documentation": "M107 sends the current tool number to the automatic tool changer, via the PLC. M107 does not set the tool changer strobe or look for an acknowledgement from the changer (see M6).\n\nExample:\n```\nM107 ; send request for tool to change\nM94/16 ; turn on tool changer strobe\nM101/5 ; wait for acknowledge on input 5\nM95/16 ; turn off strobe\nM100/5 ; wait for acknowledge to be removed\n```\n",
-    "sortText": "M0107"
+    "sortText": "#M0107"
   },
   {
     "name": "M108",
     "kind": "m-code",
     "detail": "Enable Override Controls",
     "documentation": "M108 re-enables the feedrate override and/or spindle speed override controls if they were disabled with M109. A parameter of ”1” indicates the feedrate override; ”2” indicates the spindle speed override.\n\nExample:\n```\nM109/1/2 ; disables feedrate and spindle speed overrides\nM108/1 ; re-enables feedrate override\nM108/2 ; re-enables spindle speed override\n```\n",
-    "sortText": "M0108"
+    "sortText": "#M0108"
   },
   {
     "name": "M109",
     "kind": "m-code",
     "detail": "Disable Override Controls",
     "documentation": "M109 disables the feedrate override and/or spindle speed override controls. It may be used before tapping with G85 to assure that the machine runs at the programmed feedrate and spindle speed. It is not necessary to specify M109 with G74 or G84; those cycles automatically disable and re-enable the override controls. M109 cannot be used in MDI mode.\n\nExample:\n```\nM3 S500 ; start spindle in clockwise direction, at 500 rpm\nF27.78 ; set feedrate for 18 pitch tap\nM109/1/2 ; disable feedrate and spindle speed overrides\nG85 X0 Y0 R.1 Z-.5 ; tap a hole\nM108/1/2 ; re-enable overrides\n```\n\n",
-    "sortText": "M0109"
+    "sortText": "#M0109"
   },
   {
     "name": "M115",
     "kind": "m-code",
     "detail": "Protected Move Probing Functions",
     "documentation": "The protected move probing functions provide the capability to program customized probing routines. The structure for these commands is: \n```Mnnn /Axis pos Pp Ff L1```\n\nWhere:\n\nnnn is either 115, 116, 125, or 126.\n\nAxis is a valid axis label, i.e., X, Y,Z, etc.\n\npos is an optional position\n\nP is a PLC bit number, which can be negative.\n\nF* is a feedrate (in units per minute.)\n\nL1* options for the M115/M116 commands that prevents an error if the probe does not detect a surface\n\nis an option for M115/M116 that forces the DSP probe to move a ”Recovery Distance”\n\n**NOTE:** the Q1 option only applies for DSP Probes\n\nFor M115 and M116 functions, the indicated axis will move to pos (if specified) until the corresponding PLC bit p state is 1, unless p is negative, in which case movement is until the PLC bit state is 0(closed). A ”p value” of 1 to 80 (or -1 to -80) specifies PLC bits INP1-INP80. Warnings are generated in the CNC software message window for ”Missing P value” and ”Invalid P value.” If ”pos” is not specified, M115 will move the axis in the negative direction, and M116 will move the axis in the positive direction. Note if ”pos” is specified, then if does not matter whether M115 or M116 is used. Regardless of whether or not pos is specified, movement is bound by the settings in the software travel limits as well the maximum probing distance (Machine Parameter 16).\n\nFor M125 and M126 protected move functions, the behavior is identical to that of the M115 and M116 commands, except in regards to the PLC bit state. The M115 and M116 commands are to be used when one expects contact to be made and M125 and M126 commands are to be used when one does not expect any contact to be made.\n\nExample:\n\nFinding the center of a vertical slot. In this example, it is assumed that there is a probe connected to INP15 and that the probe tip is positioned somewhere in the slot, such that movement along the X-axis will cause a probe trigger.\n\n```\nM115/X P-15 F20 ; Move X minus at 20 ipm until probe trip\nM116/X P15 F5 ; Move X plus at 5 ipm until probe clears \n#100 = #5041 ; Record the point in user variable #100\nM116/X P-15 F20 ; Move X plus at 20 ipm until probe trip\nM115/X P15 F5 ; Move X minus at 5 ipm until probe clears\nX[[#100+#5041]/2] ; Move X to center of slot\n```\n\n* Usage is slightly different when using a DSP type probe. Please see below for dissimilarities between a standard DP4 probe and the DSP type probe.\n\n",
-    "sortText": "M0115"
+    "sortText": "#M0115"
   },
   {
     "name": "M116",
     "kind": "m-code",
     "detail": "Protected Move Probing Functions",
     "documentation": "The protected move probing functions provide the capability to program customized probing routines. The structure for these commands is: \n```Mnnn /Axis pos Pp Ff L1```\n\nWhere:\n\nnnn is either 115, 116, 125, or 126.\n\nAxis is a valid axis label, i.e., X, Y,Z, etc.\n\npos is an optional position\n\nP is a PLC bit number, which can be negative.\n\nF* is a feedrate (in units per minute.)\n\nL1* options for the M115/M116 commands that prevents an error if the probe does not detect a surface\n\nis an option for M115/M116 that forces the DSP probe to move a ”Recovery Distance”\n\n**NOTE:** the Q1 option only applies for DSP Probes\n\nFor M115 and M116 functions, the indicated axis will move to pos (if specified) until the corresponding PLC bit p state is 1, unless p is negative, in which case movement is until the PLC bit state is 0(closed). A ”p value” of 1 to 80 (or -1 to -80) specifies PLC bits INP1-INP80. Warnings are generated in the CNC software message window for ”Missing P value” and ”Invalid P value.” If ”pos” is not specified, M115 will move the axis in the negative direction, and M116 will move the axis in the positive direction. Note if ”pos” is specified, then if does not matter whether M115 or M116 is used. Regardless of whether or not pos is specified, movement is bound by the settings in the software travel limits as well the maximum probing distance (Machine Parameter 16).\n\nFor M125 and M126 protected move functions, the behavior is identical to that of the M115 and M116 commands, except in regards to the PLC bit state. The M115 and M116 commands are to be used when one expects contact to be made and M125 and M126 commands are to be used when one does not expect any contact to be made.\n\nExample:\n\nFinding the center of a vertical slot. In this example, it is assumed that there is a probe connected to INP15 and that the probe tip is positioned somewhere in the slot, such that movement along the X-axis will cause a probe trigger.\n\n```\nM115/X P-15 F20 ; Move X minus at 20 ipm until probe trip\nM116/X P15 F5 ; Move X plus at 5 ipm until probe clears \n#100 = #5041 ; Record the point in user variable #100\nM116/X P-15 F20 ; Move X plus at 20 ipm until probe trip\nM115/X P15 F5 ; Move X minus at 5 ipm until probe clears\nX[[#100+#5041]/2] ; Move X to center of slot\n```\n\n* Usage is slightly different when using a DSP type probe. Please see below for dissimilarities between a standard DP4 probe and the DSP type probe.\n\n",
-    "sortText": "M0116"
+    "sortText": "#M0116"
   },
   {
     "name": "M125",
     "kind": "m-code",
     "detail": "Protected Move Probing Functions",
     "documentation": "The protected move probing functions provide the capability to program customized probing routines. The structure for these commands is: \n```Mnnn /Axis pos Pp Ff L1```\n\nWhere:\n\nnnn is either 115, 116, 125, or 126.\n\nAxis is a valid axis label, i.e., X, Y,Z, etc.\n\npos is an optional position\n\nP is a PLC bit number, which can be negative.\n\nF* is a feedrate (in units per minute.)\n\nL1* options for the M115/M116 commands that prevents an error if the probe does not detect a surface\n\nis an option for M115/M116 that forces the DSP probe to move a ”Recovery Distance”\n\n**NOTE:** the Q1 option only applies for DSP Probes\n\nFor M115 and M116 functions, the indicated axis will move to pos (if specified) until the corresponding PLC bit p state is 1, unless p is negative, in which case movement is until the PLC bit state is 0(closed). A ”p value” of 1 to 80 (or -1 to -80) specifies PLC bits INP1-INP80. Warnings are generated in the CNC software message window for ”Missing P value” and ”Invalid P value.” If ”pos” is not specified, M115 will move the axis in the negative direction, and M116 will move the axis in the positive direction. Note if ”pos” is specified, then if does not matter whether M115 or M116 is used. Regardless of whether or not pos is specified, movement is bound by the settings in the software travel limits as well the maximum probing distance (Machine Parameter 16).\n\nFor M125 and M126 protected move functions, the behavior is identical to that of the M115 and M116 commands, except in regards to the PLC bit state. The M115 and M116 commands are to be used when one expects contact to be made and M125 and M126 commands are to be used when one does not expect any contact to be made.\n\nExample:\n\nFinding the center of a vertical slot. In this example, it is assumed that there is a probe connected to INP15 and that the probe tip is positioned somewhere in the slot, such that movement along the X-axis will cause a probe trigger.\n\n```\nM115/X P-15 F20 ; Move X minus at 20 ipm until probe trip\nM116/X P15 F5 ; Move X plus at 5 ipm until probe clears \n#100 = #5041 ; Record the point in user variable #100\nM116/X P-15 F20 ; Move X plus at 20 ipm until probe trip\nM115/X P15 F5 ; Move X minus at 5 ipm until probe clears\nX[[#100+#5041]/2] ; Move X to center of slot\n```\n\n* Usage is slightly different when using a DSP type probe. Please see below for dissimilarities between a standard DP4 probe and the DSP type probe.\n\n",
-    "sortText": "M0125"
+    "sortText": "#M0125"
   },
   {
     "name": "M126",
     "kind": "m-code",
     "detail": "Protected Move Probing Functions",
     "documentation": "The protected move probing functions provide the capability to program customized probing routines. The structure for these commands is: \n```Mnnn /Axis pos Pp Ff L1```\n\nWhere:\n\nnnn is either 115, 116, 125, or 126.\n\nAxis is a valid axis label, i.e., X, Y,Z, etc.\n\npos is an optional position\n\nP is a PLC bit number, which can be negative.\n\nF* is a feedrate (in units per minute.)\n\nL1* options for the M115/M116 commands that prevents an error if the probe does not detect a surface\n\nis an option for M115/M116 that forces the DSP probe to move a ”Recovery Distance”\n\n**NOTE:** the Q1 option only applies for DSP Probes\n\nFor M115 and M116 functions, the indicated axis will move to pos (if specified) until the corresponding PLC bit p state is 1, unless p is negative, in which case movement is until the PLC bit state is 0(closed). A ”p value” of 1 to 80 (or -1 to -80) specifies PLC bits INP1-INP80. Warnings are generated in the CNC software message window for ”Missing P value” and ”Invalid P value.” If ”pos” is not specified, M115 will move the axis in the negative direction, and M116 will move the axis in the positive direction. Note if ”pos” is specified, then if does not matter whether M115 or M116 is used. Regardless of whether or not pos is specified, movement is bound by the settings in the software travel limits as well the maximum probing distance (Machine Parameter 16).\n\nFor M125 and M126 protected move functions, the behavior is identical to that of the M115 and M116 commands, except in regards to the PLC bit state. The M115 and M116 commands are to be used when one expects contact to be made and M125 and M126 commands are to be used when one does not expect any contact to be made.\n\nExample:\n\nFinding the center of a vertical slot. In this example, it is assumed that there is a probe connected to INP15 and that the probe tip is positioned somewhere in the slot, such that movement along the X-axis will cause a probe trigger.\n\n```\nM115/X P-15 F20 ; Move X minus at 20 ipm until probe trip\nM116/X P15 F5 ; Move X plus at 5 ipm until probe clears \n#100 = #5041 ; Record the point in user variable #100\nM116/X P-15 F20 ; Move X plus at 20 ipm until probe trip\nM115/X P15 F5 ; Move X minus at 5 ipm until probe clears\nX[[#100+#5041]/2] ; Move X to center of slot\n```\n\n* Usage is slightly different when using a DSP type probe. Please see below for dissimilarities between a standard DP4 probe and the DSP type probe.\n\n",
-    "sortText": "M0126"
+    "sortText": "#M0126"
   },
   {
     "name": "M120",
     "kind": "m-code",
     "detail": "Open data file (overwrite existing file)",
     "documentation": "This M function will open the requested data file for writing. If no drive or directory is specified with the file name, then the file will be opened in the same directory as the CNC program. If the file cannot be successfully opened, then an error will be returned, ultimately terminating the job. If a data file is already open when M120 is called, that file will first be closed, then the new file opened.\n\nExample:\n```\nM120 ”probetst.dat” ; Opens probetst.dat file to write data too\n```\nNOTE: M120 and M121 also allow use of the string user variables #300 - #399 to specify a filename. As an example, given that #300 = ”myfile” and #301 = ”cnc”\n```\nM120 ”#300.#301” ; Opens the file ”myfile.cnc” for data recording.\n```\nKeep in mind however that there is a quirk in the way that the M120/M121 operates that requires the ’.’ to be present so assigning #301 = ”.cnc” and executing M120 ”#300#301” does not work and generates a ”Could not open file” error message.\n\n",
-    "sortText": "M0120"
+    "sortText": "#M0120"
   },
   {
     "name": "M121",
     "kind": "m-code",
     "detail": "Open data file (append to existing file)",
     "documentation": "This M function will open the requested file for writing at the end of the file. If no drive or directory is specified with the file name, then the file will be opened in the same directory as the CNC program. If the file does not already exist, it will be created. This is not an error. If the file cannot be successfully opened, then an error will be returned, ultimately terminating the job. If a data file is already open when M121 is called, that file will first be closed, then the new file opened.\n\nExample:\n```\nM121 ”c:\\probetst.dat” ; Opens probetst.dat file to add data to it\n```\nString variables #300-#399 may also be used to specify a file name. Please see M120 above for details.\n\n",
-    "sortText": "M0121"
+    "sortText": "#M0121"
   },
   {
     "name": "M122",
     "kind": "m-code",
     "detail": "Record local position(s) and optional comment in data file",
     "documentation": "This M function will write the current expected position value to the data file, in the usual format (i.e. axis label before number, 4 decimal places in inch mode, 3 decimal places in millimeter mode. Any comment that appeared on the line with M122 will be outputted after the position(s). With no axis arguments, M122 will write the positions of all installed axes. With axis arguments, it will write the positions only of the requested axes. Positions will be written in local (not machine) coordinates, in native machine units. If no data file has been opened with M120 or M121 before M122 is called, then M122 will return an error and terminate the job. The parameter L1 may be used to suppress the new line character normally outputted after the last position. Furthermore, the output of axis labels, comma separators, and spaces can be enabled or suppressed via machine parameter 72 (see Parameter 72 in Chapter 14). If the control has been configured to use a DSP probe type, using parameter Q1 will write the values stored in #24301-#24305 to the file.\n\nExample: M function and sample output:\n\n|M122 ;comment|->|X1.2345 Y-3.2109 Z-0.5678 ;comment|\n|:---|:---|:---|\n|M122 /X L1|->|X-1.5000|\n|M122 /X|->|X-1.5000 X-2.0000|\n",
-    "sortText": "M0122"
+    "sortText": "#M0122"
   },
   {
     "name": "M123",
     "kind": "m-code",
     "detail": "Record value and/or comment in data file",
     "documentation": "This M function will write the specified parameter value (if any) to the data file, followed by any comment that appeared on the line with M123. If a P value is specified, M123 will record the numeric value (4 decimal places in inches, 3 in millimeters). If neither a P value nor a comment was specified, M123 does nothing. This is not an error. If no data file has been opened with M120 or M121 before M123 is called, then M123 will return an error and terminate the job. The parameter L1 may be used to suppress the new line character normally outputted after the last value. The R and Q parameters can be used to specify the field width and precision, respectively. Furthermore, the output of axis labels, comma separators, and spaces can be enabled or suppressed via machine parameter 72 (see Parameter 72 in Chapter 14).\n\nExample: M function and sample output:\n\n|M123 ;1.2345\nM123 P#A ; first macro argument|->\n->|1.2345\n1.2345 first macro argument|\n|:---|:---|:---|\n|M123 Q0 P1.23|->|1|\n",
-    "sortText": "M0123"
+    "sortText": "#M0123"
   },
   {
     "name": "M124",
     "kind": "m-code",
     "detail": "Record machine position(s) and optional comment in data file",
     "documentation": "Identical to M122 above except that the m124 reports machine position instead of a local WCS position.\n\n",
-    "sortText": "M0124"
+    "sortText": "#M0124"
   },
   {
     "name": "M127",
     "kind": "m-code",
     "detail": "Record Date and Time in a data file",
     "documentation": "**NOTE:** The M127 does not insert a semi-colon in front of the date. If desired, use the M123 as shown below.\n```\nM121 ”testdata.dat” \nM123 ;;\nM127\n```\nIf you opened testdata.dat you would see: Day of week, Month, day, time, and year. (i.e. ;Wed Aug 29 11:56:57 2007)\n\n",
-    "sortText": "M0127"
+    "sortText": "#M0127"
   },
   {
     "name": "M128",
     "kind": "m-code",
     "detail": "Move Axis by Encoder Counts",
     "documentation": "M128 moves the requested axis by L which specifies an encoder count position or quantity. The L parameter is subject to the current G90/G91 mode (absolute/incremental).\n\nExample:\n```\nG91 M128/X L-5000 ; move the X axis incrementally by -5000 counts\n```\n",
-    "sortText": "M0128"
+    "sortText": "#M0128"
   },
   {
     "name": "M129",
     "kind": "m-code",
     "detail": "Record Current Job file path to data file",
     "documentation": "This M function is used to write the current job’s file path to the specified data file called out by the M120 or M121.\n\nExample: Run a job named job.cnc which contains the following 2 lines:\n```\nM121 ”output.txt”\nM129\n```\nIf you opened the output.txt file you would see: c:\\cncm\\ncfiles\\job.cnc\n\n",
-    "sortText": "M0129"
+    "sortText": "#M0129"
   },
   {
     "name": "M130",
     "kind": "m-code",
     "detail": "Run system command",
     "documentation": "This allows shell commands to be called from a CNC program or MDI. M130 takes one string argument which contains the system command to execute.\n\nFor example:\n```\nM130 ”mycommand.bat”\n```\nwill run the batch file mycommand.bat.\n\nNormally, the command will run asynchronously, meaning that the G-code program will not wait for the command to finish before continuing. However, if an L1 parameter is given, the command will prevent further G-code execution until a fault occurs (such as E-Stop).\n\n",
-    "sortText": "M0130"
+    "sortText": "#M0130"
   },
   {
     "name": "M150",
     "kind": "m-code",
     "detail": "Set Spindle Encoder to zero at next index pulse",
     "documentation": "M150 will cause the spindle encoder position to be reset to 0 upon the next encounter of the spindle encoder’s index pulse. M150 will not generate spindle movement. As a matter of fact, the spindle needs be be commanded to move in order for M150 to work.\n\n",
-    "sortText": "M0150"
+    "sortText": "#M0150"
   },
   {
     "name": "M223",
     "kind": "m-code",
     "detail": "Formatted String Commands",
     "documentation": "",
-    "sortText": "M0223"
+    "sortText": "#M0223"
   },
   {
     "name": "M224",
     "kind": "m-code",
     "detail": "Formatted String Commands",
     "documentation": "",
-    "sortText": "M0224"
+    "sortText": "#M0224"
   },
   {
     "name": "M225",
     "kind": "m-code",
     "detail": "Formatted String Commands",
     "documentation": "",
-    "sortText": "M0225"
+    "sortText": "#M0225"
   },
   {
     "name": "M290",
     "kind": "m-code",
     "detail": "Formatted String Commands",
     "documentation": "",
-    "sortText": "M0290"
+    "sortText": "#M0290"
   },
   {
     "name": "M200",
     "kind": "m-code",
     "detail": "Stop for Operator, Prompt for Action",
     "documentation": "M200 is used to pause the currently running job and prompt the operator for action. If M0 jogging is unlocked, or the control is in DEMO mode, jogging is enabled while waiting for the operator to respond. If this option has not been enabled, the behavior will default to that of a standard M0. (jogging disabled)\n\nThe syntax is:\n\nM200 formatted-string [[user var expr] ...]\n\nExample:\n```\nM200 “Please jog the %c and %c axes to the desired X0, Y0 position.\\nPress Cycle Start to continue” #100 #101\n```\n\nM201 behaves exactly like M200 except that PLC bits SV PROGRAM RUNNING, SV MDI MODE, and SV JOB IN PROGRESS are turned off while the prompt is displayed.\n\n",
-    "sortText": "M0200"
+    "sortText": "#M0200"
   },
   {
     "name": "M201",
     "kind": "m-code",
     "detail": "Stop for Operator, Prompt for Action",
     "documentation": "M200 is used to pause the currently running job and prompt the operator for action. If M0 jogging is unlocked, or the control is in DEMO mode, jogging is enabled while waiting for the operator to respond. If this option has not been enabled, the behavior will default to that of a standard M0. (jogging disabled)\n\nThe syntax is:\n\nM200 formatted-string [[user var expr] ...]\n\nExample:\n```\nM200 “Please jog the %c and %c axes to the desired X0, Y0 position.\\nPress Cycle Start to continue” #100 #101\n```\n\nM201 behaves exactly like M200 except that PLC bits SV PROGRAM RUNNING, SV MDI MODE, and SV JOB IN PROGRESS are turned off while the prompt is displayed.\n\n",
-    "sortText": "M0201"
+    "sortText": "#M0201"
   },
   {
     "name": "M223",
     "kind": "m-code",
     "detail": "Write Formatted String to File",
     "documentation": "The M223 command writes a formatted-string to a file that was opened using the M120 or M121 commands. The syntax is:\n\nM223 formatted-string [[user var expr] ...]\n\nExample:\n\nM223 ”; The measured diameter of the pocket = %.4f\\n” #100\n\n",
-    "sortText": "M0223"
+    "sortText": "#M0223"
   },
   {
     "name": "M224",
     "kind": "m-code",
     "detail": "Prompt for Operator Input Using Formatted String",
     "documentation": "The M224 command displays a formatted-string and then accepts user input. The syntax is: M224 /num lvalue expr formatted-string [[user var expr] ...]\n\nWhere /num is an optional parameter specifying the font family. Possibilities are:\n\n/0 - Default         /4 - Swiss\n\n/1 - Decorative     /5 - Modern\n\n/2 - Roman          /6 - Teletype\n\n/3 - Script\n\nWhere lvalue expr is a user var expr that evaluates to a user variable that can be written. If lvalue expr is a string type (#300-#399) then the user input is assigned verbatim to the string. Otherwise, the user input is evaluated as any other ”bracketed” numerical expression.\n\nExample:\n\nM224 /0 #300 ”Please enter the direction that you wish to probe in the %c axis: (+ or -)” #100\n\n",
-    "sortText": "M0224"
+    "sortText": "#M0224"
   },
   {
     "name": "M225",
     "kind": "m-code",
     "detail": "Display Formatted String for A Period of Time",
     "documentation": "The M225 command displays a formatted-string for a specified period of time. The syntax is: M225 /num time expr formatted-string [user var] ...\n\nWhere /num is an optional parameter specifying the font family. Possibilities are:\n\n/0 - Default         /4 - Swiss\n\n/1 - Decorative     /5 - Modern\n\n/2 - Roman          /6 - Teletype\n\n/3 - Script\n\nThe argument time expr is a user var expr that evaluates to a floating point variable specifying the number of seconds to display the output, with a value of zero interpreted as indefinitely. The CYCLE START key can be used to immediately continue running without waiting for the time to expire.\n\nExample:\n\n\\\n\nM225 /6 #100 ”Warning, %s is not selected n Please select %s and press Cycle Start to continue.” #300 #300\n\n",
-    "sortText": "M0225"
+    "sortText": "#M0225"
   },
   {
     "name": "M290",
     "kind": "m-code",
     "detail": "Digitize Profile (Optional)",
     "documentation": "This performs a 2 axis digitize, probing along an axis while stepping over using a perpendicular travel axis. This M-code is similar to performing a single slice of Grid Digitizing with the Surface Following type selected (See Chapter 8). M290 expects that a file is already open with M120/121 (however, if not open, there will be no output).\n\nThe syntax is:\n\nM290 /a #vvv /b #vvvv ”formatted-string” Q R  P L    \n\nThe first axis mentioned will be treated as the probing axis and the second will be treated as the travel axis.\n\nExplanation of M290 Arguments:\n\n/a +-nnn.nnn is the probing direction and max distance on axis ”a”.\n\n/b +-nnn.nnn is the travel direction and max distance on axis ”b” (perpendicular to probing axis).\n\n#vvv and #vvvv (optional) are G-code variables that will be a receptacle of the very last probed position of the cycle.\n\n”formatted-string” (optional) is the format of the output (if not mentioned, then there will be no output to file).\n\nQ is the stepover along the travel direction (this is a positive quantity).\n\nR (optional) is the retract/pullback amount upon interruption or completion.\n\nP (optional) is the interruption PLC bit state which causes a graceful end to the cycle. (If not mentioned, then no PLC bit will checked for graceful interruption.).\n\nL (optional) is the output variable to which to store the interrupt status (0=no interruption, 1=interrupted by PLC bit P , 2=surface not found error).\n\n",
-    "sortText": "M0290"
+    "sortText": "#M0290"
   },
   {
     "name": "M300",
     "kind": "m-code",
     "detail": "Fast Synchronous I/O update",
     "documentation": "There are 32 user definable fast system integer variables that can be used to communicate with the PLC (similar to M94 and M95), but without causing motion to decelerate to a stop* (unlike M94 and M95). The syntax is:\n\nM300 /nn /vvv\n\nwhere nn is 1-32 and vvv is a 32-bit signed integer value. The parameter nn (1-32) maps to system variables SV FSIO1 - SV FSIO32. These commands work in conjunction with a PLC program that can read the SV FSIOx and act upon them.\n\nExample:\n```\nM300 /21 /-1234 ; set SV FSIO21 to integer value -1234\n```\nNOTE: Motion will be decelerated to a stop if Smoothing is turned on (P220 = 1).\n\n",
-    "sortText": "M0300"
+    "sortText": "#M0300"
   },
   {
     "name": "M333",
     "kind": "m-code",
     "detail": "Axis Role Re-assignment",
     "documentation": "This is an experimental M-function that re-assigns X,Y,Z axis behaviors to other axes. This command is not recommended for normal use.\n\n",
-    "sortText": "M0333"
+    "sortText": "#M0333"
   },
   {
     "name": "M1000",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1000"
+    "sortText": "#M1000"
   },
   {
     "name": "M1001",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1001"
+    "sortText": "#M1001"
   },
   {
     "name": "M1002",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1002"
+    "sortText": "#M1002"
   },
   {
     "name": "M1003",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1003"
+    "sortText": "#M1003"
   },
   {
     "name": "M1004",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1004"
+    "sortText": "#M1004"
   },
   {
     "name": "M1005",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1005"
+    "sortText": "#M1005"
   },
   {
     "name": "M1006",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1006"
+    "sortText": "#M1006"
   },
   {
     "name": "M1007",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1007"
+    "sortText": "#M1007"
   },
   {
     "name": "M1008",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1008"
+    "sortText": "#M1008"
   },
   {
     "name": "M1009",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1009"
+    "sortText": "#M1009"
   },
   {
     "name": "M1010",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1010"
+    "sortText": "#M1010"
   },
   {
     "name": "M1011",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1011"
+    "sortText": "#M1011"
   },
   {
     "name": "M1012",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1012"
+    "sortText": "#M1012"
   },
   {
     "name": "M1013",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1013"
+    "sortText": "#M1013"
   },
   {
     "name": "M1014",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1014"
+    "sortText": "#M1014"
   },
   {
     "name": "M1015",
     "kind": "m-code",
     "detail": "Graphing Color for Feedrate movement",
     "documentation": "When a CNC program is graphed (F8 from the Main Screen), feedrate movements are normally plotted using the color yellow. This color setting can be changed to another color as stated in the chart below.\n\n\n|M Code|Feedrate Graphing Color|\n|:---|:---|\n|M1000|Black|\n|M1001|Navy Blue|\n|M1002|Green|\n|M1003|Teal|\n|M1004|Orange|\n|M1005|Blue|\n|M1006|Lime|\n|M1007|Aqua|\n|M1008|Maroon|\n|M1009|Purple|\n|M1010|Olive|\n|M1011|Gray|\n|M1012|Red|\n|M1013|Fuchsia|\n|M1014|Yellow|\n|M1015|White|\n\n\nChanging this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.\n\n\n",
-    "sortText": "M1015"
+    "sortText": "#M1015"
   }
 ]

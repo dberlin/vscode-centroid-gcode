@@ -9,7 +9,7 @@ for (const item of fileData) {
     let namePieces = numericRegexp.exec(codeName);
     if (!namePieces) continue;
     let nameVal = parseInt(namePieces[1]);
-    let sortVal = `${codeName[0]}${nameVal.toString().padStart(4, "0")}`;
+    let sortVal = `#${codeName[0]}${nameVal.toString().padStart(4, "0")}`;
     outputList.push({
       name: codeName.trim(),
       kind: item["kind"],

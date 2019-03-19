@@ -16,6 +16,16 @@ export class CentroidCompletionProvider
     let tries = DocumentSymbolManager.getTriesForDocument(document);
     if (!tries) return [];
     let symbolResults = tries.getAllCompletions(wordText);
+
+    // Mark the list as incomplete if > 1000 because of how slow vscode is at handling it
+    if (symbolResults.length > 1000) {
+      symbolResults.sort((a, b) => {
+        if (<string>a.sortText < <string>b.sortText) return -1;
+        else if (<string>a.sortText > <string>b.sortText) return 1;
+        return 0;
+      });
+      return new vscode.CompletionList(symbolResults.slice(0, 1000), true);
+    }
     return symbolResults;
   }
 }
