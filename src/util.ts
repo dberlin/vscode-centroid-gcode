@@ -5,7 +5,7 @@ import { DocumentSymbolManager } from "./DocumentManager";
 
 export const wordPatternRegExp = /(\#\d+)|(-?\d*\.\d\w*)|([^\`\~\!\@\#\%\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/;
 
-const noLeadingZeroRegEx = new RegExp("^[A-Z]([0-9])$");
+const noLeadingZeroRegEx = /^[A-Z](\d)$/;
 /**
  * Normalize the name of a gcode symbol
  * @param symbolName - symbol to normaize
@@ -16,7 +16,7 @@ export function normalizeSymbolName(symbolName: string): string {
   // Convert all non-leading zero forms (G1, G2) to leading zero forms for symbol name
   if ((matches = noLeadingZeroRegEx.exec(upperName))) {
     let number = parseInt(matches[1]);
-    upperName = upperName[0] + "0" + number.toString();
+    upperName = `${upperName[0]}0${number}`;
   }
   return upperName;
 }
@@ -39,7 +39,7 @@ export function RegExpAny(...args: RegExp[]) {
     newFlags.push(key);
   }
   let combined = new RegExp(
-    "(?:" + components.join(")|(?:") + ")",
+    `(?:${components.join(")|(?:")})`,
     newFlags.join("")
   );
   return combined;
