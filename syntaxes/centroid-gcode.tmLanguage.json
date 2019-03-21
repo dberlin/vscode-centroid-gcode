@@ -137,7 +137,7 @@
           "name": "support.constant.math.centroid-gcode"
         },
         {
-          "match": "(?i:/[0-9A-Z])",
+          "match": "(?i:/[0-9A-Z]+)",
           "name": "support.constant.math.centroid-gcode"
         }
       ]
