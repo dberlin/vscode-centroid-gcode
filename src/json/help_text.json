@@ -367,21 +367,21 @@
     "name": "M03",
     "kind": "m-code",
     "detail": "Spindle On Clockwise",
-    "documentation": "M3 requests the PLC to start the spindle in the clockwise direction. Default action:\n\nM95/2 M94/1\n\n",
+    "documentation": "M3 requests the PLC to start the spindle in the clockwise direction. Default action:\n\n```\nM95/2\nM94/1\n```\n",
     "sortText": "#M0003"
   },
   {
     "name": "M04",
     "kind": "m-code",
     "detail": "Spindle On Counterclockwise",
-    "documentation": "M4 requests the PLC to start the spindle in the counterclockwise direction. Default action:\n\nM95/1 M94/2\n\n",
+    "documentation": "M4 requests the PLC to start the spindle in the counterclockwise direction. Default action:\n\n```\nM95/1\nM94/2\n```\n",
     "sortText": "#M0004"
   },
   {
     "name": "M05",
     "kind": "m-code",
     "detail": "Spindle Stop",
-    "documentation": "M5 requests the PLC to stop the spindle.\n\nDefault action if the spindle had been spinning CW:\n\nM95/2 M95/1\n\nDefault action if the spindle was OFF or was spinning CCW:\n\nM95/1 M95/2\n\n",
+    "documentation": "M5 requests the PLC to stop the spindle.\n\nDefault action if the spindle had been spinning CW:\n\n```\nM95/2\nM95/1\n```\n\nDefault action if the spindle was OFF or was spinning CCW:\n\n```\nM95/1\nM95/2\n```\n",
     "sortText": "#M0005"
   },
   {
@@ -395,35 +395,35 @@
     "name": "M07",
     "kind": "m-code",
     "detail": "Mist Coolant On",
-    "documentation": "M7 causes the PLC to start the mist coolant system. Default action:\n\nM95/3\n\nM94/5\n\n",
+    "documentation": "M7 causes the PLC to start the mist coolant system. Default action:\n\n```\nM95/3\nM94/5\n```\n",
     "sortText": "#M0007"
   },
   {
     "name": "M08",
     "kind": "m-code",
     "detail": "Flood Coolant On",
-    "documentation": "M8 causes the PLC to start the flood coolant system. Default action:\n\nM95/5\n\nM94/3\n\n",
+    "documentation": "M8 causes the PLC to start the flood coolant system. Default action:\n\n```\nM95/5\nM94/3\n```\n",
     "sortText": "#M0008"
   },
   {
     "name": "M09",
     "kind": "m-code",
     "detail": "Coolant Off",
-    "documentation": "M9 causes the PLC to stop the coolant system. Default action:\n\nM95/3/5\n\n",
+    "documentation": "M9 causes the PLC to stop the coolant system. Default action:\n\n```\nM95/3/5\n```\n",
     "sortText": "#M0009"
   },
   {
     "name": "M10",
     "kind": "m-code",
     "detail": "Clamp On",
-    "documentation": "M10 causes the PLC to activate the clamp–also referred to as a ’chuck’. Default action:\n\nM94/4\n\nNOTE: adding 256 to parameter 178 can switch M10 and M11.\n\n",
+    "documentation": "M10 causes the PLC to activate the clamp–also referred to as a ’chuck’. Default action:\n\n\n```\nM94/4\n```\n\nNOTE: adding 256 to parameter 178 can switch M10 and M11.\n\n",
     "sortText": "#M0010"
   },
   {
     "name": "M11",
     "kind": "m-code",
     "detail": "Clamp Off",
-    "documentation": "M11 causes the PLC to release the clamp–also referred to as a ’chuck’. Default action:\n\nM95/4\n\n",
+    "documentation": "M11 causes the PLC to release the clamp–also referred to as a ’chuck’. Default action:\n\n```\nM95/4\n```\n",
     "sortText": "#M0011"
   },
   {
@@ -521,14 +521,14 @@
     "name": "M94",
     "kind": "m-code",
     "detail": "Output On/Off",
-    "documentation": "There are 128 user definable system variable bits that can be used to communicate with the PLC. M94 and M95 are used to request those system variable bits to turn on or off respectively. Requests 1-128 are mapped to the PLC as system variables SV M94 M95 1 through SV M94 M95 128 as shown in the following table:\n\n|On|Off|PLC bit|\n|:---|:---|:---|\n|M94/1|M95/1|SV M94 M95 1|\n|M94/2|M95/2|SV M94 M95 2|\n|M94/3|M95/3|SV M94 M95 3|\n|M94/4|M95/4|SV M94 M95 4|\n|.|.|.|\n|.|.|.|\n|.|.|.|\n|M94/128|M95/128|SV M94 M95 128|\nTo use M94 and M95 to control a function external to the servo control, such as an indexer, the input request must be mapped to one of the PLC outputs in the PLC program. See M94/M95 function usage in the PLC section of the service manual.\n\nExample:\n\n```\nM94/5/6 ; turns on SV M94 M95 5 and SV M94 M95 6.\n```\n\nNOTE: M94 and M95 will cause prior motion to decelerate to a stop before the requested bits are turned on or off\n\nNOTE: Requests 1-5, 15, and 16 are controlled by the default actions of M3, M4, M5, M6, M7, M8, M9, M10, M11, and M39. To override or disable a bit used in one of these M codes, define a custom M-function.\n\n",
+    "documentation": "There are 128 user definable system variable bits that can be used to communicate with the PLC. M94 and M95 are used to request those system variable bits to turn on or off respectively. Requests 1-128 are mapped to the PLC as system variables SV M94 M95 1 through SV M94 M95 128 as shown in the following table:\n\n|On|Off|PLC bit|\n|:---|:---|:---|\n|M94/1|M95/1|SV M94 M95 1|\n|M94/2|M95/2|SV M94 M95 2|\n|M94/3|M95/3|SV M94 M95 3|\n|M94/4|M95/4|SV M94 M95 4|\n|.|.|.|\n|.|.|.|\n|.|.|.|\n|M94/128|M95/128|SV M94 M95 128|\n\n\nTo use M94 and M95 to control a function external to the servo control, such as an indexer, the input request must be mapped to one of the PLC outputs in the PLC program. See M94/M95 function usage in the PLC section of the service manual.\n\nExample:\n\n```\nM94/5/6 ; turns on SV M94 M95 5 and SV M94 M95 6.\n```\n\nNOTE: M94 and M95 will cause prior motion to decelerate to a stop before the requested bits are turned on or off\n\nNOTE: Requests 1-5, 15, and 16 are controlled by the default actions of M3, M4, M5, M6, M7, M8, M9, M10, M11, and M39. To override or disable a bit used in one of these M codes, define a custom M-function.\n\n",
     "sortText": "#M0094"
   },
   {
     "name": "M95",
     "kind": "m-code",
     "detail": "Output On/Off",
-    "documentation": "There are 128 user definable system variable bits that can be used to communicate with the PLC. M94 and M95 are used to request those system variable bits to turn on or off respectively. Requests 1-128 are mapped to the PLC as system variables SV M94 M95 1 through SV M94 M95 128 as shown in the following table:\n\n|On|Off|PLC bit|\n|:---|:---|:---|\n|M94/1|M95/1|SV M94 M95 1|\n|M94/2|M95/2|SV M94 M95 2|\n|M94/3|M95/3|SV M94 M95 3|\n|M94/4|M95/4|SV M94 M95 4|\n|.|.|.|\n|.|.|.|\n|.|.|.|\n|M94/128|M95/128|SV M94 M95 128|\nTo use M94 and M95 to control a function external to the servo control, such as an indexer, the input request must be mapped to one of the PLC outputs in the PLC program. See M94/M95 function usage in the PLC section of the service manual.\n\nExample:\n\n```\nM94/5/6 ; turns on SV M94 M95 5 and SV M94 M95 6.\n```\n\nNOTE: M94 and M95 will cause prior motion to decelerate to a stop before the requested bits are turned on or off\n\nNOTE: Requests 1-5, 15, and 16 are controlled by the default actions of M3, M4, M5, M6, M7, M8, M9, M10, M11, and M39. To override or disable a bit used in one of these M codes, define a custom M-function.\n\n",
+    "documentation": "There are 128 user definable system variable bits that can be used to communicate with the PLC. M94 and M95 are used to request those system variable bits to turn on or off respectively. Requests 1-128 are mapped to the PLC as system variables SV M94 M95 1 through SV M94 M95 128 as shown in the following table:\n\n|On|Off|PLC bit|\n|:---|:---|:---|\n|M94/1|M95/1|SV M94 M95 1|\n|M94/2|M95/2|SV M94 M95 2|\n|M94/3|M95/3|SV M94 M95 3|\n|M94/4|M95/4|SV M94 M95 4|\n|.|.|.|\n|.|.|.|\n|.|.|.|\n|M94/128|M95/128|SV M94 M95 128|\n\n\nTo use M94 and M95 to control a function external to the servo control, such as an indexer, the input request must be mapped to one of the PLC outputs in the PLC program. See M94/M95 function usage in the PLC section of the service manual.\n\nExample:\n\n```\nM94/5/6 ; turns on SV M94 M95 5 and SV M94 M95 6.\n```\n\nNOTE: M94 and M95 will cause prior motion to decelerate to a stop before the requested bits are turned on or off\n\nNOTE: Requests 1-5, 15, and 16 are controlled by the default actions of M3, M4, M5, M6, M7, M8, M9, M10, M11, and M39. To override or disable a bit used in one of these M codes, define a custom M-function.\n\n",
     "sortText": "#M0095"
   },
   {

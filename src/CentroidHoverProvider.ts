@@ -2,6 +2,14 @@
 import * as vscode from "vscode";
 import { getSymbolForPosition } from "./util";
 import { DocumentSymbolManager } from "./DocumentManager";
+
+function getMacroParameterNum(name: string): number {
+  if (!name.startsWith("#")) return 0;
+  let result = parseInt(name.substr(1));
+  if (result) return result;
+  return 0;
+}
+
 export class CentroidHoverProvider implements vscode.HoverProvider {
   public provideHover(
     document: vscode.TextDocument,
@@ -17,9 +25,9 @@ export class CentroidHoverProvider implements vscode.HoverProvider {
         /* Don't produce a hover for the same position we declared the symbol on */
         if (position.line === symbolDeclPos.line) return null;
       }
-      if ((<vscode.MarkdownString>sym.documentation).value.startsWith("\n\n")) {
-        hoverText.appendMarkdown("#### " + (sym.detail || "").trim());
-      }
+      // If it is a macro parameter not in the system range, format the detail part.
+      hoverText.appendMarkdown(`#### ${(sym.detail || "").trim()}\n\n`);
+
       hoverText.appendMarkdown(
         (<vscode.MarkdownString>sym.documentation).value
       );

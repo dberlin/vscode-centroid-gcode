@@ -23,14 +23,14 @@
     G1 moves to the specified position at the programmed feedrate. The coordinates may be either absolute positions (G90) or incremental positions (G91). The movement will be along a straight line. G1 is modal and remains in effect until another positioning mode (G0, G2, G3 etc.) is commanded.
 
     Example:
-    
+
     ```
     G01 X2 Y3 Z4 W5 F10 ; Linear move to X2, Y3, Z4, W5 at a 10in/min
     G91 X6 Y7 ; Linear move to X8, Y10
     Z3 W4 F20 ; Linear move to Z7, W9 at 20in/min (G91 is modal)
     ```
 
-- name: 'G02, G03'
+- name: "G02, G03"
   kind: g-code
   detail: Circular or Helical Interpolation
   documentation: |+
@@ -81,7 +81,7 @@
     Examples:
 
     Circular motion (See graph in method 1, example 2)
-    
+
     ```
     G17 G90 F25 ; selects XY plane and absolute positioning
     G00 X1.0 Y1.0 Z0 ; rapid to start position X1, Y1, Z0
@@ -135,7 +135,7 @@
     G10 D3 R.25 ; Sets tool diameter offset #3 to .25 in the offset lib.
     ```
 
-- name: 'G17, G18, G19'
+- name: "G17, G18, G19"
   kind: g-code
   detail: Circular Interpolation Plane Selection
   documentation: |+
@@ -202,7 +202,7 @@
     ```
     **NOTE:** G30 P1 is equivalent to G28.
 
-- name: 'G40, G41, G42'
+- name: "G40, G41, G42"
   kind: g-code
   detail: Cutter Compensation
   documentation: |+
@@ -222,7 +222,7 @@
     ```
     Whenever cutter compensation is applied, the following factors must be taken into account in order to obtain proper results.
 
-- name: 'G43, G44, G49'
+- name: "G43, G44, G49"
   kind: g-code
   detail: Tool Length Compensation
   documentation: |+
@@ -249,7 +249,7 @@
   documentation: |+
     When G43.4 is active then any feed move (G1) will be made such that the tip of the tool moves in a straight line (this typically causes the Z-axis to move up and down during the move). G43.3 Compensation applies in this mode.
 
-- name: 'G50, G51'
+- name: "G50, G51"
   kind: g-code
   detail: Scaling / Mirroring (Optional)
   documentation: |+
@@ -406,7 +406,7 @@
     G65 P0002 L1 Y1 Z.25 ; Call macro again
     : End program
     ```
-- name: 'G68, G69'
+- name: "G68, G69"
   kind: g-code
   detail: Coordinate Rotation on/off
   documentation: |+
@@ -607,7 +607,7 @@
     G89 X1 Y1 R.1 Z-.5 P.1 ; bore 0.5” hole at X1Y1, dwell .1 seconds 
     G80 ; cancel canned cycle
     ```
-- name: 'G90, G91'
+- name: "G90, G91"
   kind: g-code
   detail: Absolute/Incremental Positioning Mode
   documentation: |+
@@ -650,7 +650,7 @@
     G93 is Modal, and remains in effect until a G94 is issued to cancel the G93.
 
     Example of use in a program:
-    
+
     ```
     G0 G54 G90 X2.2126 Y-1.1995 A94.75 B-.161 S3000 M3 ; Move to start
     G43 H26 Z7.0002
@@ -681,7 +681,7 @@
   documentation: |+
     G99 sets the +Z return level to point R as pictured in Figure 1 in the Canned Cycle Section.
 
-- name: 'G117, G118, G119'
+- name: "G117, G118, G119"
   kind: g-code
   detail: Rotation of Pre-set Arc Planes
   documentation: |+
@@ -734,16 +734,20 @@
   documentation: |+
     M3 requests the PLC to start the spindle in the clockwise direction. Default action:
 
-    M95/2 M94/1
-
+    ```
+    M95/2
+    M94/1
+    ```
 - name: M04
   kind: m-code
   detail: Spindle On Counterclockwise
   documentation: |+
     M4 requests the PLC to start the spindle in the counterclockwise direction. Default action:
 
-    M95/1 M94/2
-
+    ```
+    M95/1
+    M94/2
+    ```
 - name: M05
   kind: m-code
   detail: Spindle Stop
@@ -752,12 +756,17 @@
 
     Default action if the spindle had been spinning CW:
 
-    M95/2 M95/1
+    ```
+    M95/2
+    M95/1
+    ```
 
     Default action if the spindle was OFF or was spinning CCW:
 
-    M95/1 M95/2
-
+    ```
+    M95/1
+    M95/2
+    ```
 - name: M06
   kind: m-code
   detail: Tool Change
@@ -790,35 +799,39 @@
   documentation: |+
     M7 causes the PLC to start the mist coolant system. Default action:
 
+    ```
     M95/3
-
     M94/5
-
+    ```
 - name: M08
   kind: m-code
   detail: Flood Coolant On
   documentation: |+
     M8 causes the PLC to start the flood coolant system. Default action:
 
+    ```
     M95/5
-
     M94/3
-
+    ```
 - name: M09
   kind: m-code
   detail: Coolant Off
   documentation: |+
     M9 causes the PLC to stop the coolant system. Default action:
 
+    ```
     M95/3/5
-
+    ```
 - name: M10
   kind: m-code
   detail: Clamp On
   documentation: |+
     M10 causes the PLC to activate the clamp–also referred to as a ’chuck’. Default action:
 
+
+    ```
     M94/4
+    ```
 
     NOTE: adding 256 to parameter 178 can switch M10 and M11.
 
@@ -828,8 +841,9 @@
   documentation: |+
     M11 causes the PLC to release the clamp–also referred to as a ’chuck’. Default action:
 
+    ```
     M95/4
-
+    ```
 - name: M17
   kind: m-code
   detail: Prepare for Tool Change (Macro)
@@ -901,7 +915,7 @@
 
     ; Off if M95/15 or the CNC
 
-- name: 'M41, M42, M43'
+- name: "M41, M42, M43"
   kind: m-code
   detail: Select Spindle Gear Range (Macros)
   documentation: |+
@@ -1000,7 +1014,7 @@
     ```
     NOTE: Any axis freed within a CNC program should not be used in that program afterwards. Incorrect positioning may result.
 
-- name: 'M94, M95'
+- name: "M94, M95"
   kind: m-code
   detail: Output On/Off
   documentation: |+
@@ -1016,6 +1030,8 @@
     |.|.|.|
     |.|.|.|
     |M94/128|M95/128|SV M94 M95 128|
+
+
     To use M94 and M95 to control a function external to the servo control, such as an indexer, the input request must be mapped to one of the PLC outputs in the PLC program. See M94/M95 function usage in the PLC section of the service manual.
 
     Example:
@@ -1109,7 +1125,7 @@
 
 - name: M100, M101
   kind: m-code
-  detail: 'Wait for PLC bit (Closed, On, Set)'
+  detail: "Wait for PLC bit (Closed, On, Set)"
   documentation: |+
     The M100/M101 commands wait for a PLC bit to reach a state as indicated in the table below:
 
@@ -1121,8 +1137,8 @@
     |90001 - 90064|T1 - T64 status bits|reset (not expired)|set (expired)|
     |93001 - 93256|STG1 - STG256 status bits|reset (disabled)|set (enabled)|
     |94001 - 94256|FSTG - FTSG256 status bits|reset (disabled)|set (enabled)|
-    
-    
+
+
     The number ranges 1-240 can be used to reference the first eighty INP, OUT, or MEM bits. It is recommended that existing CNC10 programs and macros be converted to the new ranges for use with CNC11.
 
     |Number|PLC bit|M100|M101|
@@ -1175,7 +1191,7 @@
     ```
     M105/X P5 F30 ; move the X axis in minus direction at 30”/min until
     ; the switch on INP5 opens
-    
+
     G92 X10 ; Sets X position to 10
     M105/Z P-6 ; move the Z axis in minus direction until switch on INP6 closes
     ```
@@ -1233,7 +1249,7 @@
     M108/1/2 ; re-enable overrides
     ```
 
-- name: 'M115, M116, M125, M126'
+- name: "M115, M116, M125, M126"
   kind: m-code
   detail: Protected Move Probing Functions
   documentation: |+
@@ -1265,7 +1281,7 @@
     Example:
 
     Finding the center of a vertical slot. In this example, it is assumed that there is a probe connected to INP15 and that the probe tip is positioned somewhere in the slot, such that movement along the X-axis will cause a probe trigger.
-    
+
     ```
     M115/X P-15 F20 ; Move X minus at 20 ipm until probe trip
     M116/X P15 F5 ; Move X plus at 5 ipm until probe clears 
@@ -1392,13 +1408,13 @@
   documentation: |+
     M150 will cause the spindle encoder position to be reset to 0 upon the next encounter of the spindle encoder’s index pulse. M150 will not generate spindle movement. As a matter of fact, the spindle needs be be commanded to move in order for M150 to work.
 
-- name: 'M223, M224, M225, M290'
+- name: "M223, M224, M225, M290"
   kind: m-code
   detail: Formatted String Commands
-  documentation: ''
-- name: 'M200, M201'
+  documentation: ""
+- name: "M200, M201"
   kind: m-code
-  detail: 'Stop for Operator, Prompt for Action'
+  detail: "Stop for Operator, Prompt for Action"
   documentation: |+
     M200 is used to pause the currently running job and prompt the operator for action. If M0 jogging is unlocked, or the control is in DEMO mode, jogging is enabled while waiting for the operator to respond. If this option has not been enabled, the behavior will default to that of a standard M0. (jogging disabled)
 
@@ -1523,7 +1539,7 @@
   documentation: |+
     This is an experimental M-function that re-assigns X,Y,Z axis behaviors to other axes. This command is not recommended for normal use.
 
-- name: 'M1000, M1001, M1002, M1003, M1004, M1005, M1006, M1007, M1008, M1009, M1010, M1011, M1012, M1013, M1014, M1015'
+- name: "M1000, M1001, M1002, M1003, M1004, M1005, M1006, M1007, M1008, M1009, M1010, M1011, M1012, M1013, M1014, M1015"
   kind: m-code
   detail: Graphing Color for Feedrate movement
   documentation: |+
@@ -1549,7 +1565,7 @@
     |M1014|Yellow|
     |M1015|White|
 
-    
+
     Changing this feedrate graphing color can be used as a method highlighting or hiding parts of a graphed CNC program, but will not affect the normal run of the program (when the CYCLE START button is pressed on the Main Screen). The limitations to using these M codes are as follows: These M codes cannot be placed on the same line as another M code, and also the rapid (G0) movement color cannot be changed.
 
 
