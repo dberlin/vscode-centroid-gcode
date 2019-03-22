@@ -14,7 +14,7 @@
     {
       "include": "#prognumbers"
     },
-  
+
     {
       "include": "#coords"
     },
@@ -51,7 +51,6 @@
     {
       "include": "#bitwiseoperators"
     }
-   
   ],
   "repository": {
     "comments": {

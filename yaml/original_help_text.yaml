@@ -1445,24 +1445,29 @@
   kind: m-code
   detail: Prompt for Operator Input Using Formatted String
   documentation: |+
-    The M224 command displays a formatted-string and then accepts user input. The syntax is: M224 /num lvalue expr formatted-string [[user var expr] ...]
+    The M224 command displays a formatted-string and then accepts user input. The syntax is: 
+
+    M224 /num lvalue expr formatted-string [[user var expr] ...]
 
     Where /num is an optional parameter specifying the font family. Possibilities are:
 
-    /0 - Default         /4 - Swiss
+    |Parameter|Font|
+    |:---|:---|
+    |/0|Default|
+    |/1|Decorative|
+    |/2|Roman|
+    |/3|Script|
+    |/4|Swiss|
+    |/5|Modern|
+    |/6|Teletype|
 
-    /1 - Decorative     /5 - Modern
-
-    /2 - Roman          /6 - Teletype
-
-    /3 - Script
 
     Where lvalue expr is a user var expr that evaluates to a user variable that can be written. If lvalue expr is a string type (#300-#399) then the user input is assigned verbatim to the string. Otherwise, the user input is evaluated as any other ”bracketed” numerical expression.
 
     Example:
-
+    ```
     M224 /0 #300 ”Please enter the direction that you wish to probe in the %c axis: (+ or -)” #100
-
+    ```
 - name: M225
   kind: m-code
   detail: Display Formatted String for A Period of Time
@@ -1471,21 +1476,23 @@
 
     Where /num is an optional parameter specifying the font family. Possibilities are:
 
-    /0 - Default         /4 - Swiss
-
-    /1 - Decorative     /5 - Modern
-
-    /2 - Roman          /6 - Teletype
-
-    /3 - Script
+    |Parameter|Font|
+    |:---|:---|
+    |/0|Default|
+    |/1|Decorative|
+    |/2|Roman|
+    |/3|Script|
+    |/4|Swiss|
+    |/5|Modern|
+    |/6|Teletype|
 
     The argument time expr is a user var expr that evaluates to a floating point variable specifying the number of seconds to display the output, with a value of zero interpreted as indefinitely. The CYCLE START key can be used to immediately continue running without waiting for the time to expire.
 
     Example:
 
-    \
-
+    ```
     M225 /6 #100 ”Warning, %s is not selected n Please select %s and press Cycle Start to continue.” #300 #300
+    ```
 
 - name: M290
   kind: m-code
@@ -1495,7 +1502,9 @@
 
     The syntax is:
 
+    ```
     M290 /a #vvv /b #vvvv ”formatted-string” Q R  P L    
+    ```
 
     The first axis mentioned will be treated as the probing axis and the second will be treated as the travel axis.
 
