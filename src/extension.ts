@@ -5,7 +5,7 @@ import { CentroidDeclarationProvider } from "./CentroidDeclarationProvider";
 import { CentroidDocumentSymbolProvider } from "./CentroidDocumentSymbolProvider";
 import { CentroidFoldingProvider } from "./CentroidFoldingProvider";
 import { CentroidHoverProvider } from "./CentroidHoverProvider";
-import { CentroidReferenceProvider } from "./CentroidReferenceProvider";
+import { CentroidReferenceProvider } from "./vscode-centroid-common/CentroidReferenceProvider";
 import { DocumentSymbolManager } from "./DocumentManager";
 import { wordPatternRegExp } from "./util";
 
