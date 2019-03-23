@@ -80,7 +80,7 @@
         "@types/js-yaml": "^3.12.0",
         "@types/jsdom": "^12.2.3",
         "@types/mocha": "^5.2.6",
-        "@types/node": "^10.14.2",
+        "@types/node": "^10.14.3",
         "js-yaml": "^3.13.0",
         "jsdom": "^14.0.0",
         "mocha": "^6.0.2",
