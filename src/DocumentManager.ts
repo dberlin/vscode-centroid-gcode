@@ -4,6 +4,7 @@ import { FileTries } from "./FileTries";
 import help_text from "./json/help_text.json";
 import machine_parameters from "./json/machine_parameters.json";
 import macro_variables from "./json/macro_variables.json";
+import { SubprogramManager } from "./SubprogramManager";
 import { ModalManager } from "./ModalManager";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
 import { BaseDocumentSymbolManagerClass } from "./vscode-centroid-common/BaseDocumentManager";
@@ -33,8 +34,8 @@ interface JSONSymbol {
  * Main class handling managing open VSCode documents and associated symbols.
  */
 export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
-  private modes: Map<string, ModalManager> = new Map<string, ModalManager>();
-
+  private modes = new Map<string, ModalManager>();
+  private subPrograms = new Map<string, SubprogramManager>();
   constructor() {
     super();
     this.processSymbolList(help_text);
@@ -77,10 +78,22 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
     let modalManager = new ModalManager();
     this.modes.set(filename, modalManager);
 
+    let subprogramManager = new SubprogramManager();
+    this.subPrograms.set(filename, subprogramManager);
+
     super.parseAndAddDocument(document);
 
     // Parse out all the symbols
-    modalManager.parse(document);
+    try {
+      modalManager.parse(document);
+    } catch (err) {
+      console.error(err);
+    }
+    try {
+      subprogramManager.parse(document);
+    } catch (err) {
+      console.error(err);
+    }
     fileTries.freeze();
   }
 
@@ -88,11 +101,19 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
     super.removeDocumentInternal(document);
     let filename = this.normalizePathtoDoc(document);
     this.modes.delete(filename);
+    this.subPrograms.delete(filename);
   }
+
+  getSubprogramsForDocument(document: vscode.TextDocument) {
+    let filename = this.normalizePathtoDoc(document);
+    return this.subPrograms.get(filename);
+  }
+
   getModesForDocument(document: vscode.TextDocument) {
     let filename = this.normalizePathtoDoc(document);
     return this.modes.get(filename);
   }
+
   getTriesForDocument(document: vscode.TextDocument) {
     return super.getTriesForDocument(document) as FileTries;
   }

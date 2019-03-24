@@ -91,3 +91,16 @@ export function getSymbolForPosition(
   if (!wordText) return null;
   return getSymbolByName(document, wordText);
 }
+
+/**
+ * Generate a regular expression that matches lines that have any single word in the word array.
+ *
+ * @param wordArray - Array of words
+ * @param flags - Flags to use on regexp. Defaults to "mg"
+ */
+export function getRegexFromWordArray(
+  wordArray: string[],
+  flags: string = "mg"
+) {
+  return new RegExp(`(?<=^\\s*)(${wordArray.join("|")})(?=\\s*$)`, flags);
+}

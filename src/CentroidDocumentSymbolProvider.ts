@@ -9,8 +9,15 @@ export class CentroidDocumentSymbolProvider
   ): vscode.ProviderResult<
     vscode.SymbolInformation[] | vscode.DocumentSymbol[]
   > {
+    let results: vscode.DocumentSymbol[] = [];
     let modes = DocumentSymbolManager.getModesForDocument(document);
-    if (!modes) return null;
-    return modes.getDocumentSymbols();
+    if (modes) {
+      results = results.concat(modes.getDocumentSymbols());
+    }
+    let subprograms = DocumentSymbolManager.getSubprogramsForDocument(document);
+    if (subprograms) {
+      results = results.concat(subprograms.getDocumentSymbols());
+    }
+    return results;
   }
 }
