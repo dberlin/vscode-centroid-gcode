@@ -1,5 +1,16 @@
 node_modules
 out
 html
+java
 .vscode-test
 **/.DS_Store
+src/CentroidGCode.interp
+src/CentroidGCode.tokens
+src/CentroidGCodeLexer.interp
+src/CentroidGCodeLexer.tokens
+src/CentroidGCodeLexer.ts
+src/CentroidGCodeParser.interp
+src/CentroidGCodeParser.tokens
+src/CentroidGCodeParser.ts
+src/CentroidGCodeListener.ts
+src/CentroidGCodeVisitor.ts

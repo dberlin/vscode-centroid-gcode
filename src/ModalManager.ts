@@ -1,7 +1,34 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2019 Daniel Berlin
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 import IntervalTree from "node-interval-tree";
 import * as vscode from "vscode";
 import { normalizeSymbolName, RegExpAny } from "./util";
+import { isString } from "util";
 
+function isComment(str: string) {
+  return str[0] == ";" || str[0] == ":";
+}
 // Centroid G-Code modal groups
 let GroupA = /G[0]*[0123]/gi;
 let GroupC = /G1[789]|G11[789]/gi;
@@ -20,8 +47,12 @@ let GroupO = /G2[23]/gi;
 let GroupP = /G9[34]|G93.1/gi;
 let MGroupA = /M[0]*[345]/gi;
 let TGroupA = /T\d\d?\d?/gi;
+let Comments = /;.*$/gim;
+let Strings = /"(?:\\["\\]|[^\n"\\])*"/gim;
 
 let ModalRegex = RegExpAny(
+  Comments,
+  Strings,
   // GroupA,
   GroupC,
   GroupD,
@@ -109,7 +140,8 @@ export class ModalManager {
     // may capture is small, we just work around this.
     while ((matches = ModalRegex.exec(textToParse))) {
       let match = matches[0];
-
+      // Ignore comments and strings
+      if (isComment(match) || match[0] == '"') continue;
       let groupName = this.getGroupNameforGCode(normalizeSymbolName(match));
       if (!groupName) {
         console.info(

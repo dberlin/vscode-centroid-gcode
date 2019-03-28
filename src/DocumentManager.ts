@@ -1,13 +1,35 @@
-"use strict";
+/*
+ * MIT License
+ *
+ * Copyright (c) 2019 Daniel Berlin
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ * of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 import * as vscode from "vscode";
 import { FileTries } from "./FileTries";
 import help_text from "./json/help_text.json";
 import machine_parameters from "./json/machine_parameters.json";
 import macro_variables from "./json/macro_variables.json";
-import { SubprogramManager } from "./SubprogramManager";
-import { ModalManager } from "./ModalManager";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
+import { SymbolManager } from "./SymbolManager";
 import { BaseDocumentSymbolManagerClass } from "./vscode-centroid-common/BaseDocumentManager";
+"use strict";
 
 function convertKindtoSymbolType(kind: string) {
   switch (kind) {
@@ -34,8 +56,7 @@ interface JSONSymbol {
  * Main class handling managing open VSCode documents and associated symbols.
  */
 export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
-  private modes = new Map<string, ModalManager>();
-  private subPrograms = new Map<string, SubprogramManager>();
+  private symbolManager = new Map<string, SymbolManager>();
   constructor() {
     super();
     this.processSymbolList(help_text);
@@ -63,59 +84,42 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
   }
 
   getFoldingRanges(document: vscode.TextDocument): vscode.FoldingRange[] {
+    /*
     let modes = this.getModesForDocument(document);
     if (!modes) return [];
-    return modes.getFoldingRanges();
+    return modes.getFoldingRanges();*/
+    return [];
   }
   // Parse and add a document to our list of managed documents
-  parseAndAddDocument(document: vscode.TextDocument) {
+  async parseAndAddDocument(document: vscode.TextDocument) {
     if (this.hasDocument(document)) return;
 
     let filename = this.normalizePathtoDoc(document);
     let fileTries: FileTries = new FileTries();
     this.tries.set(filename, fileTries);
-
-    let modalManager = new ModalManager();
-    this.modes.set(filename, modalManager);
-
-    let subprogramManager = new SubprogramManager();
-    this.subPrograms.set(filename, subprogramManager);
-
+    let symbolManager = new SymbolManager(document);
+    this.symbolManager.set(filename, symbolManager);
     super.parseAndAddDocument(document);
 
-    // Parse out all the symbols
-    try {
-      modalManager.parse(document);
-    } catch (err) {
-      console.error(err);
-    }
-    try {
-      subprogramManager.parse(document);
-    } catch (err) {
-      console.error(err);
-    }
+    symbolManager.parse();
     fileTries.freeze();
   }
 
   protected removeDocumentInternal(document: vscode.TextDocument) {
     super.removeDocumentInternal(document);
     let filename = this.normalizePathtoDoc(document);
-    this.modes.delete(filename);
-    this.subPrograms.delete(filename);
-  }
-
-  getSubprogramsForDocument(document: vscode.TextDocument) {
-    let filename = this.normalizePathtoDoc(document);
-    return this.subPrograms.get(filename);
-  }
-
-  getModesForDocument(document: vscode.TextDocument) {
-    let filename = this.normalizePathtoDoc(document);
-    return this.modes.get(filename);
+    this.symbolManager.delete(filename);
   }
 
   getTriesForDocument(document: vscode.TextDocument) {
     return super.getTriesForDocument(document) as FileTries;
+  }
+
+  getDocumentSymbolsForDocument(document: vscode.TextDocument) {
+    let filename = this.normalizePathtoDoc(document);
+    let symbolManager = this.symbolManager.get(filename);
+    if (symbolManager) return symbolManager.getDocSymbols();
+    return [];
   }
 }
 export const DocumentSymbolManager = new DocumentSymbolManagerClass();
