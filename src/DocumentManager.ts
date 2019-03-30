@@ -94,10 +94,10 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
   async parseAndAddDocument(document: vscode.TextDocument) {
     if (this.hasDocument(document)) return;
 
-    let filename = this.normalizePathtoDoc(document);
-    let fileTries: FileTries = new FileTries();
+    const filename = this.normalizePathtoDoc(document);
+    const fileTries: FileTries = new FileTries();
     this.tries.set(filename, fileTries);
-    let symbolManager = new SymbolManager(document);
+    const symbolManager = new SymbolManager(document);
     this.symbolManager.set(filename, symbolManager);
     super.parseAndAddDocument(document);
 
@@ -107,7 +107,7 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
 
   protected removeDocumentInternal(document: vscode.TextDocument) {
     super.removeDocumentInternal(document);
-    let filename = this.normalizePathtoDoc(document);
+    const filename = this.normalizePathtoDoc(document);
     this.symbolManager.delete(filename);
   }
 
@@ -115,9 +115,13 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
     return super.getTriesForDocument(document) as FileTries;
   }
 
+  getSymbolManagerForDocument(document: vscode.TextDocument) {
+    const filename = this.normalizePathtoDoc(document);
+    return this.symbolManager.get(filename);
+  }
   getDocumentSymbolsForDocument(document: vscode.TextDocument) {
-    let filename = this.normalizePathtoDoc(document);
-    let symbolManager = this.symbolManager.get(filename);
+    const filename = this.normalizePathtoDoc(document);
+    const symbolManager = this.symbolManager.get(filename);
     if (symbolManager) return symbolManager.getDocSymbols();
     return [];
   }

@@ -47,7 +47,7 @@ let fileNames;
 if (fs.lstatSync(testFilePath).isDirectory()) {
   fileNames = fs
     .readdirSync(testFilePath)
-    .map(name => path.join(testFilePath + name));
+    .map(name => path.join(`${testFilePath}/${name}`));
 } else {
   fileNames = [process.argv[2]];
 }

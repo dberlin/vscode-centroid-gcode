@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { Token } from "antlr4ts";
+import { Token, CommonTokenStream } from "antlr4ts";
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 import { ParseTreeWalker } from "antlr4ts/tree/ParseTreeWalker";
 import * as vscode from "vscode";
@@ -32,6 +32,7 @@ import {
   ProgramContext
 } from "./CentroidGCodeParser";
 import { createGCodeParserForText } from "./util";
+import { CentroidGCodeLexer } from "./CentroidGCodeLexer";
 
 export class SymbolManager {
   private document: vscode.TextDocument;
