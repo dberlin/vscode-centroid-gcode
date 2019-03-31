@@ -1,98 +1,105 @@
 {
-    "name": "centroid-gcode-language",
-    "displayName": "G-Code Language Support (Centroid)",
-    "description": "Language support (highlighting, hovers) for GCode",
-    "bugs": {
-        "url": "https://github.com/dberlin/vscode-centroid-gcode/issues"
-    },
-    "homepage": "https://github.com/dberlin/vscode-centroid-gcode",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/dberlin/vscode-centroid-gcode.git"
-    },
-    "publisher": "DanielBerlin",
-    "license": "Apache-2.0",
-    "version": "0.1.5",
-    "engines": {
-        "vscode": "^1.31.0"
-    },
-    "categories": [
-        "Programming Languages"
-    ],
-    "contributes": {
-        "languages": [
-            {
-                "id": "centroid-gcode",
-                "aliases": [
-                    "Centroid gcode",
-                    "gcode",
-                    "GCODE",
-                    "nc",
-                    "syntax",
-                    "highlighter",
-                    "language",
-                    "centroid-gcode"
-                ],
-                "extensions": [
-                    ".nc",
-                    ".gcode",
-                    ".tap",
-                    ".cls",
-                    ".apt",
-                    ".mpt",
-                    ".fnc",
-                    ".gc",
-                    ".dnc",
-                    ".cnc",
-                    ".ncf",
-                    ".ncc",
-                    ".maz",
-                    ".hnc",
-                    ".knc",
-                    ".g00",
-                    ".mac",
-                    ".hom"
-                ],
-                "configuration": "./language-configuration.json"
-            }
+  "name": "centroid-gcode-language",
+  "displayName": "G-Code Language Support (Centroid)",
+  "description": "Language support (highlighting, hovers) for GCode",
+  "bugs": {
+    "url": "https://github.com/dberlin/vscode-centroid-gcode/issues"
+  },
+  "homepage": "https://github.com/dberlin/vscode-centroid-gcode",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dberlin/vscode-centroid-gcode.git"
+  },
+  "publisher": "DanielBerlin",
+  "license": "Apache-2.0",
+  "version": "0.1.5",
+  "engines": {
+    "vscode": "^1.31.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "centroid-gcode",
+        "aliases": [
+          "Centroid gcode",
+          "gcode",
+          "GCODE",
+          "nc",
+          "syntax",
+          "highlighter",
+          "language",
+          "centroid-gcode"
         ],
-        "grammars": [
-            {
-                "language": "centroid-gcode",
-                "scopeName": "source.centroidgcode",
-                "path": "./syntaxes/centroid-gcode.tmLanguage.json"
-            }
-        ]
-    },
-    "activationEvents": [
-        "*"
+        "extensions": [
+          ".nc",
+          ".gcode",
+          ".tap",
+          ".cls",
+          ".apt",
+          ".mpt",
+          ".fnc",
+          ".gc",
+          ".dnc",
+          ".cnc",
+          ".ncf",
+          ".ncc",
+          ".maz",
+          ".hnc",
+          ".knc",
+          ".g00",
+          ".mac",
+          ".hom"
+        ],
+        "configuration": "./language-configuration.json"
+      }
     ],
-    "main": "./out/extension.js",
-    "scripts": {
-        "convert-yaml": "ts-node src/scripts/yaml2expandedjs.ts yaml/original_help_text.yaml > src/json/help_text.json",
-        "vscode:prepublish": "npm run compile",
-        "compile": "npm run convert-yaml && npm run antlr && tsc -p ./",
-        "antlr": "antlr4ts -visitor -listener src/*.g4",
-        "watch": "tsc -b -watch ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/js-yaml": "^3.12.0",
-        "@types/jsdom": "^12.2.3",
-        "@types/mocha": "^5.2.6",
-        "@types/node": "^10.14.3",
-        "antlr4ts-cli": "^0.5.0-alpha.3",
-        "js-yaml": "^3.13.0",
-        "jsdom": "^14.0.0",
-        "mocha": "^6.0.2",
-        "tslint": "^5.14.0",
-        "typemoq": "^2.1.0",
-        "vscode": "^1.1.33"
-    },
-    "dependencies": {
-        "antlr4ts": "^0.5.0-alpha.3",
-        "node-interval-tree": "^1.3.3",
-        "tiny-trie": "^0.2.6"
-    }
+    "grammars": [
+      {
+        "language": "centroid-gcode",
+        "scopeName": "source.centroidgcode",
+        "path": "./syntaxes/centroid-gcode.tmLanguage.json"
+      }
+    ]
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "convert-yaml": "ts-node src/scripts/yaml2expandedjs.ts yaml/original_help_text.yaml > src/json/help_text.json",
+    "vscode:prepublish": "webpack --mode production",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test",
+    "compile": "npm run convert-yaml && npm run antlr &&  && webpack --mode none",
+    "antlr": "antlr4ts -visitor -listener src/*.g4",
+    "watch": "webpack --mode none --watch",
+    "test-compile": "tsc -p ./",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.12.0",
+    "@types/jsdom": "^12.2.3",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.14.3",
+    "antlr4ts-cli": "^0.5.0-alpha.3",
+    "js-yaml": "^3.13.0",
+    "jsdom": "^14.0.0",
+    "mocha": "^6.0.2",
+    "ts-loader": "^5.3.3",
+    "tslint": "^5.14.0",
+    "typemoq": "^2.1.0",
+    "typescript": "^3.4.1",
+    "vscode": "^1.1.33",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.3",
+    "node-interval-tree": "^1.3.3",
+    "tiny-trie": "^0.2.6"
+  }
 }
