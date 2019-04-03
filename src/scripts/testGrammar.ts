@@ -44,23 +44,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  ANTLRInputStream,
-  BailErrorStrategy,
-  CommonTokenStream,
-  Token
-} from "antlr4ts";
-import { PredictionMode } from "antlr4ts/atn/PredictionMode";
 import * as fs from "fs";
-import { CentroidGCodeLexer } from "../CentroidGCodeLexer";
-import { CentroidGCodeListener } from "../CentroidGCodeListener";
-import {
-  createGCodeLexerForText,
-  createGCodeParserForLexer,
-  createGCodeParserForText
-} from "../util";
-import { OBlockContext, ProgramContext } from "../CentroidGCodeParser";
-import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
+import { createGCodeLexerForText, createGCodeParserForText } from "../util";
 if (process.argv.length < 3) {
   console.log("usage: ts-node testGrammar.ts <input file>");
   process.exit();

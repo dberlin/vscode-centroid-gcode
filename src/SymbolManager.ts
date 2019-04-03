@@ -82,14 +82,14 @@ class StageAndModeFinder implements CentroidGCodeListener {
   }
   exitProgram(ctx: ProgramContext) {
     let startToken = ctx.start;
-    let stopToken = ctx.stop as Token;
+    let stopToken = ctx.stop!;
     this.regionList[0].range = new vscode.Range(
       startToken.line,
       startToken.charPositionInLine,
       stopToken.line,
       stopToken.charPositionInLine
     );
-    let sym = this.regionList.pop() as vscode.DocumentSymbol;
+    let sym = this.regionList.pop()!;
   }
   enterOBlock(ctx: OBlockContext) {
     let sym = this.createEmptyRegion(" ");
@@ -99,7 +99,7 @@ class StageAndModeFinder implements CentroidGCodeListener {
   }
   exitOBlock(ctx: OBlockContext) {
     let startToken = ctx.start;
-    let stopToken = ctx.stop as Token;
+    let stopToken = ctx.stop!;
     let fullRange = new vscode.Range(
       startToken.line,
       startToken.charPositionInLine,
@@ -114,7 +114,7 @@ class StageAndModeFinder implements CentroidGCodeListener {
       nameToken.stopIndex - nameToken.startIndex
     );
     let blockName = ctx.O_BLOCK_NUMBER().text;
-    let region = this.regionList.pop() as vscode.DocumentSymbol;
+    let region = this.regionList.pop()!;
     region.name = blockName;
     region.range = fullRange;
     region.selectionRange = nameRange;

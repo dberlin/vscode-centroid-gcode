@@ -23,14 +23,17 @@ grammar CentroidGCode;
 // This is a parser that supports Centroid CNC's GCode variant. Unfortunately G-Code differs greatly
 // even in things like "allowed comment style". So this will likely be mostly correct but.
 
-// Programs are made up of blocks
-program: EOF | block+ EOF;
+// Programs are made up of blocks and mode changes
+program: EOF | (oBlock | modechange | block)+ EOF;
 // Blocks are groups of gcode, either named or unnamed
-block: oBlock | word+;
-oBlock: O_BLOCK_NUMBER word* M99;
-word:
-	gWord
-	| mWord
+oBlock: O_BLOCK_NUMBER (modechange | block)* M99;
+modechange: modalWord;
+block: nonModalWord+;
+// We treat H/T words as modal for ease of use
+modalWord: gWordModal | mWordModal | hWordModal | tWordModal;
+nonModalWord:
+	gnonmodal
+	| mnonmodal
 	| axisWord
 	| feedWord
 	| separateWord
@@ -60,7 +63,8 @@ gotoExpression: GOTO singleExpression;
 axisWord: (A | B | C | I | J | K | R | U | V | W | X | Y | Z) singleExpression;
 feedWord: F singleExpression;
 
-gWord:
+gWord: gWordModal | gnonmodal;
+gWordModal:
 	groupA
 	| groupC
 	| groupD
@@ -75,8 +79,7 @@ gWord:
 	| groupM
 	| groupN
 	| groupO
-	| groupP
-	| gnonmodal;
+	| groupP;
 // Modal gcode groups from the manual. Group B is not modal.
 groupA: G0 | G1 | G2 | G3;
 gnonmodal: G4 | G9 | G10 | G28 | G29 | G30 | G52 | G53 | G92;
@@ -115,7 +118,8 @@ groupN: G68 | G69 | G68_1;
 groupO: G22 | G23;
 groupP: G93 | G94 | G93_1;
 
-mWord:
+mWord: mWordModal | mnonmodal;
+mWordModal:
 	mgroup4
 	| mgroup6
 	| mgroup7
@@ -129,8 +133,7 @@ mWord:
 	| mgroup15
 	| mgroup16
 	| mgroup17
-	| mprobe
-	| mnonmodal;
+	| mprobe;
 
 //The modal groups for M codes are:
 mgroup4: M0 | M1 | M2 | M30 | M60;
@@ -195,8 +198,9 @@ slashAxis:
 slashExpression: '/' singleExpression;
 // String followed by variable references
 formattedString: String singleExpression*;
-
-separateWord: (D | H | L | M | P | Q | S | T) singleExpression;
+hWordModal: H singleExpression;
+tWordModal: T singleExpression;
+separateWord: (D | L | M | P | Q | S) singleExpression;
 
 singleExpression:
 	'#' singleExpression									# VariableExpression

@@ -23,7 +23,7 @@
  */
 "use strict";
 
-import { ANTLRInputStream, CommonTokenStream } from "antlr4ts";
+import { ANTLRInputStream, CommonTokenStream, CharStreams } from "antlr4ts";
 
 import { CentroidGCodeLexer } from "./CentroidGCodeLexer";
 
@@ -87,7 +87,7 @@ export function getRegexFromWordArray(
 }
 
 export function createGCodeLexerForText(text: string) {
-  const inputStream = new ANTLRInputStream(text);
+  const inputStream = CharStreams.fromString(text);
   return new CentroidGCodeLexer(inputStream);
 }
 export function createGCodeParserForLexer(lexer: CentroidGCodeLexer) {
