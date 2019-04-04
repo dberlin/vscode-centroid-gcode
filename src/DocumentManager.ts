@@ -29,7 +29,6 @@ import macro_variables from "./json/macro_variables.json";
 import { SymbolInfo, SymbolType } from "./SymbolInfo";
 import { SymbolManager } from "./SymbolManager";
 import { BaseDocumentSymbolManagerClass } from "./vscode-centroid-common/BaseDocumentManager";
-"use strict";
 
 function convertKindtoSymbolType(kind: string) {
   switch (kind) {
@@ -61,29 +60,12 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
     super();
     this.processSymbolList(help_text);
     this.processSymbolList(machine_parameters);
-    this.processSymbolList(<any>macro_variables);
+    this.processSymbolList(macro_variables as any);
   }
 
-  /**
-   * Take a list of JSOn symbols and convert them to VSCode SymbolInfo.
-   *
-   * @param symList - list of symbols from JSON.
-   */
-  protected processSymbolList(symList: JSONSymbol[]) {
-    symList.forEach(val => {
-      this.systemSymbols.push(
-        new SymbolInfo(
-          val.name,
-          <SymbolType>convertKindtoSymbolType(val.kind),
-          val.detail, // detail
-          val.documentation, // documentation
-          val.sortText // sortText
-        )
-      );
-    });
-  }
-
-  getFoldingRanges(document: vscode.TextDocument): vscode.FoldingRange[] {
+  public getFoldingRanges(
+    document: vscode.TextDocument,
+  ): vscode.FoldingRange[] {
     /*
     let modes = this.getModesForDocument(document);
     if (!modes) return [];
@@ -91,8 +73,10 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
     return [];
   }
   // Parse and add a document to our list of managed documents
-  async parseAndAddDocument(document: vscode.TextDocument) {
-    if (this.hasDocument(document)) return;
+  public async parseAndAddDocument(document: vscode.TextDocument) {
+    if (this.hasDocument(document)) {
+      return;
+    }
 
     const filename = this.normalizePathtoDoc(document);
     const fileTries: FileTries = new FileTries();
@@ -105,25 +89,46 @@ export class DocumentSymbolManagerClass extends BaseDocumentSymbolManagerClass {
     fileTries.freeze();
   }
 
+  public getTriesForDocument(document: vscode.TextDocument) {
+    return super.getTriesForDocument(document) as FileTries;
+  }
+
+  public getSymbolManagerForDocument(document: vscode.TextDocument) {
+    const filename = this.normalizePathtoDoc(document);
+    return this.symbolManager.get(filename);
+  }
+  public getDocumentSymbolsForDocument(document: vscode.TextDocument) {
+    const filename = this.normalizePathtoDoc(document);
+    const symbolManager = this.symbolManager.get(filename);
+    if (symbolManager) {
+      return symbolManager.getDocSymbols();
+    }
+    return [];
+  }
+
+  /**
+   * Take a list of JSOn symbols and convert them to VSCode SymbolInfo.
+   *
+   * @param symList - list of symbols from JSON.
+   */
+  protected processSymbolList(symList: JSONSymbol[]) {
+    symList.forEach((val) => {
+      this.systemSymbols.push(
+        new SymbolInfo(
+          val.name,
+          convertKindtoSymbolType(val.kind) as SymbolType,
+          val.detail, // detail
+          val.documentation, // documentation
+          val.sortText, // sortText
+        ),
+      );
+    });
+  }
+
   protected removeDocumentInternal(document: vscode.TextDocument) {
     super.removeDocumentInternal(document);
     const filename = this.normalizePathtoDoc(document);
     this.symbolManager.delete(filename);
-  }
-
-  getTriesForDocument(document: vscode.TextDocument) {
-    return super.getTriesForDocument(document) as FileTries;
-  }
-
-  getSymbolManagerForDocument(document: vscode.TextDocument) {
-    const filename = this.normalizePathtoDoc(document);
-    return this.symbolManager.get(filename);
-  }
-  getDocumentSymbolsForDocument(document: vscode.TextDocument) {
-    const filename = this.normalizePathtoDoc(document);
-    const symbolManager = this.symbolManager.get(filename);
-    if (symbolManager) return symbolManager.getDocSymbols();
-    return [];
   }
 }
 export const DocumentSymbolManager = new DocumentSymbolManagerClass();

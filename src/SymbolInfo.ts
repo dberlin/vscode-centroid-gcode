@@ -30,11 +30,11 @@ export enum SymbolType {
   MCode,
   Label,
   OtherCode,
-  SystemVariable
+  SystemVariable,
 }
 export class SymbolInfo extends BaseSymbolInfo {
   /* What kind of symbol is it. */
-  symbolType: SymbolType;
+  public symbolType: SymbolType;
   constructor(
     name: string,
     type: SymbolType,
@@ -42,10 +42,10 @@ export class SymbolInfo extends BaseSymbolInfo {
     doc: string = "",
     sortText: string = "",
     value: number = 0,
-    pos: number = -1
+    pos: number = -1,
   ) {
-    let kind =
-      type == SymbolType.SystemVariable
+    const kind =
+      type === SymbolType.SystemVariable
         ? vscode.CompletionItemKind.Variable
         : vscode.CompletionItemKind.Operator;
 

@@ -22,35 +22,35 @@
  * SOFTWARE.
  */
 import IntervalTree from "node-interval-tree";
+import { isString } from "util";
 import * as vscode from "vscode";
 import { normalizeSymbolName, RegExpAny } from "./util";
-import { isString } from "util";
 
 function isComment(str: string) {
-  return str[0] == ";" || str[0] == ":";
+  return str[0] === ";" || str[0] === ":";
 }
 // Centroid G-Code modal groups
-let GroupA = /G[0]*[0123]/gi;
-let GroupC = /G1[789]|G11[789]/gi;
-let GroupD = /G4[012]/gi;
-let GroupE = /G4[349]|G43.3|G43.4/gi;
-let GroupF = /G6[14]/gi;
-let GroupG = /G7[346]|G8[0123459]|G17[346]|G18[0123459]/gi;
-let GroupH = /G9[01]/gi;
-let GroupI = /G9[89]/gi;
-let GroupJ = /G65/gi;
-let GroupK = /G2[01]/gi;
-let GroupL = /G5[456789]/gi;
-let GroupM = /G5[01]/gi;
-let GroupN = /G6[89]|G68.1/gi;
-let GroupO = /G2[23]/gi;
-let GroupP = /G9[34]|G93.1/gi;
-let MGroupA = /M[0]*[345]/gi;
-let TGroupA = /T\d\d?\d?/gi;
-let Comments = /;.*$/gim;
-let Strings = /"(?:\\["\\]|[^\n"\\])*"/gim;
+const GroupA = /G[0]*[0123]/gi;
+const GroupC = /G1[789]|G11[789]/gi;
+const GroupD = /G4[012]/gi;
+const GroupE = /G4[349]|G43.3|G43.4/gi;
+const GroupF = /G6[14]/gi;
+const GroupG = /G7[346]|G8[0123459]|G17[346]|G18[0123459]/gi;
+const GroupH = /G9[01]/gi;
+const GroupI = /G9[89]/gi;
+const GroupJ = /G65/gi;
+const GroupK = /G2[01]/gi;
+const GroupL = /G5[456789]/gi;
+const GroupM = /G5[01]/gi;
+const GroupN = /G6[89]|G68.1/gi;
+const GroupO = /G2[23]/gi;
+const GroupP = /G9[34]|G93.1/gi;
+const MGroupA = /M[0]*[345]/gi;
+const TGroupA = /T\d\d?\d?/gi;
+const Comments = /;.*$/gim;
+const Strings = /"(?:\\["\\]|[^\n"\\])*"/gim;
 
-let ModalRegex = RegExpAny(
+const ModalRegex = RegExpAny(
   Comments,
   Strings,
   // GroupA,
@@ -69,7 +69,7 @@ let ModalRegex = RegExpAny(
   GroupO,
   GroupP,
   MGroupA,
-  TGroupA
+  TGroupA,
 );
 
 interface CodeOffset {
@@ -94,107 +94,9 @@ export class ModalManager {
     "G50",
     "G69",
     "G23",
-    "M05"
+    "M05",
   ]);
   private readonly gcodeToGroupName: Map<string, string>;
-
-  getGroupNameforGCode(name: string) {
-    return this.gcodeToGroupName.get(name);
-  }
-
-  getFoldingRanges() {
-    return this.finalRanges;
-  }
-  /**
-   * Get the active GCode modes at a point in the document.
-   *
-   * @param pos - Byte position in the document.
-   */
-  getActiveModes(pos: number): string[] {
-    return this.codeIntervals.search(pos, pos);
-  }
-  private isDefaultMode(mode: string) {
-    return this.defaultModes.has(mode);
-  }
-
-  getDocumentSymbols(): vscode.DocumentSymbol[] {
-    return this.documentSymbols;
-  }
-
-  private isFoldingGroup(groupName: string) {
-    return groupName === "TGroupA";
-  }
-
-  /**
-   * Parse GCode and store the modes.
-   * @param textToParse - Text to parse modes out of.
-   */
-  parse(document: vscode.TextDocument) {
-    let textToParse = document.getText();
-    let matches: RegExpExecArray | null;
-
-    // Javascript makes it impossible to discover which capture triggered in
-    // less than linear time per match, because it produces empty undefined
-    // slots and no capture group index or anything similar, so the entire list
-    // of possible capture groups must be walked. Because the set of strings we
-    // may capture is small, we just work around this.
-    while ((matches = ModalRegex.exec(textToParse))) {
-      let match = matches[0];
-      // Ignore comments and strings
-      if (isComment(match) || match[0] == '"') continue;
-      let groupName = this.getGroupNameforGCode(normalizeSymbolName(match));
-      if (!groupName) {
-        console.info(
-          "Can't find group name for %s",
-          normalizeSymbolName(match)
-        );
-        continue;
-      }
-      let currArray = <CodeOffset[]>this.currentRanges.get(groupName);
-      if (currArray == undefined) {
-        currArray = [];
-        this.currentRanges.set(groupName, currArray);
-      }
-      // We look for mode change to mode change.
-      currArray.push({
-        code: normalizeSymbolName(match),
-        offset: matches.index
-      });
-      if (currArray.length === 2) {
-        let item2 = currArray[1];
-        let item1 = <CodeOffset>currArray.shift();
-        // If they are the same mode, the mode has not changed.
-        // Since we have two items, it means we want to update the
-        // start of the new item to the start of the old item.
-        if (item1.code === item2.code) {
-          item2.offset = item1.offset;
-          continue;
-        }
-        if (this.isDefaultMode(item1.code)) continue;
-        if (this.isFoldingGroup(groupName)) {
-          let item1Pos = document.positionAt(item1.offset);
-          let item2Pos = document.positionAt(item2.offset);
-          this.addFoldingRange(item1Pos, item2Pos);
-          this.addDocumentSymbol(item1Pos, item2Pos, item1);
-        }
-        this.codeIntervals.insert(item1.offset, item2.offset, item1.code);
-      }
-    }
-
-    // At the end of the document, see what modes are left
-    let endOffset = textToParse.length;
-    for (let entry of this.currentRanges) {
-      let item = <CodeOffset>entry[1].shift();
-      if (this.isDefaultMode(item.code)) continue;
-      if (this.isFoldingGroup(entry[0])) {
-        let itemPos = document.positionAt(item.offset);
-        let endPos = document.positionAt(endOffset);
-        this.addFoldingRange(itemPos, endPos);
-        this.addDocumentSymbol(itemPos, endPos, item);
-      }
-      this.codeIntervals.insert(item.offset, endOffset, item.code);
-    }
-  }
   constructor() {
     this.gcodeToGroupName = new Map([
       ["G00", "A"],
@@ -271,12 +173,12 @@ export class ModalManager {
       ["G189", "G"],
       ["M03", "MGroupA"],
       ["M04", "MGroupA"],
-      ["M05", "MGroupA"]
+      ["M05", "MGroupA"],
     ]);
     for (let i = 0; i <= 200; ++i) {
       this.gcodeToGroupName.set(
         normalizeSymbolName("T" + i.toString()),
-        "TGroupA"
+        "TGroupA",
       );
     }
     this.codeIntervals = new IntervalTree();
@@ -294,8 +196,113 @@ export class ModalManager {
       ["K", [{ code: "G20", offset: 0 }]],
       ["M", [{ code: "G50", offset: 0 }]],
       ["N", [{ code: "G69", offset: 0 }]],
-      ["MGroupA", [{ code: normalizeSymbolName("M5"), offset: 0 }]]
+      ["MGroupA", [{ code: normalizeSymbolName("M5"), offset: 0 }]],
     ]);
+  }
+
+  public getGroupNameforGCode(name: string) {
+    return this.gcodeToGroupName.get(name);
+  }
+
+  public getFoldingRanges() {
+    return this.finalRanges;
+  }
+  /**
+   * Get the active GCode modes at a point in the document.
+   *
+   * @param pos - Byte position in the document.
+   */
+  public getActiveModes(pos: number): string[] {
+    return this.codeIntervals.search(pos, pos);
+  }
+
+  public getDocumentSymbols(): vscode.DocumentSymbol[] {
+    return this.documentSymbols;
+  }
+
+  /**
+   * Parse GCode and store the modes.
+   * @param textToParse - Text to parse modes out of.
+   */
+  public parse(document: vscode.TextDocument) {
+    const textToParse = document.getText();
+    let matches: RegExpExecArray | null;
+
+    // Javascript makes it impossible to discover which capture triggered in
+    // less than linear time per match, because it produces empty undefined
+    // slots and no capture group index or anything similar, so the entire list
+    // of possible capture groups must be walked. Because the set of strings we
+    // may capture is small, we just work around this.
+    // tslint:disable-next-line: no-conditional-assignment
+    while ((matches = ModalRegex.exec(textToParse))) {
+      const match = matches[0];
+      // Ignore comments and strings
+      if (isComment(match) || match[0] === '"') {
+        continue;
+      }
+      const groupName = this.getGroupNameforGCode(normalizeSymbolName(match));
+      if (!groupName) {
+        console.info(
+          "Can't find group name for %s",
+          normalizeSymbolName(match),
+        );
+        continue;
+      }
+      let currArray = this.currentRanges.get(groupName) as CodeOffset[];
+      if (currArray === undefined) {
+        currArray = [];
+        this.currentRanges.set(groupName, currArray);
+      }
+      // We look for mode change to mode change.
+      currArray.push({
+        code: normalizeSymbolName(match),
+        offset: matches.index,
+      });
+      if (currArray.length === 2) {
+        const item2 = currArray[1];
+        const item1 = currArray.shift() as CodeOffset;
+        // If they are the same mode, the mode has not changed.
+        // Since we have two items, it means we want to update the
+        // start of the new item to the start of the old item.
+        if (item1.code === item2.code) {
+          item2.offset = item1.offset;
+          continue;
+        }
+        if (this.isDefaultMode(item1.code)) {
+          continue;
+        }
+        if (this.isFoldingGroup(groupName)) {
+          const item1Pos = document.positionAt(item1.offset);
+          const item2Pos = document.positionAt(item2.offset);
+          this.addFoldingRange(item1Pos, item2Pos);
+          this.addDocumentSymbol(item1Pos, item2Pos, item1);
+        }
+        this.codeIntervals.insert(item1.offset, item2.offset, item1.code);
+      }
+    }
+
+    // At the end of the document, see what modes are left
+    const endOffset = textToParse.length;
+    for (const entry of this.currentRanges) {
+      const item = entry[1].shift() as CodeOffset;
+      if (this.isDefaultMode(item.code)) {
+        continue;
+      }
+      if (this.isFoldingGroup(entry[0])) {
+        const itemPos = document.positionAt(item.offset);
+        const endPos = document.positionAt(endOffset);
+        this.addFoldingRange(itemPos, endPos);
+        this.addDocumentSymbol(itemPos, endPos, item);
+      }
+      this.codeIntervals.insert(item.offset, endOffset, item.code);
+    }
+  }
+  private isDefaultMode(mode: string) {
+    return this.defaultModes.has(mode);
+  }
+
+  private isFoldingGroup(groupName: string) {
+    return groupName === "TGroupA";
   }
 
   private addFoldingRange(itemPos: vscode.Position, endPos: vscode.Position) {
@@ -303,8 +310,8 @@ export class ModalManager {
       new vscode.FoldingRange(
         itemPos.line,
         endPos.line - 1,
-        vscode.FoldingRangeKind.Region
-      )
+        vscode.FoldingRangeKind.Region,
+      ),
     );
   }
   /**
@@ -318,17 +325,17 @@ export class ModalManager {
   private addDocumentSymbol(
     beginPos: vscode.Position,
     endPos: vscode.Position,
-    activeCode: CodeOffset
+    activeCode: CodeOffset,
   ) {
     // The end is really where the next match began. Back it up to the previous line
 
-    let toolRegion = new vscode.Range(
+    const toolRegion = new vscode.Range(
       beginPos.with(undefined, 0),
-      endPos.with(endPos.line - 1, 0)
+      endPos.with(endPos.line - 1, 0),
     );
-    let symbolNameRegion = new vscode.Range(
+    const symbolNameRegion = new vscode.Range(
       beginPos,
-      beginPos.with(undefined, beginPos.character + activeCode.code.length)
+      beginPos.with(undefined, beginPos.character + activeCode.code.length),
     );
     if (activeCode.code.startsWith("T")) {
       this.documentSymbols.push(
@@ -337,8 +344,8 @@ export class ModalManager {
           "Region where tool " + activeCode.code + " is active",
           vscode.SymbolKind.Function,
           toolRegion,
-          symbolNameRegion
-        )
+          symbolNameRegion,
+        ),
       );
     }
   }

@@ -62,6 +62,6 @@ try {
 console.timeEnd("Lexing");
 console.time("Parsing");
 const parser = createGCodeParserForText(docText);
-let tree = parser.program();
+const tree = parser.program();
 console.timeEnd("Parsing");
 console.log(tree.toStringTree());

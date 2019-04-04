@@ -21,78 +21,82 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { JSDOM } from "jsdom";
 import fs from "fs";
+import { JSDOM } from "jsdom";
 function range(a: number, b: number, step?: number): number[] {
-  let result = [];
+  const result = [];
   step = step || 1;
-  for (let i = a; (b - i) * step > 0; i += step) result.push(i);
+  for (let i = a; (b - i) * step > 0; i += step) {
+    result.push(i);
+  }
   return result;
 }
-let tupleRangeRegex = /\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/;
+const tupleRangeRegex = /\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/;
 function tupleRange(str: string) {
   let matches;
   if ((matches = tupleRangeRegex.exec(str))) {
     return range(
-      parseInt(matches[1]),
-      parseInt(matches[2]) + 1,
-      parseInt(matches[3])
+      parseInt(matches[1], 10),
+      parseInt(matches[2], 10) + 1,
+      parseInt(matches[3], 10),
     );
   }
   return null;
 }
-let regularRangeRegex = /(\d+)\s*-\s*(\d+)/;
+const regularRangeRegex = /(\d+)\s*-\s*(\d+)/;
 function regularRange(str: string) {
   let matches;
   if ((matches = regularRangeRegex.exec(str))) {
-    let lower = parseInt(matches[1]);
-    let upper = parseInt(matches[2]) + 1;
+    const lower = parseInt(matches[1], 10);
+    const upper = parseInt(matches[2], 10) + 1;
     return range(lower, upper, 1);
   }
-  return [parseInt(str)];
+  return [parseInt(str, 10)];
 }
 if (process.argv.length < 3) {
   console.log("usage: ts-node parseManualHelp <html help files>");
   process.exit(0);
 }
-for (let fileName of process.argv.slice(2)) {
-  let HTMLString = fs.readFileSync(fileName).toString();
-  let fileDOM = new JSDOM(HTMLString);
-  let fileDOMDoc = fileDOM.window.document;
-  let tableCollection = fileDOMDoc.getElementsByTagName("table");
-  let outputList = [];
-  let tableArray = [];
-  let noteRegEx = /^.*?Note:/;
+for (const fileName of process.argv.slice(2)) {
+  const HTMLString = fs.readFileSync(fileName).toString();
+  const fileDOM = new JSDOM(HTMLString);
+  const fileDOMDoc = fileDOM.window.document;
+  const tableCollection = fileDOMDoc.getElementsByTagName("table");
+  const outputList = [];
+  const tableArray = [];
+  const noteRegEx = /^.*?Note:/;
+  // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < tableCollection.length; ++i) {
-    let tableItem = tableCollection[i];
+    const tableItem = tableCollection[i];
 
-    let documentation = "";
+    const documentation = "";
     // For our help, all rows are TR's
-    let tableChildren = tableItem.children[0].children;
+    const tableChildren = tableItem.children[0].children;
+    // tslint:disable-next-line: prefer-for-of
     for (let rIdx = 0; rIdx < tableChildren.length; ++rIdx) {
-      let tableRow = tableChildren[rIdx];
-      let rowArray = [];
+      const tableRow = tableChildren[rIdx];
+      const rowArray = [];
+      // tslint:disable-next-line: prefer-for-of
       for (let cIdx = 0; cIdx < tableRow.children.length; ++cIdx) {
-        let tableCell = tableRow.children[cIdx];
-        rowArray.push((<string>tableCell.textContent).trim());
+        const tableCell = tableRow.children[cIdx];
+        rowArray.push((tableCell.textContent as string).trim());
       }
       tableArray.push(rowArray);
     }
   }
-  let tupleRangeRegex = /\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/;
 
   for (const arrayRow of tableArray) {
-    let rowRange = tupleRange(arrayRow[0]) || regularRange(arrayRow[0]);
+    const rowRange = tupleRange(arrayRow[0]) || regularRange(arrayRow[0]);
     let num = 1;
-    for (let idx of rowRange) {
-      let indexRegex = /\$i/;
-      let replacedRow1 = arrayRow[1].replace(indexRegex, num.toString());
-      let name = `#${idx}`;
-      let kind = "system-variable";
-      let detail = replacedRow1.trim();
+    for (const idx of rowRange) {
+      const indexRegex = /\$i/;
+      const replacedRow1 = arrayRow[1].replace(indexRegex, num.toString());
+      const name = `#${idx}`;
+      const kind = "system-variable";
+      const detail = replacedRow1.trim();
       let documentation = "";
       if (arrayRow.length > 3) {
-        let replacedRow2 = arrayRow[2].replace(indexRegex, num.toString());
+        const replacedRow2 = arrayRow[2].replace(indexRegex, num.toString());
         documentation = replacedRow2.trim();
         if (arrayRow[3].trim() === "R/W") {
           documentation += "\n\nThis variable is read/write";
@@ -108,11 +112,11 @@ for (let fileName of process.argv.slice(2)) {
       }
       ++num;
       outputList.push({
-        name: name,
-        kind: kind,
-        detail: detail,
-        documentation: documentation,
-        sortText: `${idx}`.padStart(5, "0")
+        name,
+        kind,
+        detail,
+        documentation,
+        sortText: `${idx}`.padStart(5, "0"),
       });
     }
   }

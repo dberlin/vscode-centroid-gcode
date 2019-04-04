@@ -24,20 +24,20 @@
 import {
   ANTLRInputStream,
   BailErrorStrategy,
-  CommonTokenStream
+  CommonTokenStream,
 } from "antlr4ts";
 import { PredictionMode } from "antlr4ts/atn/PredictionMode";
 import * as fs from "fs";
 import * as path from "path";
 import { CentroidGCodeLexer } from "../CentroidGCodeLexer";
 import { CentroidGCodeParser } from "../CentroidGCodeParser";
-import { createGCodeParserForText, createGCodeLexerForText } from "../util";
+import { createGCodeLexerForText, createGCodeParserForText } from "../util";
 if (process.argv.length < 3) {
   console.log("usage: ts-node timeGrammar.ts <directorye>");
   process.exit();
 }
 
-let testFilePath =
+const testFilePath =
   process.argv[2] ||
   "/Users/dannyb/Dropbox/sources/vscode/centroid-gcode-language/testfiles/";
 // Create the lexer and parser
@@ -47,11 +47,11 @@ let fileNames;
 if (fs.lstatSync(testFilePath).isDirectory()) {
   fileNames = fs
     .readdirSync(testFilePath)
-    .map(name => path.join(`${testFilePath}/${name}`));
+    .map((name) => path.join(`${testFilePath}/${name}`));
 } else {
   fileNames = [process.argv[2]];
 }
-for (let fileName of fileNames) {
+for (const fileName of fileNames) {
   console.log(`Processing ${fileName}`);
   const docText = fs.readFileSync(fileName).toString();
   console.time("Lexing");

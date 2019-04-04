@@ -21,61 +21,77 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import fs from "fs";
 import * as js2yaml from "js-yaml";
 import { JSDOM } from "jsdom";
-import fs from "fs";
 if (process.argv.length < 3) {
   console.log("usage: ts-node parseManualHelp <html help files>");
   process.exit(0);
 }
-for (let fileName of process.argv.slice(2)) {
-  let HTMLString = fs.readFileSync(fileName).toString();
-  let fileDOM = new JSDOM(HTMLString);
-  let fileDOMDoc = fileDOM.window.document;
-  let listCollection = fileDOMDoc.getElementsByTagName("li");
-  let outputList = [];
-  let noteRegEx = /^.*?Note:/;
+for (const fileName of process.argv.slice(2)) {
+  const HTMLString = fs.readFileSync(fileName).toString();
+  const fileDOM = new JSDOM(HTMLString);
+  const fileDOMDoc = fileDOM.window.document;
+  const listCollection = fileDOMDoc.getElementsByTagName("li");
+  const outputList = [];
+  const noteRegEx = /^.*?Note:/;
+  // tslint:disable-next-line: prefer-for-of
   for (let i = 0; i < listCollection.length; ++i) {
     const listItem = listCollection[i];
     if (
       !listItem.firstElementChild ||
-      listItem.firstElementChild.tagName != "H3"
-    )
+      listItem.firstElementChild.tagName !== "H3"
+    ) {
       continue;
-    let originalName = listItem.firstElementChild.textContent;
-    if (!originalName) continue;
-    let codeSplit = originalName.split(/ - /);
-    if (codeSplit.length != 2) continue;
-    let codeNameUnsplit = codeSplit[0].trim();
-    let detail = codeSplit[1].trim();
+    }
+    const originalName = listItem.firstElementChild.textContent;
+    if (!originalName) {
+      continue;
+    }
+    const codeSplit = originalName.split(/ - /);
+    if (codeSplit.length !== 2) {
+      continue;
+    }
+    const codeNameUnsplit = codeSplit[0].trim();
+    const detail = codeSplit[1].trim();
     let documentation = "";
-    let kind = codeNameUnsplit.startsWith("M") ? "m-code" : "g-code";
+    const kind = codeNameUnsplit.startsWith("M") ? "m-code" : "g-code";
+    // tslint:disable-next-line: prefer-for-of
     for (let licIdx = 0; licIdx < listItem.children.length; ++licIdx) {
-      let childItem = listItem.children[licIdx];
+      const childItem = listItem.children[licIdx];
       switch (childItem.tagName) {
         case "P": {
-          if (!childItem.textContent) continue;
-          let childText = childItem.textContent;
+          if (!childItem.textContent) {
+            continue;
+          }
+          const childText = childItem.textContent;
           let matches;
+          // tslint:disable-next-line: no-conditional-assignment
           if ((matches = noteRegEx.exec(childText))) {
-            if (!matches.length) continue;
+            if (!matches.length) {
+              continue;
+            }
 
             documentation +=
               "**NOTE:**" + childText.substring(matches[0].length) + "\n\n";
-          } else documentation += childText + "\n\n";
+          } else {
+            documentation += childText + "\n\n";
+          }
           break;
         }
         case "TABLE": {
           // For our help, all rows are TR's
           let firstRow: boolean = true;
-          let tableChildren = childItem.children[0].children;
-          let cellCount = tableChildren[0].children.length;
+          const tableChildren = childItem.children[0].children;
+          const cellCount = tableChildren[0].children.length;
+          // tslint:disable-next-line: prefer-for-of
           for (let rIdx = 0; rIdx < tableChildren.length; ++rIdx) {
-            let tableRow = tableChildren[rIdx];
+            const tableRow = tableChildren[rIdx];
 
             let rowStr = "|";
+            // tslint:disable-next-line: prefer-for-of
             for (let cIdx = 0; cIdx < tableRow.children.length; ++cIdx) {
-              let tableCell = tableRow.children[cIdx];
+              const tableCell = tableRow.children[cIdx];
               rowStr += (tableCell.textContent || "").trim() + "|";
             }
             documentation += rowStr + "\n";
@@ -94,9 +110,9 @@ for (let fileName of process.argv.slice(2)) {
     }
     outputList.push({
       name: codeNameUnsplit.trim(),
-      kind: kind,
-      detail: detail,
-      documentation: documentation
+      kind,
+      detail,
+      documentation,
     });
   }
 

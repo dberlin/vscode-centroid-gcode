@@ -26,18 +26,18 @@ import * as vscode from "vscode";
 import { getSymbolForPosition } from "./vscode-util";
 
 export class CentroidDeclarationProvider implements vscode.DeclarationProvider {
-  provideDeclaration(
+  public provideDeclaration(
     document: vscode.TextDocument,
     position: vscode.Position,
-    token: vscode.CancellationToken
+    token: vscode.CancellationToken,
   ): vscode.ProviderResult<
     vscode.Location | vscode.Location[] | vscode.LocationLink[]
   > {
-    let sym = getSymbolForPosition(document, position);
-    if (sym && sym.symbolDeclPos != -1) {
+    const sym = getSymbolForPosition(document, position);
+    if (sym && sym.symbolDeclPos !== -1) {
       return new vscode.Location(
         document.uri,
-        document.positionAt(sym.symbolDeclPos)
+        document.positionAt(sym.symbolDeclPos),
       );
     }
     return null;

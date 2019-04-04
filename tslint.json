@@ -1,7 +1,12 @@
 {
-	"rules": {
-		"indent": [true, "spaces", 2],
-		"semicolon": [true, "always"],
-        "deprecation": true
-	}
+  "extends": "tslint:recommended",
+  "rules": {
+    "indent": [true, "spaces", 2],
+    "semicolon": [true, "always"],
+    "deprecation": true,
+    "object-literal-sort-keys": false,
+    "no-console": false,
+    "interface-name": false,
+    "no-conditional-assignment": false
+  }
 }

@@ -23,13 +23,17 @@
  */
 "use strict";
 import * as vscode from "vscode";
-import { getSymbolForPosition } from "./vscode-util";
 import { DocumentSymbolManager } from "./DocumentManager";
+import { getSymbolForPosition } from "./vscode-util";
 
 function getMacroParameterNum(name: string): number {
-  if (!name.startsWith("#")) return 0;
-  let result = parseInt(name.substr(1));
-  if (result) return result;
+  if (!name.startsWith("#")) {
+    return 0;
+  }
+  const result = parseInt(name.substr(1), 10);
+  if (result) {
+    return result;
+  }
   return 0;
 }
 
@@ -37,22 +41,24 @@ export class CentroidHoverProvider implements vscode.HoverProvider {
   public provideHover(
     document: vscode.TextDocument,
     position: vscode.Position,
-    token: vscode.CancellationToken
+    token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.Hover> {
     /* See if we have the symbol */
-    let sym = getSymbolForPosition(document, position);
+    const sym = getSymbolForPosition(document, position);
     if (sym) {
-      let hoverText = new vscode.MarkdownString();
-      if (sym.symbolDeclPos != -1) {
-        let symbolDeclPos = document.positionAt(sym.symbolDeclPos);
+      const hoverText = new vscode.MarkdownString();
+      if (sym.symbolDeclPos !== -1) {
+        const symbolDeclPos = document.positionAt(sym.symbolDeclPos);
         /* Don't produce a hover for the same position we declared the symbol on */
-        if (position.line === symbolDeclPos.line) return null;
+        if (position.line === symbolDeclPos.line) {
+          return null;
+        }
       }
       // If it is a macro parameter not in the system range, format the detail part.
       hoverText.appendMarkdown(`#### ${(sym.detail || "").trim()}\n\n`);
 
       hoverText.appendMarkdown(
-        (<vscode.MarkdownString>sym.documentation).value
+        (sym.documentation as vscode.MarkdownString).value,
       );
       return new vscode.Hover(hoverText);
     }

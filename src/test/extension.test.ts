@@ -36,40 +36,40 @@ import * as vscode from "vscode";
 import { DocumentSymbolManagerClass } from "../DocumentManager";
 import * as util from "../util";
 
-let testFilePath = path.join(__dirname + "/../../testfiles/");
+const testFilePath = path.join(__dirname + "/../../testfiles/");
 // Defines a Mocha test suite to group tests of similar kind together
-suite("Extension Tests", function() {
+suite("Extension Tests", () => {
   // Defines a Mocha unit test
-  test("GCode symbol normalization utility class", function() {
-    assert.equal(util.normalizeSymbolName("T1"), "T01");
-    assert.equal(util.normalizeSymbolName("t1"), "T01");
-    assert.equal(util.normalizeSymbolName("T01"), "T01");
-    assert.equal(util.normalizeSymbolName("t01"), "T01");
-    assert.equal(util.normalizeSymbolName(" T1 "), "T01");
-    assert.equal(util.normalizeSymbolName(" t1 "), "T01");
-    assert.equal(util.normalizeSymbolName(" T01 "), "T01");
-    assert.equal(util.normalizeSymbolName(" t01 "), "T01");
+  test("GCode symbol normalization utility class", () => {
+    assert.strictEqual(util.normalizeSymbolName("T1"), "T01");
+    assert.strictEqual(util.normalizeSymbolName("t1"), "T01");
+    assert.strictEqual(util.normalizeSymbolName("T01"), "T01");
+    assert.strictEqual(util.normalizeSymbolName("t01"), "T01");
+    assert.strictEqual(util.normalizeSymbolName(" T1 "), "T01");
+    assert.strictEqual(util.normalizeSymbolName(" t1 "), "T01");
+    assert.strictEqual(util.normalizeSymbolName(" T01 "), "T01");
+    assert.strictEqual(util.normalizeSymbolName(" t01 "), "T01");
   });
   let DocumentSymbolManager: DocumentSymbolManagerClass;
 
-  test("GCode parsing", async function() {
+  test("GCode parsing", async () => {
     DocumentSymbolManager = new DocumentSymbolManagerClass();
 
-    for (let fileName of fs.readdirSync(testFilePath)) {
+    for (const fileName of fs.readdirSync(testFilePath)) {
       const textDocument = await vscode.workspace.openTextDocument(
-        path.join(testFilePath + fileName)
+        path.join(testFilePath + fileName),
       );
       DocumentSymbolManager.parseAndAddDocument(textDocument);
-      let fileTries = DocumentSymbolManager.getTriesForDocument(textDocument);
-      assert.notEqual(
+      const fileTries = DocumentSymbolManager.getTriesForDocument(textDocument);
+      assert.notStrictEqual(
         fileTries,
         undefined,
-        "the file trie should have been filled in"
+        "the file trie should have been filled in",
       );
-      let completions = fileTries.getAllCompletions("");
+      const completions = fileTries.getAllCompletions("");
       assert.ok(
         completions.length >= 0,
-        "Didn't find any symbols in the document"
+        "Didn't find any symbols in the document",
       );
     }
   }).timeout(10000);

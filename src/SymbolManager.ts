@@ -21,18 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { Token, CommonTokenStream } from "antlr4ts";
+import { CommonTokenStream, Token } from "antlr4ts";
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
 import { ParseTreeWalker } from "antlr4ts/tree/ParseTreeWalker";
 import * as vscode from "vscode";
-import { CentroidGCodeListener } from "./CentroidGCodeListener";
-import {
-  CentroidGCodeParser,
-  OBlockContext,
-  ProgramContext
-} from "./CentroidGCodeParser";
-import { createGCodeParserForText } from "./util";
 import { CentroidGCodeLexer } from "./CentroidGCodeLexer";
+import { CentroidGCodeParser } from "./CentroidGCodeParser";
+import { StageAndModeFinder } from "./StageAndModeFinder";
+import { createGCodeParserForText } from "./util";
 
 export class SymbolManager {
   private document: vscode.TextDocument;
@@ -45,78 +41,18 @@ export class SymbolManager {
     this.parser.buildParseTree = false;
     this.docSymbols = [];
   }
-  async parse() {
-    let finder = new StageAndModeFinder(this.docSymbols);
+  public async parse() {
+    const finder = new StageAndModeFinder(this.docSymbols);
     this.parser.removeParseListeners();
     this.parser.addParseListener(finder as ParseTreeListener);
     try {
-      let tree = this.parser.program();
-      //ParseTreeWalker.DEFAULT.walk(finder as ParseTreeListener, tree);
+      const tree = this.parser.program();
+      // ParseTreeWalker.DEFAULT.walk(finder as ParseTreeListener, tree);
     } catch (err) {
       console.error(err);
     }
   }
-  getDocSymbols() {
+  public getDocSymbols() {
     return this.docSymbols;
-  }
-}
-class StageAndModeFinder implements CentroidGCodeListener {
-  private regionList: vscode.DocumentSymbol[] = [];
-  private docSymbols: vscode.DocumentSymbol[];
-  constructor(docSymbols: vscode.DocumentSymbol[]) {
-    this.docSymbols = docSymbols;
-  }
-  private createEmptyRegion(name: string) {
-    return new vscode.DocumentSymbol(
-      name,
-      "",
-      vscode.SymbolKind.Function,
-      new vscode.Range(0, 0, 1, 1),
-      new vscode.Range(0, 0, 1, 1)
-    );
-  }
-  enterProgram(ctx: ProgramContext) {
-    let sym = this.createEmptyRegion("Whole Program");
-    this.regionList.push(sym);
-    this.docSymbols.push(sym);
-  }
-  exitProgram(ctx: ProgramContext) {
-    let startToken = ctx.start;
-    let stopToken = ctx.stop!;
-    this.regionList[0].range = new vscode.Range(
-      startToken.line,
-      startToken.charPositionInLine,
-      stopToken.line,
-      stopToken.charPositionInLine
-    );
-    let sym = this.regionList.pop()!;
-  }
-  enterOBlock(ctx: OBlockContext) {
-    let sym = this.createEmptyRegion(" ");
-    if (this.regionList.length != 0)
-      this.regionList[this.regionList.length - 1].children.push(sym);
-    this.regionList.push(sym);
-  }
-  exitOBlock(ctx: OBlockContext) {
-    let startToken = ctx.start;
-    let stopToken = ctx.stop!;
-    let fullRange = new vscode.Range(
-      startToken.line,
-      startToken.charPositionInLine,
-      stopToken.line,
-      stopToken.charPositionInLine
-    );
-    let nameToken = ctx.O_BLOCK_NUMBER().symbol;
-    let nameRange = new vscode.Range(
-      nameToken.line,
-      nameToken.charPositionInLine,
-      nameToken.line,
-      nameToken.stopIndex - nameToken.startIndex
-    );
-    let blockName = ctx.O_BLOCK_NUMBER().text;
-    let region = this.regionList.pop()!;
-    region.name = blockName;
-    region.range = fullRange;
-    region.selectionRange = nameRange;
   }
 }

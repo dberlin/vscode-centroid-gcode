@@ -23,7 +23,7 @@
  */
 "use strict";
 
-import { ANTLRInputStream, CommonTokenStream, CharStreams } from "antlr4ts";
+import { ANTLRInputStream, CharStreams, CommonTokenStream } from "antlr4ts";
 
 import { CentroidGCodeLexer } from "./CentroidGCodeLexer";
 
@@ -31,6 +31,7 @@ import { CentroidGCodeParser } from "./CentroidGCodeParser";
 
 import { PredictionMode } from "antlr4ts/atn/PredictionMode";
 
+// tslint:disable-next-line: max-line-length
 export const wordPatternRegExp = /(\#\d*)|(-?\d*\.\d\w*)|([^\`\~\!\@\#\%\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s]+)/;
 
 const noLeadingZeroRegEx = /^[A-Z](\d)$/;
@@ -42,9 +43,10 @@ export function normalizeSymbolName(symbolName: string): string {
   let upperName = symbolName.toUpperCase().trim();
   let matches;
   // Convert all non-leading zero forms (G1, G2) to leading zero forms for symbol name
+  // tslint:disable-next-line: no-conditional-assignment
   if ((matches = noLeadingZeroRegEx.exec(upperName))) {
-    let number = parseInt(matches[1]);
-    upperName = `${upperName[0]}0${number}`;
+    const num = parseInt(matches[1], 10);
+    upperName = `${upperName[0]}0${num}`;
   }
   return upperName;
 }
@@ -54,21 +56,21 @@ export function normalizeSymbolName(symbolName: string): string {
  * @param args - Regular expressions to combine
  */
 export function RegExpAny(...args: RegExp[]) {
-  let components: string[] = [];
-  let flags = new Map();
-  for (let i = 0; i < args.length; i++) {
-    components.push(args[i].source);
-    for (let flag of args[i].flags.split("")) {
+  const components: string[] = [];
+  const flags = new Map();
+  for (const arg of args) {
+    components.push(arg.source);
+    for (const flag of arg.flags.split("")) {
       flags.set(flag, flag);
     }
   }
-  let newFlags = [];
-  for (let key of flags.keys()) {
+  const newFlags = [];
+  for (const key of flags.keys()) {
     newFlags.push(key);
   }
-  let combined = new RegExp(
+  const combined = new RegExp(
     `(?:${components.join(")|(?:")})`,
-    newFlags.join("")
+    newFlags.join(""),
   );
   return combined;
 }
@@ -81,7 +83,7 @@ export function RegExpAny(...args: RegExp[]) {
  */
 export function getRegexFromWordArray(
   wordArray: string[],
-  flags: string = "mg"
+  flags: string = "mg",
 ) {
   return new RegExp(`(?<=^\\s*)(${wordArray.join("|")})(?=\\s*$)`, flags);
 }

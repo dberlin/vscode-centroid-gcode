@@ -26,9 +26,9 @@ import { DocumentSymbolManager } from "./DocumentManager";
 
 export class CentroidDocumentSymbolProvider
   implements vscode.DocumentSymbolProvider {
-  provideDocumentSymbols(
+  public provideDocumentSymbols(
     document: vscode.TextDocument,
-    token: vscode.CancellationToken
+    token: vscode.CancellationToken,
   ): vscode.ProviderResult<
     vscode.SymbolInformation[] | vscode.DocumentSymbol[]
   > {
