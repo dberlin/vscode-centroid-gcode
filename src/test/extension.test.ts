@@ -72,5 +72,5 @@ suite("Extension Tests", () => {
         "Didn't find any symbols in the document",
       );
     }
-  }).timeout(10000);
+  }).timeout(20000);
 });
